@@ -1,0 +1,44 @@
+{
+    "name": "@ab-inbev/design-system",
+    "version": "0.1.0",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "sideEffects": false,
+    "license": "MIT",
+    "files": [
+        "dist/**"
+    ],
+    "scripts": {
+        "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
+        "dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
+        "lint": "eslint \"src/**/*.ts*\"",
+        "test": "jest",
+        "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^6.1.5",
+        "@testing-library/react": "^14.1.2",
+        "@types/jest": "^29.5.8",
+        "@types/react": "^18.2.0",
+        "@types/react-dom": "^18.2.0",
+        "eslint": "^8.56.0",
+        "identity-obj-proxy": "^3.0.0",
+        "jest": "^29.7.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "ts-jest": "^29.1.1",
+        "tsup": "^8.0.1",
+        "typescript": "^5.3.3"
+    },
+    "peerDependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.11.3",
+        "@emotion/styled": "^11.11.0",
+        "@mui/material": "^5.15.3"
+    }
+}
