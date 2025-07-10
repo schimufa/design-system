@@ -88,7 +88,7 @@ pnpm build
 
 4. Run Storybook:
 
-```bash
+````bash
 # Navigate to the design system package
 cd packages/design-system
 pnpm storybook
@@ -117,7 +117,8 @@ pnpm storybook
 1. Create changesets for your changes:
    ```bash
    pnpm changeset
-   ```
+````
+
 2. Commit your changes and changeset files
 3. When ready to release, run:
    ```bash

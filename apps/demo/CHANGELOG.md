@@ -1,5 +1,24 @@
 # @ab-inbev/demo
 
+## 4.0.1
+
+### Patch Changes
+
+- Updated testing dependencies and configuration:
+- Updated dependencies
+  - @schimufa/design-system@4.0.1
+
+## 4.0.0
+
+### Major Changes
+
+- fix: remove unused import and fix type checking
+
+### Patch Changes
+
+- Updated dependencies
+  - @schimufa/design-system@4.0.0
+
 ## 3.0.0
 
 ### Major Changes

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material/styles';
-import { getTheme } from '../../../theme';
+import { getTheme } from '../../../themes';
 import { Card } from '../index';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 

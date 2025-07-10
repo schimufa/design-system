@@ -1,5 +1,17 @@
 # @ab-inbev/design-system
 
+## 4.0.1
+
+### Patch Changes
+
+- Updated testing dependencies and configuration:
+
+## 4.0.0
+
+### Major Changes
+
+- fix: remove unused import and fix type checking
+
 ## 3.0.0
 
 ### Major Changes

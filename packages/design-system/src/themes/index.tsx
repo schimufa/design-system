@@ -42,3 +42,7 @@ export const themes = {
     },
   }),
 };
+
+export type AppTheme = keyof typeof themes;
+
+export const getTheme = (theme: AppTheme) => themes[theme];

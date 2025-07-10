@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material/styles';
-import { getTheme } from '../../../theme';
-import Button from '../index';
+import { getTheme } from '../../../themes';
+import { Button } from '../index';
 
 const renderWithTheme = (ui: React.ReactElement) => {
   return render(

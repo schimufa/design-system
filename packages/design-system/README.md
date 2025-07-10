@@ -26,9 +26,7 @@ import { Button, getTheme } from '@schimufa/design-system';
 function App() {
   return (
     <ThemeProvider theme={getTheme('default')}>
-      <Button variant="contained">
-        Hello World!
-      </Button>
+      <Button variant="contained">Hello World!</Button>
     </ThemeProvider>
   );
 }
@@ -37,6 +35,7 @@ function App() {
 ## Development
 
 1. Start Storybook:
+
 ```bash
 # From the design system package directory
 pnpm storybook
@@ -50,6 +49,7 @@ pnpm turbo storybook
 3. Add stories in `src/stories`
 
 4. Document changes with changesets:
+
 ```bash
 pnpm changeset
 ```

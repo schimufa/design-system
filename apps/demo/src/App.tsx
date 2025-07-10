@@ -1,10 +1,13 @@
-import { ThemeProvider } from '@mui/material/styles';
 import { Typography, CssBaseline } from '@mui/material';
-import { Card, getTheme } from '@schimufa/design-system';
+import { ThemeProvider } from '@mui/material/styles';
+import { Card, getTheme, type AppTheme } from '@schimufa/design-system';
 
 function App() {
+  const themeKey: AppTheme = 'finance';
+  const theme = getTheme(themeKey);
+
   return (
-    <ThemeProvider theme={getTheme('finance')}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 p-8">
         {/* Header Section */}

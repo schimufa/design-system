@@ -9,52 +9,30 @@ import {
 } from '@mui/material';
 
 export interface CardProps {
-  /**
-   * The title of the card
-   */
   title?: string;
-  /**
-   * Optional subtitle or description
-   */
   subtitle?: string;
-  /**
-   * The main content of the card
-   */
   children: React.ReactNode;
-  /**
-   * Optional icon to display before the title
-   */
   icon?: React.ReactNode;
-  /**
-   * Optional className for additional styling
-   */
   className?: string;
-  /**
-   * Optional variant for different card styles
-   */
   variant?: 'default' | 'outlined' | 'glass';
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles
-   */
   sx?: SxProps<Theme>;
 }
 
-/**
- * Card component that provides a clean, modern container for content
- */
-export const Card: React.FC<CardProps> = ({
-  title,
-  subtitle,
-  children,
-  icon,
-  className,
-  variant = 'default',
-  sx,
-}) => {
+export function Card(props: CardProps) {
+  const {
+    title,
+    subtitle,
+    children,
+    icon,
+    className,
+    variant = 'default',
+    sx,
+  } = props;
+
   const theme = useTheme();
 
   const getCardStyles = () => {
-    const baseStyles = {
+    const baseStyles: SxProps<Theme> = {
       backgroundColor: theme.palette.background.paper,
       borderRadius: '16px',
       overflow: 'hidden',
@@ -139,4 +117,4 @@ export const Card: React.FC<CardProps> = ({
       </CardContent>
     </MuiCard>
   );
-};
+}
