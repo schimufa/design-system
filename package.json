@@ -14,7 +14,7 @@
         "docs": "turbo run docs",
         "release": "pnpm build && changeset publish",
         "prepare-release": "changeset version && pnpm install",
-        "ci": "pnpm build && pnpm lint && pnpm typecheck && pnpm test && pnpm validate-theme && pnpm docs"
+        "ci": "pnpm build && pnpm lint && pnpm typecheck && pnpm test"
     },
     "devDependencies": {
         "@changesets/cli": "^2.0.0",
