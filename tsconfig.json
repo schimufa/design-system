@@ -9,14 +9,17 @@
         "allowImportingTsExtensions": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": true,
+        "noEmit": false,
         "jsx": "react-jsx",
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["packages/*/src", "apps/*/src"],
+    "include": [
+        "packages/*/src/**/*",
+        "apps/*/src/**/*"
+    ],
     "references": [
         { "path": "./packages/design-system" },
         { "path": "./apps/demo" }

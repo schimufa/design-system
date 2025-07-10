@@ -1,5 +1,15 @@
 # @ab-inbev/design-system
 
+## 2.0.4
+
+### Patch Changes
+
+- Fixed build configuration:
+  - Updated TypeScript configuration for proper module resolution
+  - Fixed import extensions in demo app
+  - Updated Vite configuration for better TypeScript support
+  - Improved ESLint configuration
+
 ## 2.0.3
 
 ### Patch Changes

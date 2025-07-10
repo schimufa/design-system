@@ -1,4 +1,4 @@
-import { ComponentType } from 'react';
+// Design system specification types and utilities
 
 interface DesignSpec {
   version: string;
@@ -94,7 +94,7 @@ export function getPRUrl(component: string, version: string): string {
 
 export function getMigrationGuide(
   component: string,
-  fromVersion: string,
+  _fromVersion: string, // Prefix with underscore to indicate intentionally unused
   toVersion: string
 ): string {
   const spec = getDesignSpec(component, toVersion);

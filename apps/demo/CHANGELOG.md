@@ -1,5 +1,17 @@
 # @ab-inbev/demo
 
+## 1.0.3
+
+### Patch Changes
+
+- Fixed build configuration:
+  - Updated TypeScript configuration for proper module resolution
+  - Fixed import extensions in demo app
+  - Updated Vite configuration for better TypeScript support
+  - Improved ESLint configuration
+- Updated dependencies
+  - @schimufa/design-system@2.0.4
+
 ## 1.0.2
 
 ### Patch Changes

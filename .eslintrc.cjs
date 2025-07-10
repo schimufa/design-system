@@ -14,6 +14,13 @@ module.exports = {
         sourceType: 'module',
         ecmaFeatures: {
             jsx: true
+        },
+        project: ['./tsconfig.json', './packages/*/tsconfig.json', './apps/*/tsconfig.json'],
+        tsconfigRootDir: __dirname
+    },
+    settings: {
+        react: {
+            version: 'detect'
         }
     },
     rules: {
@@ -22,11 +29,6 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'warn'
-    },
-    settings: {
-        react: {
-            version: 'detect'
-        }
     },
     env: {
         browser: true,
