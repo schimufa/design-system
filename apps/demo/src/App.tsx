@@ -1,66 +1,14 @@
 import React, { useState } from 'react';
-import { 
-  ThemeProvider, 
-  createTheme,
-  Box, 
-  Container, 
-  Grid, 
-  Typography, 
-  Button as MuiButton,
-  CssBaseline 
-} from '@mui/material';
-
-// Simple theme configurations
-const themes = {
-  finance: createTheme({
-    palette: {
-      primary: { main: '#1976d2' },
-      secondary: { main: '#9c27b0' },
-    },
-  }),
-  logistics: createTheme({
-    palette: {
-      primary: { main: '#2e7d32' },
-      secondary: { main: '#f57c00' },
-    },
-  }),
-  sales: createTheme({
-    palette: {
-      primary: { main: '#d32f2f' },
-      secondary: { main: '#0288d1' },
-    },
-  }),
-};
-
-// Simple versioned button component
-const VersionedButton: React.FC<{
-  version?: '1.0.0' | '2.0.0';
-  variant?: 'contained' | 'outlined';
-  onClick?: () => void;
-  children: React.ReactNode;
-}> = ({ version = '1.0.0', variant = 'contained', onClick, children }) => {
-  const buttonStyle = {
-    borderRadius: version === '2.0.0' ? '20px' : '4px',
-    textTransform: version === '2.0.0' ? 'none' : 'uppercase',
-  } as const;
-
-  return (
-    <MuiButton
-      variant={variant}
-      onClick={onClick}
-      sx={buttonStyle}
-    >
-      {children}
-    </MuiButton>
-  );
-};
+import { ThemeProvider } from '@mui/material/styles';
+import { Box, Container, Grid, Typography, CssBaseline } from '@mui/material';
+import { Button, getTheme, themes, AppTheme } from '@ab-inbev/design-system';
 
 function App() {
-  const [currentTheme, setCurrentTheme] = useState<keyof typeof themes>('finance');
+  const [currentTheme, setCurrentTheme] = useState<AppTheme>('finance');
   const [buttonVersion, setButtonVersion] = useState<'1.0.0' | '2.0.0'>('1.0.0');
 
   return (
-    <ThemeProvider theme={themes[currentTheme]}>
+    <ThemeProvider theme={getTheme(currentTheme)}>
       <CssBaseline />
       <Container maxWidth="lg">
         <Box sx={{ my: 4 }}>
@@ -77,14 +25,14 @@ function App() {
               1. Theme Selection (Requirement #1: Configurable Design System)
             </Typography>
             <Grid container spacing={2}>
-              {Object.keys(themes).map((theme) => (
+              {themes.map((theme) => (
                 <Grid item key={theme}>
-                  <VersionedButton
+                  <Button
                     variant={currentTheme === theme ? 'contained' : 'outlined'}
-                    onClick={() => setCurrentTheme(theme as keyof typeof themes)}
+                    onClick={() => setCurrentTheme(theme)}
                   >
                     {theme}
-                  </VersionedButton>
+                  </Button>
                 </Grid>
               ))}
             </Grid>
@@ -96,20 +44,20 @@ function App() {
             </Typography>
             <Grid container spacing={2}>
               <Grid item>
-                <VersionedButton
+                <Button
                   variant={buttonVersion === '1.0.0' ? 'contained' : 'outlined'}
                   onClick={() => setButtonVersion('1.0.0')}
                 >
                   Version 1.0.0
-                </VersionedButton>
+                </Button>
               </Grid>
               <Grid item>
-                <VersionedButton
+                <Button
                   variant={buttonVersion === '2.0.0' ? 'contained' : 'outlined'}
                   onClick={() => setButtonVersion('2.0.0')}
                 >
                   Version 2.0.0
-                </VersionedButton>
+                </Button>
               </Grid>
             </Grid>
           </Box>
@@ -120,14 +68,14 @@ function App() {
             </Typography>
             <Grid container spacing={2}>
               <Grid item>
-                <VersionedButton version={buttonVersion} variant="contained">
+                <Button version={buttonVersion} variant="contained">
                   Primary Button
-                </VersionedButton>
+                </Button>
               </Grid>
               <Grid item>
-                <VersionedButton version={buttonVersion} variant="outlined">
+                <Button version={buttonVersion} variant="outlined">
                   Secondary Button
-                </VersionedButton>
+                </Button>
               </Grid>
             </Grid>
           </Box>
