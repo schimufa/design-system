@@ -15,7 +15,11 @@
         "prepare": "husky install",
         "changeset": "changeset",
         "version-packages": "changeset version",
-        "release": "turbo run build && changeset publish"
+        "release": "turbo run build && changeset publish",
+        "validate-design": "ts-node packages/design-system/scripts/design-validator.ts",
+        "generate-release-notes": "ts-node scripts/generate-release-notes.ts",
+        "preversion-packages": "pnpm validate-design",
+        "postversion-packages": "pnpm generate-release-notes"
     },
     "devDependencies": {
         "@changesets/cli": "^2.29.5",
@@ -28,6 +32,8 @@
         "husky": "^8.0.3",
         "prettier": "^3.1.1",
         "turbo": "^1.11.3",
-        "typescript": "^5.3.3"
+        "typescript": "^5.3.3",
+        "ts-node": "^10.9.2",
+        "chalk": "^5.3.0"
     }
 }
