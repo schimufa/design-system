@@ -12,9 +12,5 @@ export const ThemeDecorator = ({ children }: ThemeDecoratorProps) => {
   const themeKey = (theme || 'finance') as keyof typeof themes;
   const selectedTheme = themes[themeKey] || themes.finance;
 
-  return (
-    <ThemeProvider theme={selectedTheme}>
-      {children}
-    </ThemeProvider>
-  );
+  return <ThemeProvider theme={selectedTheme}>{children}</ThemeProvider>;
 };

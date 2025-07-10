@@ -1,20 +1,22 @@
-# AB InBev Frontend Architecture Solution
+# Frontend Design System
 
-This repository demonstrates a modern, scalable frontend architecture that meets AB InBev's requirements for a unified design system and component library. The solution addresses all 8 key requirements while maintaining simplicity and flexibility.
+This repository demonstrates a modern, scalable frontend architecture with a unified design system and component library.
 
 ## Key Features
 
 ### 1. Configurable Design System
 
-- Multiple color palettes for different application domains (finance, logistics, sales)
+- Multiple color palettes for different application domains
 - Theme switching without component logic changes
 - Built on Material-UI for robust theming support
+- Storybook integration for component development and documentation
 
 ### 2. Version-Controlled Components
 
 - Components maintain version history through explicit versioning
 - Documentation of changes in component comments
 - Semantic versioning for clear upgrade paths
+- Changesets for version management
 
 ### 3. Version-Controlled Application Blueprints
 
@@ -69,45 +71,67 @@ This repository demonstrates a modern, scalable frontend architecture that meets
 1. Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 2. Start the development environment:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 3. Build all packages:
 
 ```bash
-npm run build
+pnpm build
 ```
+
+4. Run Storybook:
+
+```bash
+# Navigate to the design system package
+cd packages/design-system
+pnpm storybook
+
 
 ## Development Workflow
 
 1. Component Development:
    - Components are created in `packages/design-system`
-   - Version changes are documented in component comments
+   - Version changes are documented using changesets (`pnpm changeset`)
    - Changes are tracked through semantic versioning
+   - Components are developed and documented in Storybook
 
 2. Application Development:
    - Create new apps in the `apps` directory
-   - Import components from `@ab-inbev/design-system`
+   - Import components from `@schimufa/design-system`
    - Select appropriate component versions and themes
 
 3. Testing Changes:
-   - Run tests: `npm test`
-   - Check linting: `npm run lint`
-   - Format code: `npm run format`
+   - Run tests: `pnpm test`
+   - Check linting: `pnpm lint`
+   - Format code: `pnpm format`
+
+## Release Process
+
+1. Create changesets for your changes:
+   ```bash
+   pnpm changeset
+   ```
+2. Commit your changes and changeset files
+3. When ready to release, run:
+   ```bash
+   pnpm changeset version
+   pnpm install
+   git add .
+   git commit -m "Version packages"
+   ```
+4. Push changes to trigger the release workflow
 
 ## Contributing
 
-1. Create a feature branch
-2. Make your changes
-3. Run tests and linting
-4. Submit a pull request
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 ## License
 
-Private - AB InBev Internal Use Only
+Private - Internal Use Only

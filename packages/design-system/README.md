@@ -1,66 +1,80 @@
-# AB InBev Design System
+# Design System
 
-A configurable and version-controlled design system for AB InBev applications.
+A configurable and version-controlled design system for modern web applications.
 
 ## Features
 
-- 🎨 Configurable themes (Finance, Logistics, Sales)
+- 🎨 Configurable themes
 - 📦 Version-controlled components
 - 🔧 Built with React & Material-UI
 - 📱 Responsive and accessible components
 - 🧪 Fully tested components
+- 📚 Storybook documentation
 
 ## Installation
 
 ```bash
-npm install @ab-inbev/design-system
+pnpm add @schimufa/design-system
 ```
 
 ## Quick Start
 
 ```tsx
 import { ThemeProvider } from '@mui/material/styles';
-import { Button, getTheme } from '@ab-inbev/design-system';
+import { Button, getTheme } from '@schimufa/design-system';
 
 function App() {
   return (
-    <ThemeProvider theme={getTheme('finance')}>
-      <Button version="1.0.0" variant="contained">
-        Hello AB InBev!
+    <ThemeProvider theme={getTheme('default')}>
+      <Button variant="contained">
+        Hello World!
       </Button>
     </ThemeProvider>
   );
 }
 ```
 
+## Development
+
+1. Start Storybook:
+```bash
+# From the design system package directory
+pnpm storybook
+
+# Or from the root directory
+pnpm turbo storybook
+```
+
+2. Create new components in `src/components`
+
+3. Add stories in `src/stories`
+
+4. Document changes with changesets:
+```bash
+pnpm changeset
+```
+
 ## Themes
 
-The design system supports three themes:
-
-- Finance
-- Logistics
-- Sales
+The design system supports customizable themes:
 
 ```tsx
-import { getTheme } from '@ab-inbev/design-system';
+import { getTheme } from '@schimufa/design-system';
 
 // Use with ThemeProvider
-<ThemeProvider theme={getTheme('finance')}>
+<ThemeProvider theme={getTheme('default')}>
   {/* Your app content */}
 </ThemeProvider>;
 ```
 
 ## Component Versioning
 
-Components support multiple versions that can coexist in the same application:
+Components are versioned using changesets. To update versions:
 
-```tsx
-// Version 1.0.0 (Classic style)
-<Button version="1.0.0" variant="contained">Click me</Button>
-
-// Version 2.0.0 (Modern style)
-<Button version="2.0.0" variant="contained">Click me</Button>
-```
+1. Make your changes
+2. Create a changeset: `pnpm changeset`
+3. Commit changes
+4. Version will be updated automatically by CI
 
 ## Contributing
 
@@ -68,4 +82,4 @@ Please read our [Contributing Guide](../../CONTRIBUTING.md) for details on our c
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details.
+Private - Internal Use Only

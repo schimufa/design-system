@@ -28,6 +28,11 @@
         },
         "docs": {
             "outputs": ["docs/**", "storybook-static/**"]
+        },
+        "storybook": {
+            "cache": false,
+            "persistent": true,
+            "outputs": ["storybook-static/**"]
         }
     }
 }

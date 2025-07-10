@@ -13,11 +13,11 @@ export function getContrastRatio(color1: string, color2: string): number {
 
 export function validateThemeColors(theme: Theme): boolean {
   const { primary, background, text } = theme.palette;
-  
+
   // Check contrast ratios against WCAG standards
   const textContrast = getContrastRatio(text.primary, background.default);
   const primaryContrast = getContrastRatio(primary.main, background.default);
-  
+
   // WCAG AA standards: 4.5:1 for normal text, 3:1 for large text
   return textContrast >= 4.5 && primaryContrast >= 3.0;
 }

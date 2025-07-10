@@ -139,4 +139,4 @@ export const designTokens: DesignTokens = {
       figmaVariable: 'typography/heading/h1',
     },
   },
-}; 
+};
