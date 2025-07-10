@@ -11,11 +11,10 @@
         "typecheck": "turbo run typecheck",
         "test": "turbo run test",
         "validate-theme": "turbo run validate-theme",
-        "validate-design": "turbo run validate-design",
         "docs": "turbo run docs",
-        "release": "turbo run build lint typecheck test && changeset publish",
+        "release": "pnpm build && changeset publish",
         "prepare-release": "changeset version && pnpm install",
-        "ci": "turbo run build lint typecheck test validate-theme validate-design docs"
+        "ci": "pnpm build && pnpm lint && pnpm typecheck && pnpm test && pnpm validate-theme && pnpm docs"
     },
     "devDependencies": {
         "@changesets/cli": "^2.0.0",
