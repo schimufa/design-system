@@ -1,0 +1,83 @@
+import { Meta, Story, Canvas } from '@storybook/blocks';
+import * as ButtonStories from '../components/Button/Button.stories';
+
+<Meta title="Components/Button/Documentation" />
+
+# Button Component
+
+The Button component is a versatile, customizable button that supports multiple versions and styles.
+
+## Component Versions
+
+### Version 1.0.0 (Classic)
+- Uppercase text
+- Sharp corners
+- Traditional Material-UI styling
+
+### Version 2.0.0 (Modern)
+- Normal text case
+- Rounded corners
+- Updated styling system
+
+## Usage
+
+```jsx
+import { Button } from '@schimufa/design-system';
+
+// Classic Version (1.0.0)
+<Button variant="contained" color="primary">
+  CLICK ME
+</Button>
+
+// Modern Version (2.0.0)
+<Button 
+  version="2.0.0"
+  variant="contained" 
+  color="primary"
+>
+  Click me
+</Button>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| version | '1.0.0' \| '2.0.0' | '1.0.0' | The design version to use |
+| variant | 'contained' \| 'outlined' \| 'text' | 'contained' | The button variant |
+| color | 'primary' \| 'secondary' \| 'error' \| 'warning' \| 'info' \| 'success' | 'primary' | The color scheme |
+| size | 'small' \| 'medium' \| 'large' | 'medium' | The button size |
+| disabled | boolean | false | Whether the button is disabled |
+| children | ReactNode | - | The button content |
+
+## Examples
+
+### Variants
+All available button variants:
+<Canvas of={ButtonStories.Variants} />
+
+### Colors
+Available color options:
+<Canvas of={ButtonStories.Colors} />
+
+### Sizes
+Different button sizes:
+<Canvas of={ButtonStories.Sizes} />
+
+## Accessibility
+
+The Button component follows WAI-ARIA guidelines:
+- Uses native `button` element
+- Supports keyboard navigation
+- Maintains proper contrast ratios
+- Includes focus indicators
+
+## Best Practices
+
+1. Use clear, action-oriented text
+2. Choose appropriate variants for different actions:
+   - Contained: Primary actions
+   - Outlined: Secondary actions
+   - Text: Tertiary actions
+3. Maintain consistent sizing within the same view
+4. Use color to indicate importance and state 

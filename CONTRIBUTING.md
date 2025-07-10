@@ -1,127 +1,134 @@
 # Contributing to Our Design System
 
-## Getting Started
+## Design-to-Code Workflow
 
-1. **Setup Your Environment**
-```bash
-# Clone the repository
-git clone [repository-url]
-cd [repository-name]
+### 1. Design Changes
+- All design changes must start with a Figma design document
+- Create a design ticket with format: `[DESIGN-{number}] Component: Change Description`
+- Link the Figma file in the ticket using format: `figma://file/{file-key}?node-id={node-id}`
 
-# Install dependencies
-pnpm install
-
-# Start development environment
-pnpm dev
+### 2. Branch Naming Convention
+```
+feature/DESIGN-123/button-variant
+bugfix/DESIGN-124/card-shadow
+docs/DESIGN-125/upgrade-guide
 ```
 
-2. **Understanding the Structure**
-- `/apps`: Individual applications
-- `/packages/design-system`: Shared component library
-- `/packages/[other-packages]`: Additional shared utilities
+### 3. Commit Messages
+Use the following format to link commits to designs:
+```
+feat(button): add glass variant [DESIGN-123]
+fix(card): adjust shadow values [DESIGN-124]
+docs: update component guidelines [DESIGN-125]
+```
+
+### 4. Pull Request Template
+- Title: `[DESIGN-{number}] Brief description`
+- Required sections:
+  - Design Reference (Figma link)
+  - Screenshots (before/after)
+  - Version Impact (major/minor/patch)
+  - Breaking Changes
+  - Migration Steps
 
 ## Development Workflow
 
-### 1. Component Development
-
-#### Design Compliance
-- Always reference the latest Figma designs
-- Use design tokens from the theme system
-- Follow accessibility guidelines
-- Maintain component API consistency
-
-#### Version Control
-- Create a new branch for each feature
-- Follow the branch naming convention:
-  - `feature/component-name`
-  - `fix/issue-description`
-  - `docs/documentation-update`
-
-#### Testing
-- Write unit tests for all new components
-- Include accessibility tests
-- Test across all supported themes
-- Ensure responsive behavior
-
-### 2. Making Changes
-
-#### Component Modifications
-1. Check existing implementation in `packages/design-system/src/components`
-2. Review design specifications in Figma
-3. Update component code
-4. Add/update tests
-5. Update documentation
-6. Create changeset (`pnpm changeset`)
-
-#### New Components
-1. Create component directory with index.tsx
-2. Add to component exports
-3. Create test file
-4. Add documentation
-5. Create changeset
-
-### 3. Quality Checks
-
-Before submitting PR:
+### 1. Local Setup
 ```bash
-# Run all checks
-pnpm lint
-pnpm test
-pnpm build
-
-# Format code
-pnpm format
+pnpm install
+pnpm storybook
 ```
 
-### 4. Creating Pull Requests
+### 2. Component Development
+- Create/update component in `packages/design-system/src/components`
+- Add/update stories in component directory
+- Add/update tests
+- Update documentation in `src/docs`
 
-Include:
-- Clear description of changes
-- Link to design specifications
-- Screenshots/videos of changes
-- Breaking change warnings
-- Migration guide if needed
+### 3. Version Management
+- Run `pnpm changeset` to document changes
+- Follow semver guidelines:
+  - Major: Breaking changes
+  - Minor: New features
+  - Patch: Bug fixes
+
+### 4. Quality Checks
+- Lint: `pnpm lint`
+- Test: `pnpm test`
+- Build: `pnpm build`
+- Storybook: `pnpm storybook`
+
+## Design System Standards
+
+### 1. Component Structure
+```
+components/
+  Button/
+    index.tsx         # Component code
+    Button.test.tsx   # Tests
+    Button.stories.tsx # Stories
+    styles.ts        # Styled components
+    types.ts         # TypeScript types
+```
+
+### 2. Design Tokens
+- Use theme variables from `src/themes`
+- No hard-coded values
+- Follow Material-UI guidelines
+
+### 3. Documentation
+- Every component needs:
+  - Props table
+  - Usage examples
+  - Accessibility notes
+  - Version history
+
+### 4. Testing Requirements
+- Unit tests
+- Visual regression tests
+- Accessibility tests
+- Story tests
 
 ## Release Process
 
-1. Create changeset describing changes
-2. Version packages (`pnpm version-packages`)
-3. Review generated changelog
-4. Create release PR
-5. Merge after approval
-
-## Documentation
-
-- Update component documentation
-- Include usage examples
-- Document props and variants
-- Add accessibility notes
-- Update design version mapping
-
-## Design System Guidelines
-
-### Theme Usage
-- Use theme tokens for colors
-- Follow spacing scale
-- Use typography variants
-- Maintain consistent border radius
-
-### Accessibility
-- Maintain WCAG 2.1 AA compliance
-- Include proper ARIA attributes
-- Support keyboard navigation
-- Test with screen readers
-
-### Component Standards
-- Follow React best practices
-- Use TypeScript
-- Include prop documentation
-- Add proper default props
-- Handle edge cases
-
-## Need Help?
-
-- Check existing issues
+### 1. Preparation
+- Update changeset files
 - Review documentation
-- Ask in #design-system Slack channel
-- Contact the core team 
+- Run full test suite
+
+### 2. Release Steps
+```bash
+pnpm changeset version
+pnpm install
+git add .
+git commit -m "chore: version packages"
+git push
+```
+
+### 3. Post-Release
+- Update release notes
+- Notify team
+- Update documentation
+
+## Design Specification Compliance
+
+### 1. Visual Compliance
+- Match Figma specifications exactly
+- Use design tokens consistently
+- Follow spacing guidelines
+
+### 2. Accessibility
+- WCAG 2.1 AA compliance
+- Keyboard navigation
+- Screen reader support
+
+### 3. Responsive Design
+- Mobile-first approach
+- Breakpoint consistency
+- Fluid typography
+
+## Getting Help
+
+- Design System Slack: #design-system
+- Documentation: [Internal Wiki Link]
+- Team: @design-system-team 

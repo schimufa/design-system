@@ -1,0 +1,94 @@
+import { Meta, Story, Canvas } from '@storybook/blocks';
+import * as CardStories from '../components/Card/Card.stories';
+
+<Meta title="Components/Card/Documentation" />
+
+# Card Component
+
+The Card component is a flexible container for displaying content with various styles and layouts.
+
+## Features
+
+- Multiple variants (default, outlined, glass)
+- Support for titles and subtitles
+- Icon integration
+- Customizable content areas
+- Material-UI theme integration
+
+## Usage
+
+```jsx
+import { Card } from '@schimufa/design-system';
+
+// Basic Card
+<Card title="My Card">
+  This is the card content
+</Card>
+
+// Glass Effect Card with Icon
+<Card 
+  variant="glass"
+  title="Weather"
+  subtitle="Current Conditions"
+  icon={<WeatherIcon />}
+>
+  72°F Sunny
+</Card>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'default' \| 'outlined' \| 'glass' | 'default' | The card style variant |
+| title | string | - | The card's title |
+| subtitle | string | - | Optional subtitle text |
+| icon | ReactNode | - | Optional icon element |
+| children | ReactNode | - | The card's content |
+| elevation | number | 1 | Shadow depth (1-24) |
+| className | string | - | Additional CSS class |
+
+## Examples
+
+### Basic Card
+A simple card with title and content:
+<Canvas of={CardStories.Default} />
+
+### Variants
+Different card styles:
+<Canvas of={CardStories.Variants} />
+
+### With Icons
+Cards with integrated icons:
+<Canvas of={CardStories.WithIcons} />
+
+## Theming
+
+The Card component respects the Material-UI theme settings:
+
+- Uses theme's palette for colors
+- Adapts to light/dark modes
+- Follows theme's border radius
+- Uses theme's shadow definitions
+
+## Best Practices
+
+1. Content Organization:
+   - Use clear hierarchy with title and subtitle
+   - Keep content concise and focused
+   - Use appropriate spacing
+
+2. Visual Hierarchy:
+   - Use elevation to indicate importance
+   - Choose variants that match the context
+   - Consider the surrounding layout
+
+3. Responsive Design:
+   - Cards should adapt to container width
+   - Content should be readable at all sizes
+   - Consider mobile viewing experience
+
+4. Accessibility:
+   - Maintain proper contrast
+   - Use semantic heading structure
+   - Ensure interactive elements are reachable 

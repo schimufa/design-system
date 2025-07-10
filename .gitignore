@@ -66,3 +66,5 @@ pnpm-lock.yaml
 *.pem
 .vercel
 .netlify 
+*storybook.log
+storybook-static

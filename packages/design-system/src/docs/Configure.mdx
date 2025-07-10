@@ -1,0 +1,68 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Getting Started/Introduction" />
+
+# Design System Documentation
+
+Welcome to our design system documentation. This guide will help you understand and use our component library effectively.
+
+## Available Components
+
+Our design system includes the following core components:
+
+### Button
+A versatile button component that supports:
+- Multiple variants (contained, outlined, text)
+- Different sizes (small, medium, large)
+- Custom colors and styling
+- Accessibility features
+
+### Card
+A flexible card component for grouping content with features:
+- Multiple variants (default, outlined, glass)
+- Title and subtitle support
+- Icon integration
+- Custom content areas
+
+## Theming
+
+The design system is built on Material-UI and supports multiple themes:
+- Finance
+- Logistics
+- Sales
+
+Each theme includes:
+- Custom color palettes
+- Typography scales
+- Spacing systems
+- Component variants
+
+## Installation
+
+```bash
+npm install @schimufa/design-system
+# or
+yarn add @schimufa/design-system
+# or
+pnpm add @schimufa/design-system
+```
+
+## Usage
+
+```jsx
+import { Button, Card } from '@schimufa/design-system';
+
+function MyComponent() {
+  return (
+    <Card title="My Card">
+      <Button variant="contained" color="primary">
+        Click Me
+      </Button>
+    </Card>
+  );
+}
+```
+
+## Contributing
+
+Please refer to our contribution guidelines in the repository for information on how to contribute to the design system.

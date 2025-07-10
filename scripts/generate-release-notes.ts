@@ -1,77 +1,138 @@
+import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-interface ChangesetInfo {
-  id: string;
+interface Changeset {
   type: 'major' | 'minor' | 'patch';
   description: string;
-  packages: string[];
+  designId?: string;
+  component?: string;
 }
 
-async function generateReleaseNotes() {
-  const changesetDir = path.join(__dirname, '../.changeset');
-  const files = fs.readdirSync(changesetDir);
-  const changesets: ChangesetInfo[] = [];
+function extractDesignId(message: string): string | undefined {
+  const match = message.match(/\[DESIGN-(\d+)\]/);
+  return match ? match[1] : undefined;
+}
 
-  for (const file of files) {
-    if (file.endsWith('.md')) {
-      const content = fs.readFileSync(path.join(changesetDir, file), 'utf8');
+function extractComponent(message: string): string | undefined {
+  const match = message.match(/^(?:feat|fix|docs)\(([\w-]+)\):/);
+  return match ? match[1] : undefined;
+}
+
+function getLatestTag(): string {
+  try {
+    return execSync('git describe --tags --abbrev=0').toString().trim();
+  } catch {
+    return 'HEAD';
+  }
+}
+
+function getChangesets(): Changeset[] {
+  const changesetDir = path.join(process.cwd(), '.changeset');
+  const changesets: Changeset[] = [];
+
+  fs.readdirSync(changesetDir)
+    .filter(file => file.endsWith('.md'))
+    .forEach(file => {
+      const content = fs.readFileSync(path.join(changesetDir, file), 'utf-8');
       const lines = content.split('\n');
       
-      // Simple parsing of changeset files
-      const changeset: Partial<ChangesetInfo> = {
-        id: file.replace('.md', ''),
-        packages: []
-      };
-      
-      let inDescription = false;
-      let description = '';
-      
-      for (const line of lines) {
-        if (line.startsWith('---')) {
-          inDescription = !inDescription;
-          continue;
-        }
-        
-        if (inDescription) {
-          description += line + '\n';
-        } else if (line.includes(':')) {
-          const [pkg, type] = line.split(':').map(s => s.trim());
-          changeset.packages = changeset.packages || [];
-          changeset.packages.push(pkg);
-          changeset.type = type as 'major' | 'minor' | 'patch';
-        }
+      const type = lines[0].includes('major') ? 'major' 
+        : lines[0].includes('minor') ? 'minor' 
+        : 'patch';
+
+      const description = lines.slice(2).join('\n').trim();
+      const designId = extractDesignId(description);
+      const component = extractComponent(description);
+
+      changesets.push({ type, description, designId, component });
+    });
+
+  return changesets;
+}
+
+function getCommitsSinceLastRelease(): string[] {
+  const lastTag = getLatestTag();
+  return execSync(`git log ${lastTag}..HEAD --pretty=format:"%s"`)
+    .toString()
+    .split('\n')
+    .filter(Boolean);
+}
+
+function generateReleaseNotes(): string {
+  const changesets = getChangesets();
+  const commits = getCommitsSinceLastRelease();
+  const date = new Date().toISOString().split('T')[0];
+
+  let notes = `# Release Notes (${date})\n\n`;
+
+  // Breaking Changes
+  const breakingChanges = changesets.filter(c => c.type === 'major');
+  if (breakingChanges.length > 0) {
+    notes += '## 🚨 Breaking Changes\n\n';
+    breakingChanges.forEach(change => {
+      notes += `- ${change.description}${change.designId ? ` [DESIGN-${change.designId}]` : ''}\n`;
+    });
+    notes += '\n';
+  }
+
+  // New Features
+  const features = changesets.filter(c => c.type === 'minor');
+  if (features.length > 0) {
+    notes += '## ✨ New Features\n\n';
+    features.forEach(change => {
+      notes += `- ${change.description}${change.designId ? ` [DESIGN-${change.designId}]` : ''}\n`;
+    });
+    notes += '\n';
+  }
+
+  // Bug Fixes
+  const fixes = changesets.filter(c => c.type === 'patch');
+  if (fixes.length > 0) {
+    notes += '## 🐛 Bug Fixes\n\n';
+    fixes.forEach(change => {
+      notes += `- ${change.description}${change.designId ? ` [DESIGN-${change.designId}]` : ''}\n`;
+    });
+    notes += '\n';
+  }
+
+  // Design Updates
+  const designUpdates = changesets.filter(c => c.designId);
+  if (designUpdates.length > 0) {
+    notes += '## 🎨 Design Updates\n\n';
+    designUpdates.forEach(change => {
+      notes += `- [DESIGN-${change.designId}] ${change.description}\n`;
+    });
+    notes += '\n';
+  }
+
+  // Component Changes
+  const componentChanges = new Map<string, Changeset[]>();
+  changesets.forEach(change => {
+    if (change.component) {
+      if (!componentChanges.has(change.component)) {
+        componentChanges.set(change.component, []);
       }
-      
-      changeset.description = description.trim();
-      changesets.push(changeset as ChangesetInfo);
+      componentChanges.get(change.component)?.push(change);
     }
+  });
+
+  if (componentChanges.size > 0) {
+    notes += '## 🔄 Component Changes\n\n';
+    componentChanges.forEach((changes, component) => {
+      notes += `### ${component}\n\n`;
+      changes.forEach(change => {
+        notes += `- ${change.description}${change.designId ? ` [DESIGN-${change.designId}]` : ''}\n`;
+      });
+      notes += '\n';
+    });
   }
 
-  // Generate markdown
-  let markdown = '# Release Notes\n\n';
-  
-  for (const changeset of changesets) {
-    markdown += `## ${changeset.type.toUpperCase()} Changes\n\n`;
-    markdown += `### Packages Affected\n`;
-    for (const pkg of changeset.packages) {
-      markdown += `- ${pkg}\n`;
-    }
-    markdown += `\n### Description\n${changeset.description}\n\n`;
-  }
-
-  // Write to file
-  fs.writeFileSync(path.join(__dirname, '../RELEASE_NOTES.md'), markdown);
-  console.log('Release notes generated successfully!');
+  return notes;
 }
 
-// Run if this is the entry point
-if (import.meta.url.endsWith(process.argv[1])) {
-  generateReleaseNotes().catch(console.error);
-}
+// Generate and save release notes
+const notes = generateReleaseNotes();
+fs.writeFileSync('RELEASE_NOTES.md', notes);
 
-export default generateReleaseNotes; 
+console.log('Release notes generated successfully!'); 
