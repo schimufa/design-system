@@ -1,5 +1,34 @@
 # @ab-inbev/design-system
 
+## 2.0.0
+
+### Major Changes
+
+- Initial release of the design system with the following features:
+  - Configurable themes (finance, logistics, sales)
+  - Versioned components (Button v1.0.0, v2.0.0)
+  - Design-to-code mapping system
+  - Comprehensive documentation
+  - Automated release process
+  - Storybook integration
+
+### Minor Changes
+
+- 1ba1f44: feat(design-system): Implement comprehensive design tracking and documentation [DESIGN-001]
+
+  This release includes several major improvements to the design system:
+  - Added design-to-code mapping system
+  - Implemented automated release notes generation
+  - Created comprehensive upgrade guides
+  - Enhanced contribution guidelines
+  - Added design specification tracking
+  - Improved version control documentation
+
+  Migration steps and detailed documentation are available in:
+  - UPGRADE_GUIDE.md
+  - CONTRIBUTING.md
+  - src/design-specs/index.ts
+
 ## 4.1.0
 
 ### Minor Changes
