@@ -1,5 +1,18 @@
 # @ab-inbev/demo
 
+## 1.0.0
+
+### Major Changes
+
+- a547c24: New documentation
+- a547c24: New documentation
+
+### Patch Changes
+
+- Updated dependencies [a547c24]
+- Updated dependencies [a547c24]
+  - @schimufa/design-system@4.0.0
+
 ## 3.0.0
 
 ### Major Changes

@@ -1,5 +1,12 @@
 # @ab-inbev/design-system
 
+## 4.0.0
+
+### Major Changes
+
+- a547c24: New documentation
+- a547c24: New documentation
+
 ## 3.0.0
 
 ### Major Changes
