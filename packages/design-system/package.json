@@ -1,66 +1,55 @@
 {
     "name": "@schimufa/design-system",
-    "version": "4.1.0",
-    "type": "module",
-    "main": "./dist/index.js",
-    "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
-    "sideEffects": false,
-    "license": "MIT",
+    "version": "1.0.0",
+    "description": "Configurable design system with versioned components",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/your-org/design-system.git"
+    },
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org/"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/schimufa/design-system.git"
-    },
-    "files": [
-        "dist/**"
-    ],
     "scripts": {
-        "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
-        "dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
-        "lint": "eslint \"src/**/*.ts*\"",
-        "test": "jest",
-        "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
-        "storybook": "storybook dev -p 6006",
-        "build-storybook": "storybook build"
-    },
-    "devDependencies": {
-        "@storybook/addon-essentials": "^7.6.10",
-        "@storybook/addon-interactions": "^7.6.10",
-        "@storybook/addon-links": "^7.6.10",
-        "@storybook/blocks": "^7.6.10",
-        "@storybook/react": "^7.6.10",
-        "@storybook/react-vite": "^7.6.10",
-        "@storybook/test": "^7.6.10",
-        "@testing-library/jest-dom": "^6.1.5",
-        "@testing-library/react": "^14.1.2",
-        "@types/jest": "^29.5.8",
-        "@types/react": "^18.2.0",
-        "@types/react-dom": "^18.2.0",
-        "eslint": "^8.56.0",
-        "eslint-plugin-storybook": "^0.6.15",
-        "identity-obj-proxy": "^3.0.0",
-        "jest": "^29.7.0",
-        "jest-environment-jsdom": "^29.7.0",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "storybook": "^7.6.10",
-        "ts-jest": "^29.1.1",
-        "tsup": "^8.0.1",
-        "typescript": "^5.3.3",
-        "vite": "^5.0.8"
+        "dev": "storybook dev -p 6006",
+        "build": "tsc && vite build",
+        "build-storybook": "storybook build",
+        "test": "vitest",
+        "test:visual": "playwright test",
+        "lint": "eslint . --ext .ts,.tsx",
+        "release": "pnpm build && changeset publish",
+        "prepare-release": "changeset version && pnpm install",
+        "docs": "typedoc --out docs src"
     },
     "peerDependencies": {
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "@mui/material": "^5.0.0",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0"
     },
-    "dependencies": {
-        "@emotion/react": "^11.11.3",
-        "@emotion/styled": "^11.11.0",
-        "@mui/icons-material": "^5.15.3",
-        "@mui/material": "^5.15.3"
-    }
+    "devDependencies": {
+        "@changesets/cli": "^2.0.0",
+        "@storybook/react": "^7.6.10",
+        "@storybook/react-vite": "^7.6.10",
+        "@types/react": "^18.0.0",
+        "@typescript-eslint/eslint-plugin": "^6.0.0",
+        "@typescript-eslint/parser": "^6.0.0",
+        "@vitejs/plugin-react": "^4.0.0",
+        "eslint": "^8.0.0",
+        "typescript": "^5.0.0",
+        "vite": "^5.0.0",
+        "vitest": "^1.0.0"
+    },
+    "keywords": [
+        "design-system",
+        "react",
+        "components",
+        "ui",
+        "material-ui"
+    ],
+    "author": "Your Organization",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/your-org/design-system/issues"
+    },
+    "homepage": "https://your-org.github.io/design-system"
 }
