@@ -11,11 +11,12 @@ const meta: Meta<typeof Button> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A customizable button component that supports multiple themes.'
-      }
-    }
+        component:
+          'A customizable button component that supports multiple themes.',
+      },
+    },
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 };
 
 export default meta;
@@ -25,8 +26,8 @@ type Story = StoryObj<typeof Button>;
 export const Primary: Story = {
   args: {
     variant: 'contained',
-    children: 'Primary Button'
-  }
+    children: 'Primary Button',
+  },
 };
 
 // Theme examples
@@ -46,14 +47,19 @@ export const ThemeExamples: Story = {
         </ThemeProvider>
       ))}
     </div>
-  )
+  ),
 };
 
 // Dark mode example
 export const DarkMode: Story = {
   render: () => (
     <div style={{ padding: '2rem', background: '#1a1a1a' }}>
-      <ThemeProvider theme={{ ...themes.finance, palette: { ...themes.finance.palette, mode: 'dark' } }}>
+      <ThemeProvider
+        theme={{
+          ...themes.finance,
+          palette: { ...themes.finance.palette, mode: 'dark' },
+        }}
+      >
         <div style={{ display: 'flex', gap: '1rem' }}>
           <Button variant="contained">Contained</Button>
           <Button variant="outlined">Outlined</Button>
@@ -61,7 +67,7 @@ export const DarkMode: Story = {
         </div>
       </ThemeProvider>
     </div>
-  )
+  ),
 };
 
 // Accessibility examples
@@ -72,7 +78,9 @@ export const AccessibilityExamples: Story = {
         <ThemeProvider key={name} theme={theme}>
           <div style={{ marginBottom: '2rem' }}>
             <h3>{name} Theme - Accessibility</h3>
-            <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
+            <div
+              style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}
+            >
               <Button variant="contained" aria-label="Primary action">
                 With ARIA Label
               </Button>
@@ -87,5 +95,5 @@ export const AccessibilityExamples: Story = {
         </ThemeProvider>
       ))}
     </div>
-  )
+  ),
 };

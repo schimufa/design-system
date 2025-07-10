@@ -11,15 +11,15 @@ const config: StorybookConfig = {
     '@storybook/addon-controls',
     '@storybook/addon-viewport',
     '@storybook/addon-measure',
-    '@storybook/addon-outline'
+    '@storybook/addon-outline',
   ],
   framework: {
     name: '@storybook/react-vite',
-    options: {}
+    options: {},
   },
   docs: {
     autodocs: true,
-    defaultName: 'Documentation'
+    defaultName: 'Documentation',
   },
   typescript: {
     reactDocgen: 'react-docgen-typescript',
@@ -34,8 +34,8 @@ const config: StorybookConfig = {
         }
         return true;
       },
-    }
-  }
+    },
+  },
 };
 
 export default config;

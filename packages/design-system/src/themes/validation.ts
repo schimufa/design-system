@@ -16,7 +16,7 @@ const WCAG_REQUIREMENTS: Record<string, ContrastRequirement> = {
   normalText: { ratio: 4.5, level: 'AA' },
   largeText: { ratio: 3.0, level: 'AA' },
   normalTextAAA: { ratio: 7.0, level: 'AAA' },
-  largeTextAAA: { ratio: 4.5, level: 'AAA' }
+  largeTextAAA: { ratio: 4.5, level: 'AAA' },
 };
 
 function checkColorContrast(color1: string, color2: string): number {
@@ -30,13 +30,17 @@ function validateColorPalette(theme: Theme): string[] {
   // Check primary color contrast
   const primaryContrast = checkColorContrast(primary.main, background.default);
   if (primaryContrast < WCAG_REQUIREMENTS.normalText.ratio) {
-    errors.push(`Primary color contrast ratio (${primaryContrast.toFixed(2)}) is below WCAG AA standard`);
+    errors.push(
+      `Primary color contrast ratio (${primaryContrast.toFixed(2)}) is below WCAG AA standard`
+    );
   }
 
   // Check text color contrast
   const textContrast = checkColorContrast(text.primary, background.default);
   if (textContrast < WCAG_REQUIREMENTS.normalText.ratio) {
-    errors.push(`Text color contrast ratio (${textContrast.toFixed(2)}) is below WCAG AA standard`);
+    errors.push(
+      `Text color contrast ratio (${textContrast.toFixed(2)}) is below WCAG AA standard`
+    );
   }
 
   return errors;
@@ -87,7 +91,7 @@ export function validateTheme(theme: Theme): ValidationResult {
   const result: ValidationResult = {
     valid: true,
     errors: [],
-    warnings: []
+    warnings: [],
   };
 
   // Collect all validation errors
@@ -95,7 +99,7 @@ export function validateTheme(theme: Theme): ValidationResult {
     ...validateColorPalette(theme),
     ...validateTypography(theme),
     ...validateSpacing(theme),
-    ...validateShape(theme)
+    ...validateShape(theme),
   ];
 
   // Add warnings for best practices
@@ -113,21 +117,28 @@ export function validateTheme(theme: Theme): ValidationResult {
   return result;
 }
 
-export function validateThemeCompatibility(oldTheme: Theme, newTheme: Theme): ValidationResult {
+export function validateThemeCompatibility(
+  oldTheme: Theme,
+  newTheme: Theme
+): ValidationResult {
   const result: ValidationResult = {
     valid: true,
     errors: [],
-    warnings: []
+    warnings: [],
   };
 
   // Check for breaking changes in color palette
   if (oldTheme.palette.primary.main !== newTheme.palette.primary.main) {
-    result.warnings.push('Primary color has changed - verify component compatibility');
+    result.warnings.push(
+      'Primary color has changed - verify component compatibility'
+    );
   }
 
   // Check for breaking changes in typography
   if (oldTheme.typography.fontSize !== newTheme.typography.fontSize) {
-    result.warnings.push('Base font size has changed - verify layout stability');
+    result.warnings.push(
+      'Base font size has changed - verify layout stability'
+    );
   }
 
   // Check for breaking changes in spacing
@@ -139,4 +150,4 @@ export function validateThemeCompatibility(oldTheme: Theme, newTheme: Theme): Va
   result.valid = result.errors.length === 0;
 
   return result;
-} 
+}
