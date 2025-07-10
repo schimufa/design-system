@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card as MuiCard, CardContent, CardHeader, CardActions, Typography, useTheme } from '@mui/material';
+import { Card as MuiCard, CardContent, Typography, useTheme, SxProps, Theme } from '@mui/material';
 
 export interface CardProps {
   /**
@@ -7,7 +7,7 @@ export interface CardProps {
    */
   title?: string;
   /**
-   * The subtitle of the card
+   * Optional subtitle or description
    */
   subtitle?: string;
   /**
@@ -15,63 +15,121 @@ export interface CardProps {
    */
   children: React.ReactNode;
   /**
-   * Optional actions to display at the bottom of the card
+   * Optional icon to display before the title
    */
-  actions?: React.ReactNode;
+  icon?: React.ReactNode;
   /**
    * Optional className for additional styling
    */
   className?: string;
   /**
-   * Optional elevation level (0-24)
+   * Optional variant for different card styles
    */
-  elevation?: number;
+  variant?: 'default' | 'outlined' | 'glass';
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles
+   */
+  sx?: SxProps<Theme>;
 }
 
 /**
- * Card component that provides a consistent container for content with optional header and actions
+ * Card component that provides a clean, modern container for content
  */
 export const Card: React.FC<CardProps> = ({
   title,
   subtitle,
   children,
-  actions,
+  icon,
   className,
-  elevation = 1
+  variant = 'default',
+  sx
 }) => {
   const theme = useTheme();
+
+  const getCardStyles = () => {
+    const baseStyles = {
+      backgroundColor: theme.palette.background.paper,
+      borderRadius: '16px',
+      overflow: 'hidden',
+      border: 'none',
+      boxShadow: 'none',
+      ...sx
+    };
+
+    switch (variant) {
+      case 'glass':
+        return {
+          ...baseStyles,
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.3)',
+        };
+      case 'outlined':
+        return {
+          ...baseStyles,
+          border: `1px solid ${theme.palette.divider}`,
+        };
+      default:
+        return baseStyles;
+    }
+  };
 
   return (
     <MuiCard 
       className={className}
-      elevation={elevation}
-      sx={{
-        backgroundColor: theme.palette.background.paper,
-        borderRadius: theme.shape.borderRadius
-      }}
+      sx={getCardStyles()}
+      role="article"
     >
-      {(title || subtitle) && (
-        <CardHeader
-          title={title && (
-            <Typography variant="h6" component="h2">
+      <CardContent sx={{ p: 3 }}>
+        {(title || icon) && (
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '12px',
+            marginBottom: subtitle ? '4px' : '16px'
+          }}>
+            {icon && (
+              <div style={{
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '50%',
+                backgroundColor: theme.palette.primary.main,
+                color: theme.palette.primary.contrastText,
+              }}>
+                {icon}
+              </div>
+            )}
+            <Typography 
+              variant="h6" 
+              component="h2"
+              sx={{ 
+                fontWeight: 500,
+                fontSize: '1.25rem',
+                lineHeight: 1.2
+              }}
+            >
               {title}
             </Typography>
-          )}
-          subheader={subtitle && (
-            <Typography variant="subtitle2" color="text.secondary">
-              {subtitle}
-            </Typography>
-          )}
-        />
-      )}
-      <CardContent>
+          </div>
+        )}
+        {subtitle && (
+          <Typography 
+            variant="subtitle1" 
+            color="text.secondary"
+            sx={{ 
+              mb: 2,
+              fontSize: '1rem',
+              lineHeight: 1.5
+            }}
+          >
+            {subtitle}
+          </Typography>
+        )}
         {children}
       </CardContent>
-      {actions && (
-        <CardActions>
-          {actions}
-        </CardActions>
-      )}
     </MuiCard>
   );
 }; 

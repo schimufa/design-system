@@ -1,107 +1,109 @@
-import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { Box, Container, Grid, Typography, CssBaseline } from '@mui/material';
-import { Button, getTheme, themes, AppTheme } from '@schimufa/design-system';
+import { Typography, CssBaseline } from '@mui/material';
+import { Card, getTheme } from '@schimufa/design-system';
 
 function App() {
-  const [currentTheme, setCurrentTheme] = useState<AppTheme>('finance');
-  const [buttonVersion, setButtonVersion] = useState<'1.0.0' | '2.0.0'>('1.0.0');
-
   return (
-    <ThemeProvider theme={getTheme(currentTheme)}>
+    <ThemeProvider theme={getTheme('finance')}>
       <CssBaseline />
-      <Container maxWidth="lg">
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            🚀 AB InBev Frontend Demo
-          </Typography>
-          
-          <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-            Demonstrating configurable design system with version-controlled components
-          </Typography>
+      <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 p-8">
+        {/* Header Section */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <Card variant="glass">
+            <div className="text-center py-6">
+              <Typography 
+                component="h1" 
+                variant="h4"
+                gutterBottom
+              >
+                Clean Design System
+              </Typography>
+              <Typography 
+                component="h2" 
+                variant="subtitle1"
+                color="text.secondary"
+              >
+                Minimal • Modern • Elegant
+              </Typography>
+            </div>
+          </Card>
+        </div>
 
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" gutterBottom>
-              1. Theme Selection (Requirement #1: Configurable Design System)
-            </Typography>
-            <Grid container spacing={2}>
-              {themes.map((theme) => (
-                <Grid item key={theme}>
-                  <Button
-                    variant={currentTheme === theme ? 'contained' : 'outlined'}
-                    onClick={() => setCurrentTheme(theme)}
-                  >
-                    {theme}
-                  </Button>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
+        {/* Features Grid */}
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Typography Card */}
+            <Card
+              variant="default"
+              title="Typography"
+              subtitle="Clean, readable fonts Perfect hierarchy"
+            >
+              <div className="space-y-4 mt-6">
+                <div className="bg-blue-500 text-white px-6 py-2 rounded-full inline-block">
+                  Primary
+                </div>
+                <div className="border border-blue-500 text-blue-500 px-6 py-2 rounded-full inline-block">
+                  Secondary
+                </div>
+                <div className="text-gray-500 mt-2">
+                  Tertiary
+                </div>
+              </div>
+            </Card>
 
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" gutterBottom>
-              2. Component Versioning (Requirement #2: Version-Controlled Components)
-            </Typography>
-            <Grid container spacing={2}>
-              <Grid item>
-                <Button
-                  variant={buttonVersion === '1.0.0' ? 'contained' : 'outlined'}
-                  onClick={() => setButtonVersion('1.0.0')}
-                >
-                  Version 1.0.0
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant={buttonVersion === '2.0.0' ? 'contained' : 'outlined'}
-                  onClick={() => setButtonVersion('2.0.0')}
-                >
-                  Version 2.0.0
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
+            {/* Components Card */}
+            <Card
+              variant="default"
+              title="Components"
+              subtitle="Consistent elements Reusable patterns"
+            >
+              <div className="space-y-4 mt-6">
+                <div className="bg-gray-100 rounded-lg p-3">
+                  <div className="bg-white rounded p-2 border border-gray-200">
+                    Input field
+                  </div>
+                </div>
+                <div className="bg-gray-100 rounded-lg p-3">
+                  <div className="bg-white rounded p-2 border border-gray-200">
+                    Card component
+                    <div className="text-sm text-gray-500 mt-1">
+                      Clean layout structure
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
 
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" gutterBottom>
-              3. Component Demo (Version: {buttonVersion})
-            </Typography>
-            <Grid container spacing={2}>
-              <Grid item>
-                <Button version={buttonVersion} variant="contained">
-                  Primary Button
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button version={buttonVersion} variant="outlined">
-                  Secondary Button
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
-
-          <Box sx={{ mb: 4, p: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
-            <Typography variant="h6" gutterBottom>
-              ✅ Requirements Demonstrated:
-            </Typography>
-            <Typography variant="body2" component="div">
-              <ul>
-                <li><strong>Configurable Design System:</strong> Switch between Finance, Logistics, and Sales themes</li>
-                <li><strong>Version-Controlled Components:</strong> Button v1.0.0 vs v2.0.0 with visual differences</li>
-                <li><strong>Independent Library Versioning:</strong> Components can coexist with different versions</li>
-                <li><strong>Repository Strategy:</strong> Monorepo structure with shared components</li>
-                <li><strong>Large-Scale Management:</strong> Consistent UX across theme changes</li>
-              </ul>
-            </Typography>
-          </Box>
-
-          <Box sx={{ textAlign: 'center', mt: 4 }}>
-            <Typography variant="body2" color="text.secondary">
-              Current Theme: <strong>{currentTheme}</strong> | Button Version: <strong>{buttonVersion}</strong>
-            </Typography>
-          </Box>
-        </Box>
-      </Container>
+            {/* Colors Card */}
+            <Card
+              variant="default"
+              title="Colors"
+              subtitle="Harmonious palette Accessible contrast"
+            >
+              <div className="mt-6">
+                <div className="grid grid-cols-4 gap-2 mb-4">
+                  <div className="w-8 h-8 rounded-full bg-blue-500"></div>
+                  <div className="w-8 h-8 rounded-full bg-purple-600"></div>
+                  <div className="w-8 h-8 rounded-full bg-gray-700"></div>
+                  <div className="w-8 h-8 rounded-full bg-gray-200"></div>
+                  <div className="w-8 h-8 rounded-full bg-green-500"></div>
+                  <div className="w-8 h-8 rounded-full bg-orange-500"></div>
+                  <div className="w-8 h-8 rounded-full bg-red-500"></div>
+                  <div className="w-8 h-8 rounded-full bg-purple-400"></div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm">
+                    Active
+                  </span>
+                  <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm">
+                    Warning
+                  </span>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div>
     </ThemeProvider>
   );
 }
