@@ -1,6 +1,6 @@
 {
-    "name": "@ab-inbev/design-system",
-    "version": "0.1.0",
+    "name": "@schimufa/design-system",
+    "version": "2.0.0",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
@@ -12,7 +12,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/ab-inbev/design-system.git"
+        "url": "https://github.com/schimufa/design-system.git"
     },
     "files": [
         "dist/**"

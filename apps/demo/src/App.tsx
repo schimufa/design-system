@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { Box, Container, Grid, Typography, CssBaseline } from '@mui/material';
-import { Button, getTheme, themes, AppTheme } from '@ab-inbev/design-system';
+import { Button, getTheme, themes, AppTheme } from '@schimufa/design-system';
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState<AppTheme>('finance');

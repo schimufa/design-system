@@ -12,7 +12,10 @@
         "lint": "turbo run lint",
         "test": "turbo run test",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "changeset": "changeset",
+        "version-packages": "changeset version",
+        "release": "turbo run build && changeset publish"
     },
     "devDependencies": {
         "@changesets/cli": "^2.29.5",

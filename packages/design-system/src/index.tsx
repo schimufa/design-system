@@ -1,5 +1,7 @@
 // Export all components
-export { default as Button } from './components/Button';
+export * from './components/Button';
+export * from './components/Header';
+export * from './components/Card';
 export type { ButtonProps } from './components/Button';
 
 // Export theme system
