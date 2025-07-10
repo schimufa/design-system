@@ -1,142 +1,77 @@
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
-import chalk from 'chalk';
+import { fileURLToPath } from 'url';
 
-interface Changeset {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+interface ChangesetInfo {
   id: string;
   type: 'major' | 'minor' | 'patch';
   description: string;
-  package: string;
-  breaking?: boolean;
-  migration?: string[];
+  packages: string[];
 }
 
-class ReleaseNotesGenerator {
-  private changesetPath: string;
-  private outputPath: string;
+async function generateReleaseNotes() {
+  const changesetDir = path.join(__dirname, '../.changeset');
+  const files = fs.readdirSync(changesetDir);
+  const changesets: ChangesetInfo[] = [];
 
-  constructor() {
-    this.changesetPath = path.join(process.cwd(), '.changeset');
-    this.outputPath = path.join(process.cwd(), 'RELEASE_NOTES.md');
-  }
-
-  private async getChangesets(): Promise<Changeset[]> {
-    const files = fs.readdirSync(this.changesetPath)
-      .filter(file => file.endsWith('.md') && file !== 'README.md');
-
-    return files.map(file => {
-      const content = fs.readFileSync(path.join(this.changesetPath, file), 'utf8');
-      // Parse changeset content
-      // This is a simplified version - in production, use proper MD parser
-      const [metadata, ...description] = content.split('---\n');
+  for (const file of files) {
+    if (file.endsWith('.md')) {
+      const content = fs.readFileSync(path.join(changesetDir, file), 'utf8');
+      const lines = content.split('\n');
       
-      return {
+      // Simple parsing of changeset files
+      const changeset: Partial<ChangesetInfo> = {
         id: file.replace('.md', ''),
-        type: 'minor', // Parse from metadata
-        description: description.join('').trim(),
-        package: '@schimufa/design-system', // Parse from metadata
-        breaking: description.join('').includes('BREAKING CHANGE'),
-        migration: this.extractMigrationSteps(description.join('')),
+        packages: []
       };
-    });
-  }
-
-  private extractMigrationSteps(content: string): string[] {
-    const migrationMatch = content.match(/## Migration([\s\S]*?)(?:##|$)/);
-    if (!migrationMatch) return [];
-    
-    return migrationMatch[1]
-      .trim()
-      .split('\n')
-      .filter(line => line.startsWith('- '))
-      .map(line => line.slice(2).trim());
-  }
-
-  private categorizeChanges(changesets: Changeset[]): Record<string, Changeset[]> {
-    return changesets.reduce((acc, changeset) => {
-      if (changeset.breaking) {
-        acc.breaking = [...(acc.breaking || []), changeset];
-      } else if (changeset.type === 'minor') {
-        acc.features = [...(acc.features || []), changeset];
-      } else {
-        acc.fixes = [...(acc.fixes || []), changeset];
-      }
-      return acc;
-    }, {} as Record<string, Changeset[]>);
-  }
-
-  private generateMarkdown(categorized: Record<string, Changeset[]>): string {
-    const date = new Date().toISOString().split('T')[0];
-    let markdown = `# Release Notes (${date})\n\n`;
-
-    if (categorized.breaking?.length) {
-      markdown += '## ⚠️ Breaking Changes\n\n';
-      categorized.breaking.forEach(change => {
-        markdown += `### ${change.description}\n\n`;
-        if (change.migration?.length) {
-          markdown += '**Migration Steps:**\n';
-          change.migration.forEach(step => {
-            markdown += `- ${step}\n`;
-          });
-          markdown += '\n';
+      
+      let inDescription = false;
+      let description = '';
+      
+      for (const line of lines) {
+        if (line.startsWith('---')) {
+          inDescription = !inDescription;
+          continue;
         }
-      });
+        
+        if (inDescription) {
+          description += line + '\n';
+        } else if (line.includes(':')) {
+          const [pkg, type] = line.split(':').map(s => s.trim());
+          changeset.packages = changeset.packages || [];
+          changeset.packages.push(pkg);
+          changeset.type = type as 'major' | 'minor' | 'patch';
+        }
+      }
+      
+      changeset.description = description.trim();
+      changesets.push(changeset as ChangesetInfo);
     }
+  }
 
-    if (categorized.features?.length) {
-      markdown += '## ✨ New Features\n\n';
-      categorized.features.forEach(change => {
-        markdown += `- ${change.description}\n`;
-      });
-      markdown += '\n';
+  // Generate markdown
+  let markdown = '# Release Notes\n\n';
+  
+  for (const changeset of changesets) {
+    markdown += `## ${changeset.type.toUpperCase()} Changes\n\n`;
+    markdown += `### Packages Affected\n`;
+    for (const pkg of changeset.packages) {
+      markdown += `- ${pkg}\n`;
     }
-
-    if (categorized.fixes?.length) {
-      markdown += '## 🐛 Bug Fixes\n\n';
-      categorized.fixes.forEach(change => {
-        markdown += `- ${change.description}\n`;
-      });
-      markdown += '\n';
-    }
-
-    markdown += '## 📦 Packages\n\n';
-    markdown += '| Package | Version | Changes |\n';
-    markdown += '|---------|----------|----------|\n';
-    markdown += `| @schimufa/design-system | ${this.getPackageVersion()} | ${this.countChanges(categorized)} changes |\n\n`;
-
-    return markdown;
+    markdown += `\n### Description\n${changeset.description}\n\n`;
   }
 
-  private getPackageVersion(): string {
-    const packageJson = JSON.parse(
-      fs.readFileSync(path.join(process.cwd(), 'packages/design-system/package.json'), 'utf8')
-    );
-    return packageJson.version;
-  }
-
-  private countChanges(categorized: Record<string, Changeset[]>): number {
-    return Object.values(categorized).reduce((acc, changes) => acc + changes.length, 0);
-  }
-
-  public async generate(): Promise<void> {
-    console.log(chalk.blue('Generating release notes...'));
-    
-    const changesets = await this.getChangesets();
-    const categorized = this.categorizeChanges(changesets);
-    const markdown = this.generateMarkdown(categorized);
-    
-    fs.writeFileSync(this.outputPath, markdown);
-    
-    console.log(chalk.green('\nRelease notes generated successfully!'));
-    console.log(chalk.gray(`Output: ${this.outputPath}`));
-  }
+  // Write to file
+  fs.writeFileSync(path.join(__dirname, '../RELEASE_NOTES.md'), markdown);
+  console.log('Release notes generated successfully!');
 }
 
-// Run generator if called directly
-if (require.main === module) {
-  const generator = new ReleaseNotesGenerator();
-  generator.generate().catch(console.error);
+// Run if this is the entry point
+if (import.meta.url.endsWith(process.argv[1])) {
+  generateReleaseNotes().catch(console.error);
 }
 
-export default ReleaseNotesGenerator; 
+export default generateReleaseNotes; 

@@ -1,5 +1,17 @@
 # @ab-inbev/demo
 
+## 3.0.0
+
+### Major Changes
+
+- New documentation
+
+### Patch Changes
+
+- Updated dependencies [babddac]
+- Updated dependencies
+  - @schimufa/design-system@3.0.0
+
 ## 2.0.0
 
 ### Major Changes

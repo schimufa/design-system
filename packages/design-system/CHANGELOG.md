@@ -4,6 +4,22 @@
 
 ### Major Changes
 
+- New documentation
+
+### Minor Changes
+
+- babddac: Added comprehensive tooling and documentation:
+  - Design validation system
+  - Automated release notes generation
+  - Design version mapping documentation
+  - Application blueprint template
+  - Enhanced PR template
+  - Updated contribution guidelines
+
+## 3.0.0
+
+### Major Changes
+
 - new tests
 
 ## 2.4.0

@@ -2,6 +2,7 @@
     "name": "ab-inbev-frontend",
     "version": "1.0.0",
     "private": true,
+    "type": "module",
     "workspaces": [
         "apps/*",
         "packages/*"
@@ -16,8 +17,8 @@
         "changeset": "changeset",
         "version-packages": "changeset version",
         "release": "turbo run build && changeset publish",
-        "validate-design": "ts-node packages/design-system/scripts/design-validator.ts",
-        "generate-release-notes": "ts-node scripts/generate-release-notes.ts",
+        "validate-design": "node -r ts-node/register packages/design-system/scripts/design-validator.ts",
+        "generate-release-notes": "node -r ts-node/register scripts/generate-release-notes.ts",
         "preversion-packages": "pnpm validate-design",
         "postversion-packages": "pnpm generate-release-notes"
     },
