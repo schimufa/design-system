@@ -1,51 +1,52 @@
 # Pull Request
 
-## Description
+## Changes
+<!-- Describe your changes in detail -->
 
-Brief description of the changes made.
+## Design Reference
+<!-- Link to Figma/design documents -->
+- Design URL: 
+- Design Version:
+- Component(s) Affected:
 
 ## Type of Change
-
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+<!-- What type of change does your code introduce? -->
+- [ ] Bug fix (non-breaking change)
+- [ ] New feature (non-breaking change)
+- [ ] Breaking change
 - [ ] Documentation update
-- [ ] Component version update
 
-## Component Changes
+## Theme Impact
+<!-- How does this affect theming? -->
+- [ ] No theme changes
+- [ ] Theme token updates
+- [ ] New theme added
+- [ ] Breaking theme changes
 
-- [ ] New component added
-- [ ] Existing component modified
-- [ ] Component version updated (specify version)
-- [ ] Theme changes
-- [ ] Breaking changes to existing APIs
+## Documentation
+<!-- What documentation has been updated? -->
+- [ ] Component documentation
+- [ ] Theme documentation
+- [ ] Migration guide
+- [ ] README updates
+- [ ] Storybook stories
 
-## Testing
+## Validation
+<!-- Confirm these have been completed -->
+- [ ] TypeScript checks pass
+- [ ] Lint checks pass
+- [ ] Unit tests added/updated
+- [ ] Visual regression tests pass
+- [ ] Theme validation passes
+- [ ] Design spec validation passes
+- [ ] Accessibility checks pass
+- [ ] Documentation is up to date
 
-- [ ] Tests added/updated
-- [ ] Manual testing completed
-- [ ] Cross-browser testing completed
-- [ ] Accessibility testing completed
+## Breaking Changes
+<!-- List any breaking changes and migration steps -->
 
-## Design System Impact
-
-- [ ] Design tokens updated
-- [ ] Theme changes made
-- [ ] Component API changes
-- [ ] Documentation updated
-
-## Checklist
-
-- [ ] Code follows project style guidelines
-- [ ] Self-review completed
-- [ ] Tests pass locally
-- [ ] Documentation updated
-- [ ] Changeset added (if applicable)
-
-## Screenshots/Videos
-
-(If applicable, add screenshots or videos to help explain your changes)
+## Screenshots
+<!-- If applicable, add screenshots to help explain your changes -->
 
 ## Additional Notes
-
-(Any additional information or context)
+<!-- Any other context about the PR that reviewers should know -->

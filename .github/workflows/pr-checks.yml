@@ -1,0 +1,62 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'packages/**'
+      - 'apps/**'
+      - '.github/workflows/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Type Check
+        run: pnpm turbo run typecheck
+        
+      - name: Lint
+        run: pnpm turbo run lint
+        
+      - name: Test
+        run: pnpm turbo run test
+        
+      - name: Build
+        run: pnpm turbo run build
+        
+      - name: Theme Validation
+        run: pnpm turbo run validate-theme
+        
+      - name: Design Spec Validation
+        run: pnpm turbo run validate-design
+        
+      - name: Storybook Build
+        run: pnpm --filter "@schimufa/design-system" build-storybook
+        
+      - name: Visual Regression Tests
+        run: pnpm --filter "@schimufa/design-system" test:visual
+        
+      - name: Check Documentation
+        run: |
+          pnpm turbo run docs
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Documentation is up to date"
+          else
+            echo "Documentation needs to be updated"
+            exit 1
+          fi 

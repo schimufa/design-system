@@ -8,8 +8,20 @@
         "emitDeclarationOnly": false,
         "isolatedModules": true,
         "skipLibCheck": true,
-        "allowImportingTsExtensions": false
+        "allowImportingTsExtensions": false,
+        "jsx": "react-jsx",
+        "types": ["node", "jest", "@testing-library/jest-dom"],
+        "paths": {
+            "@/*": ["./src/*"]
+        }
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]
+    "include": [
+        "src/**/*",
+        "scripts/**/*",
+        ".storybook/**/*",
+        "**/*.stories.tsx",
+        "**/*.test.tsx",
+        "**/*.spec.tsx"
+    ],
+    "exclude": ["node_modules", "dist"]
 } 

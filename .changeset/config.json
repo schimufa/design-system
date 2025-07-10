@@ -1,11 +1,25 @@
 {
     "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
-    "changelog": "@changesets/cli/changelog",
+    "changelog": [
+        "@changesets/cli/changelog",
+        { "repo": "schimufa/design-system" }
+    ],
     "commit": false,
     "fixed": [],
     "linked": [],
     "access": "public",
     "baseBranch": "main",
     "updateInternalDependencies": "patch",
-    "ignore": []
+    "ignore": [],
+    "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
+        "onlyUpdatePeerDependentsWhenOutOfRange": true
+    },
+    "changedFilePatterns": [
+        "packages/**",
+        "apps/**"
+    ],
+    "customTemplates": {
+        "defaultTemplate": "# Changes\n\n${changes}\n\n# Component Updates\n\n${componentUpdates}\n\n# Breaking Changes\n\n${breakingChanges}\n\n# Migration Guide\n\n${migrationSteps}\n\n# Design Updates\n\n${designUpdates}",
+        "componentTemplate": "## ${componentName}\n\n${changes}\n\n### Design Reference\n${designUrl}\n\n### Breaking Changes\n${breakingChanges}\n\n### Migration Steps\n${migrationSteps}"
+    }
 }

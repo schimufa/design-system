@@ -2,43 +2,33 @@
     "name": "ab-inbev-frontend",
     "version": "1.0.0",
     "private": true,
-    "type": "module",
-    "workspaces": [
-        "apps/*",
-        "packages/*"
-    ],
     "scripts": {
         "build": "turbo run build",
         "dev": "turbo run dev",
         "lint": "turbo run lint",
-        "test": "turbo run test",
+        "clean": "turbo run clean",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "prepare": "husky install",
-        "changeset": "changeset",
-        "version-packages": "changeset version",
-        "release": "turbo run build --filter=./packages/* && changeset publish",
-        "validate-design": "node -r ts-node/register packages/design-system/scripts/design-validator.ts",
-        "generate-release-notes": "node -r ts-node/register scripts/generate-release-notes.ts",
-        "preversion-packages": "pnpm validate-design",
-        "postversion-packages": "pnpm generate-release-notes",
-        "clean": "turbo run clean && rm -rf node_modules",
-        "build:storybook": "turbo run build-storybook"
+        "typecheck": "turbo run typecheck",
+        "test": "turbo run test",
+        "validate-theme": "turbo run validate-theme",
+        "validate-design": "turbo run validate-design",
+        "docs": "turbo run docs",
+        "release": "turbo run build lint typecheck test && changeset publish",
+        "prepare-release": "changeset version && pnpm install",
+        "ci": "turbo run build lint typecheck test validate-theme validate-design docs"
     },
     "devDependencies": {
-        "@changesets/cli": "^2.29.5",
-        "@typescript-eslint/eslint-plugin": "^6.14.0",
-        "@typescript-eslint/parser": "^6.14.0",
-        "eslint": "^8.56.0",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-react": "^7.33.2",
-        "eslint-plugin-react-hooks": "^4.6.0",
-        "eslint-plugin-storybook": "^0.8.0",
-        "eslint-config-typescript": "^3.0.0",
-        "husky": "^8.0.3",
-        "prettier": "^3.1.1",
-        "turbo": "^1.11.3",
-        "typescript": "^5.3.3",
+        "@changesets/cli": "^2.0.0",
+        "@types/node": "^24.0.0",
+        "eslint": "^8.0.0",
+        "prettier": "^3.0.0",
         "ts-node": "^10.9.2",
-        "chalk": "^5.3.0"
+        "turbo": "^1.10.0",
+        "typescript": "^5.0.0"
+    },
+    "packageManager": "pnpm@8.9.0",
+    "engines": {
+        "node": ">=18.0.0",
+        "pnpm": ">=8.9.0"
     }
 }

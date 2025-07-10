@@ -4,9 +4,12 @@
     "pipeline": {
         "build": {
             "dependsOn": ["^build"],
-            "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+            "outputs": ["dist/**"]
         },
         "lint": {
+            "outputs": []
+        },
+        "typecheck": {
             "outputs": []
         },
         "dev": {
@@ -15,6 +18,22 @@
         },
         "clean": {
             "cache": false
+        },
+        "test": {
+            "outputs": ["coverage/**"],
+            "dependsOn": []
+        },
+        "validate-theme": {
+            "outputs": [],
+            "dependsOn": ["build"]
+        },
+        "validate-design": {
+            "outputs": [],
+            "dependsOn": ["build"]
+        },
+        "docs": {
+            "outputs": ["docs/**"],
+            "dependsOn": ["build"]
         }
     }
 }

@@ -1,126 +1,91 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { ThemeProvider } from '@mui/material';
 import { Button } from './index';
+import { themes } from '../../themes';
 
-const meta = {
+const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
-        component: `
-A versatile button component that supports multiple versions and Material-UI features.
-
-## Versions
-- 1.0.0: Classic design with uppercase text and sharp corners
-- 2.0.0: Modern design with normal text case and rounded corners
-
-## Usage
-
-\`\`\`jsx
-import { Button } from '@schimufa/design-system';
-
-// Classic version (1.0.0)
-<Button variant="contained">CLICK ME</Button>
-
-// Modern version (2.0.0)
-<Button version="2.0.0" variant="contained">Click me</Button>
-\`\`\`
-`,
-      },
-    },
+        component: 'A customizable button component that supports multiple themes.'
+      }
+    }
   },
-  argTypes: {
-    version: {
-      control: 'radio',
-      options: ['1.0.0', '2.0.0'],
-      description: 'The design version of the button',
-    },
-    variant: {
-      control: 'select',
-      options: ['contained', 'outlined', 'text'],
-      description: 'The variant to use',
-    },
-    color: {
-      control: 'select',
-      options: ['primary', 'secondary', 'error', 'warning', 'info', 'success'],
-      description: 'The color of the button',
-    },
-    size: {
-      control: 'radio',
-      options: ['small', 'medium', 'large'],
-      description: 'The size of the button',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'If true, the button will be disabled',
-    },
-  },
-  tags: ['autodocs'],
-} satisfies Meta<typeof Button>;
+  tags: ['autodocs']
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Button>;
 
-export const Classic: Story = {
+// Base button story
+export const Primary: Story = {
   args: {
-    children: 'CLASSIC BUTTON',
-    version: '1.0.0',
     variant: 'contained',
-    color: 'primary',
-  },
+    children: 'Primary Button'
+  }
 };
 
-export const Modern: Story = {
-  args: {
-    children: 'Modern Button',
-    version: '2.0.0',
-    variant: 'contained',
-    color: 'primary',
-  },
-};
-
-export const Variants: Story = {
+// Theme examples
+export const ThemeExamples: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '1rem' }}>
-      <Button variant="contained">Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-      <Button variant="text">Text</Button>
+    <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
+      {Object.entries(themes).map(([name, theme]) => (
+        <ThemeProvider key={name} theme={theme}>
+          <div>
+            <h3>{name} Theme</h3>
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <Button variant="contained">Contained</Button>
+              <Button variant="outlined">Outlined</Button>
+              <Button variant="text">Text</Button>
+            </div>
+          </div>
+        </ThemeProvider>
+      ))}
     </div>
-  ),
+  )
 };
 
-export const Colors: Story = {
+// Dark mode example
+export const DarkMode: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-      <Button color="primary" variant="contained">
-        Primary
-      </Button>
-      <Button color="secondary" variant="contained">
-        Secondary
-      </Button>
-      <Button color="error" variant="contained">
-        Error
-      </Button>
-      <Button color="warning" variant="contained">
-        Warning
-      </Button>
-      <Button color="info" variant="contained">
-        Info
-      </Button>
-      <Button color="success" variant="contained">
-        Success
-      </Button>
+    <div style={{ padding: '2rem', background: '#1a1a1a' }}>
+      <ThemeProvider theme={{ ...themes.finance, palette: { ...themes.finance.palette, mode: 'dark' } }}>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <Button variant="contained">Contained</Button>
+          <Button variant="outlined">Outlined</Button>
+          <Button variant="text">Text</Button>
+        </div>
+      </ThemeProvider>
     </div>
-  ),
+  )
 };
 
-export const Sizes: Story = {
+// Accessibility examples
+export const AccessibilityExamples: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      <Button size="small">Small</Button>
-      <Button size="medium">Medium</Button>
-      <Button size="large">Large</Button>
+    <div>
+      {Object.entries(themes).map(([name, theme]) => (
+        <ThemeProvider key={name} theme={theme}>
+          <div style={{ marginBottom: '2rem' }}>
+            <h3>{name} Theme - Accessibility</h3>
+            <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
+              <Button variant="contained" aria-label="Primary action">
+                With ARIA Label
+              </Button>
+              <Button variant="outlined" disabled>
+                Disabled State
+              </Button>
+              <Button variant="contained" aria-busy="true">
+                Loading State
+              </Button>
+            </div>
+          </div>
+        </ThemeProvider>
+      ))}
     </div>
-  ),
+  )
 };

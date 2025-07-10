@@ -7,15 +7,15 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
-    }
+      '@': resolve(__dirname, 'src'),
+    },
   },
   build: {
     outDir: 'dist',
     sourcemap: true,
     commonjsOptions: {
       include: [/node_modules/],
-      extensions: ['.js', '.cjs', '.jsx', '.ts', '.tsx']
-    }
-  }
+      extensions: ['.js', '.cjs', '.jsx', '.ts', '.tsx'],
+    },
+  },
 });

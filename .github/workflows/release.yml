@@ -10,49 +10,91 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
+          
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
-          registry-url: 'https://registry.npmjs.org'
-
+          node-version: '18'
+          
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
           version: 8
-
+          
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Create Release Pull Request or Publish to npm
+        
+      - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
         with:
           publish: pnpm release
-          commit: "chore(release): version packages"
-          title: "chore(release): version packages"
+          commit: 'chore: version packages'
+          title: 'chore: version packages'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Generate Release Notes
-        if: steps.changesets.outputs.published == 'true'
-        run: |
-          node scripts/generate-release-notes.ts
           
-      - name: Create GitHub Release
-        if: steps.changesets.outputs.published == 'true'
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  docs:
+    name: Documentation
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          tag_name: v${{ steps.changesets.outputs.version }}
-          release_name: Release v${{ steps.changesets.outputs.version }}
-          body_path: RELEASE_NOTES.md
-          draft: false
-          prerelease: false 
+          node-version: '18'
+          
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Build Documentation
+        run: |
+          pnpm --filter "@schimufa/design-system" build-storybook
+          pnpm --filter "@schimufa/design-system" docs
+          
+      - name: Deploy Storybook
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./packages/design-system/storybook-static
+          destination_dir: storybook
+          
+      - name: Deploy API Docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./packages/design-system/docs
+          destination_dir: api
+          
+  notify:
+    name: Notify
+    needs: [release, docs]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "Design System Release"
+          description: |
+            A new version has been released! 🎉
+            
+            Documentation has been updated:
+            - Storybook: https://schimufa.github.io/design-system/storybook
+            - API Docs: https://schimufa.github.io/design-system/api
+            
+            Please review the release notes for breaking changes and migration steps. 
