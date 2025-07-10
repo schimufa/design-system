@@ -4,6 +4,12 @@
 
 ### Major Changes
 
+- Reset version to 1.0.0 for proper semantic versioning
+
+## 2.0.0
+
+### Major Changes
+
 - Initial release of the design system with the following features:
   - Configurable themes (finance, logistics, sales)
   - Versioned components (Button v1.0.0, v2.0.0)
