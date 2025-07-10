@@ -7,13 +7,14 @@ This guide helps you upgrade between different versions of our design system com
 ### Version Compatibility Matrix
 
 | Component | Latest Version | Supported Versions | Minimum Version |
-|-----------|---------------|-------------------|-----------------|
-| Button    | 2.0.0         | 1.0.0, 2.0.0     | 1.0.0          |
-| Card      | 1.0.0         | 1.0.0            | 1.0.0          |
+| --------- | -------------- | ------------------ | --------------- |
+| Button    | 2.0.0          | 1.0.0, 2.0.0       | 1.0.0           |
+| Card      | 1.0.0          | 1.0.0              | 1.0.0           |
 
 ### Breaking Changes Summary
 
 #### Button 2.0.0
+
 - Removed uppercase text transform
 - Changed default border radius
 - Updated theme integration
@@ -23,13 +24,16 @@ This guide helps you upgrade between different versions of our design system com
 ### Button: 1.0.0 → 2.0.0
 
 #### Changes
+
 1. Text Casing
+
    ```diff
    - <Button>SUBMIT</Button>
    + <Button version="2.0.0">Submit</Button>
    ```
 
 2. Border Radius
+
    ```diff
    - <Button>Sharp Corners</Button>
    + <Button version="2.0.0" style={{ borderRadius: 4 }}>Keep Sharp Corners</Button>
@@ -42,6 +46,7 @@ This guide helps you upgrade between different versions of our design system com
    ```
 
 #### Migration Steps
+
 1. Update version prop to "2.0.0"
 2. Review and update button text casing
 3. Check border radius compatibility
@@ -54,6 +59,7 @@ The Card component is currently at version 1.0.0. Future upgrades will be docume
 ## Gradual Migration Strategy
 
 ### Step 1: Audit Current Usage
+
 ```bash
 # Find all Button usage
 grep -r "<Button" ./src
@@ -63,6 +69,7 @@ grep -r "version=" ./src
 ```
 
 ### Step 2: Update Dependencies
+
 ```json
 {
   "dependencies": {
@@ -72,6 +79,7 @@ grep -r "version=" ./src
 ```
 
 ### Step 3: Incremental Component Updates
+
 1. Start with low-impact pages
 2. Update one component type at a time
 3. Test thoroughly after each update
@@ -95,6 +103,7 @@ function MyComponent() {
 ## Testing Changes
 
 ### Visual Regression
+
 ```bash
 # Run visual regression tests
 pnpm test:visual
@@ -104,6 +113,7 @@ pnpm test:visual -u
 ```
 
 ### Accessibility
+
 ```bash
 # Check accessibility
 pnpm test:a11y
@@ -114,6 +124,7 @@ pnpm test:a11y
 ### Common Issues
 
 1. Version Mismatch
+
    ```
    Error: Version "1.5.0" is not supported
    Solution: Use only supported versions (1.0.0 or 2.0.0)
@@ -134,10 +145,11 @@ pnpm test:a11y
 ## Future Updates
 
 Stay informed about upcoming changes:
+
 1. Watch our GitHub repository
 2. Subscribe to our changelog
 3. Join our monthly design system meetings
 
 ## Version History
 
-See our [CHANGELOG.md](./CHANGELOG.md) for a detailed history of changes. 
+See our [CHANGELOG.md](./CHANGELOG.md) for a detailed history of changes.

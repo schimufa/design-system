@@ -18,7 +18,13 @@ export default defineConfig({
       fileName: (format) => `design-system.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@mui/material', '@emotion/react', '@emotion/styled'],
+      external: [
+        'react',
+        'react-dom',
+        '@mui/material',
+        '@emotion/react',
+        '@emotion/styled',
+      ],
       output: {
         globals: {
           react: 'React',
@@ -30,4 +36,4 @@ export default defineConfig({
       },
     },
   },
-}); 
+});

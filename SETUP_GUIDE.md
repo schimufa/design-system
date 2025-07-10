@@ -13,11 +13,13 @@
 ## 🛠️ **Full Development Setup**
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 - Git
 
 ### Step 1: Repository Setup
+
 ```bash
 # Initialize Git repository
 git init
@@ -34,6 +36,7 @@ git push -u origin main
 ```
 
 ### Step 2: Install Dependencies
+
 ```bash
 # Install all dependencies
 npm install
@@ -43,6 +46,7 @@ npm install --legacy-peer-deps
 ```
 
 ### Step 3: Start Development
+
 ```bash
 # Start the demo app
 npm run dev
@@ -52,6 +56,7 @@ cd apps/demo && npm run dev
 ```
 
 ### Step 4: Build for Production
+
 ```bash
 # Build all packages
 npm run build
@@ -80,15 +85,18 @@ ab-inbev-frontend/
 ## 🎨 **Demo Features**
 
 ### 1. **Theme Switching** (Requirement #1)
+
 - Finance Theme (Blue)
-- Logistics Theme (Green)  
+- Logistics Theme (Green)
 - Sales Theme (Red)
 
 ### 2. **Component Versioning** (Requirement #2)
+
 - Version 1.0.0: Sharp corners, uppercase text
 - Version 2.0.0: Rounded corners, normal text
 
 ### 3. **Live Updates**
+
 - Real-time theme switching
 - Component version coexistence
 - Visual feedback
@@ -119,6 +127,7 @@ npx changeset publish   # Publish packages
 ## 📱 **Mobile Responsive**
 
 The demo works on:
+
 - ✅ Desktop
 - ✅ Tablet
 - ✅ Mobile
@@ -126,16 +135,19 @@ The demo works on:
 ## 🚀 **Deployment Options**
 
 ### Option 1: Static Hosting (Simplest)
+
 1. Upload `demo.html` to any web server
 2. Access via URL
 3. No build process needed
 
 ### Option 2: Netlify/Vercel
+
 1. Connect GitHub repository
 2. Set build command: `npm run build`
 3. Set publish directory: `apps/demo/dist`
 
 ### Option 3: Traditional Server
+
 1. Build: `npm run build`
 2. Serve: `npm run preview`
 3. Deploy built files
@@ -143,6 +155,7 @@ The demo works on:
 ## 🎯 **Client Presentation**
 
 ### Live Demo Script:
+
 1. **Open `demo.html`** - "Here's our working prototype"
 2. **Switch themes** - "Multiple application domains"
 3. **Change versions** - "Component version control"
@@ -150,6 +163,7 @@ The demo works on:
 5. **Explain scalability** - "Supports 300+ repositories"
 
 ### Key Points:
+
 - ✅ All 8 requirements implemented
 - ✅ Production-ready architecture
 - ✅ Scalable to enterprise level
@@ -159,17 +173,20 @@ The demo works on:
 ## 🔍 **Troubleshooting**
 
 ### Demo Not Working?
+
 1. **Check browser console** for errors
 2. **Try different browser** (Chrome recommended)
 3. **Disable ad blockers** temporarily
 4. **Check file permissions**
 
 ### Development Issues?
+
 1. **Clear node_modules**: `rm -rf node_modules && npm install`
 2. **Check Node version**: `node --version` (need 18+)
 3. **Try legacy deps**: `npm install --legacy-peer-deps`
 
 ### Build Failures?
+
 1. **Check TypeScript**: `npx tsc --noEmit`
 2. **Fix linting**: `npm run lint --fix`
 3. **Clear cache**: `npm run clean`
@@ -177,6 +194,7 @@ The demo works on:
 ## 📞 **Support**
 
 For setup assistance:
+
 1. Check this guide first
 2. Review error messages
 3. Check browser console
@@ -185,10 +203,11 @@ For setup assistance:
 ## 🎉 **Success Metrics**
 
 After setup, you should see:
+
 - ✅ Demo working in browser
 - ✅ Theme switching functional
 - ✅ Component versions working
 - ✅ No console errors
 - ✅ Responsive design active
 
-**🎯 Your AB InBev frontend architecture is ready for production!** 
+**🎯 Your AB InBev frontend architecture is ready for production!**

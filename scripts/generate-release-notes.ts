@@ -32,14 +32,16 @@ function getChangesets(): Changeset[] {
   const changesets: Changeset[] = [];
 
   fs.readdirSync(changesetDir)
-    .filter(file => file.endsWith('.md'))
-    .forEach(file => {
+    .filter((file) => file.endsWith('.md'))
+    .forEach((file) => {
       const content = fs.readFileSync(path.join(changesetDir, file), 'utf-8');
       const lines = content.split('\n');
-      
-      const type = lines[0].includes('major') ? 'major' 
-        : lines[0].includes('minor') ? 'minor' 
-        : 'patch';
+
+      const type = lines[0].includes('major')
+        ? 'major'
+        : lines[0].includes('minor')
+          ? 'minor'
+          : 'patch';
 
       const description = lines.slice(2).join('\n').trim();
       const designId = extractDesignId(description);
@@ -67,40 +69,40 @@ function generateReleaseNotes(): string {
   let notes = `# Release Notes (${date})\n\n`;
 
   // Breaking Changes
-  const breakingChanges = changesets.filter(c => c.type === 'major');
+  const breakingChanges = changesets.filter((c) => c.type === 'major');
   if (breakingChanges.length > 0) {
     notes += '## 🚨 Breaking Changes\n\n';
-    breakingChanges.forEach(change => {
+    breakingChanges.forEach((change) => {
       notes += `- ${change.description}${change.designId ? ` [DESIGN-${change.designId}]` : ''}\n`;
     });
     notes += '\n';
   }
 
   // New Features
-  const features = changesets.filter(c => c.type === 'minor');
+  const features = changesets.filter((c) => c.type === 'minor');
   if (features.length > 0) {
     notes += '## ✨ New Features\n\n';
-    features.forEach(change => {
+    features.forEach((change) => {
       notes += `- ${change.description}${change.designId ? ` [DESIGN-${change.designId}]` : ''}\n`;
     });
     notes += '\n';
   }
 
   // Bug Fixes
-  const fixes = changesets.filter(c => c.type === 'patch');
+  const fixes = changesets.filter((c) => c.type === 'patch');
   if (fixes.length > 0) {
     notes += '## 🐛 Bug Fixes\n\n';
-    fixes.forEach(change => {
+    fixes.forEach((change) => {
       notes += `- ${change.description}${change.designId ? ` [DESIGN-${change.designId}]` : ''}\n`;
     });
     notes += '\n';
   }
 
   // Design Updates
-  const designUpdates = changesets.filter(c => c.designId);
+  const designUpdates = changesets.filter((c) => c.designId);
   if (designUpdates.length > 0) {
     notes += '## 🎨 Design Updates\n\n';
-    designUpdates.forEach(change => {
+    designUpdates.forEach((change) => {
       notes += `- [DESIGN-${change.designId}] ${change.description}\n`;
     });
     notes += '\n';
@@ -108,7 +110,7 @@ function generateReleaseNotes(): string {
 
   // Component Changes
   const componentChanges = new Map<string, Changeset[]>();
-  changesets.forEach(change => {
+  changesets.forEach((change) => {
     if (change.component) {
       if (!componentChanges.has(change.component)) {
         componentChanges.set(change.component, []);
@@ -121,7 +123,7 @@ function generateReleaseNotes(): string {
     notes += '## 🔄 Component Changes\n\n';
     componentChanges.forEach((changes, component) => {
       notes += `### ${component}\n\n`;
-      changes.forEach(change => {
+      changes.forEach((change) => {
         notes += `- ${change.description}${change.designId ? ` [DESIGN-${change.designId}]` : ''}\n`;
       });
       notes += '\n';
@@ -135,4 +137,4 @@ function generateReleaseNotes(): string {
 const notes = generateReleaseNotes();
 fs.writeFileSync('RELEASE_NOTES.md', notes);
 
-console.log('Release notes generated successfully!'); 
+console.log('Release notes generated successfully!');

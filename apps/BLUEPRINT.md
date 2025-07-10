@@ -3,6 +3,7 @@
 ## Application Overview
 
 ### Metadata
+
 - **App Name**: [Name]
 - **Version**: [Version]
 - **Design System Version**: [Design System Version]
@@ -10,6 +11,7 @@
 - **Design Version**: [Design Version Hash]
 
 ### Dependencies
+
 ```json
 {
   "@schimufa/design-system": "^2.3.0",
@@ -22,6 +24,7 @@
 ## Design Implementation
 
 ### Theme Configuration
+
 ```typescript
 // theme.ts
 import { getTheme } from '@schimufa/design-system';
@@ -30,6 +33,7 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
 ```
 
 ### Layout Structure
+
 - Header
   - Logo
   - Navigation
@@ -42,6 +46,7 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
 ### Component Usage
 
 #### Header Component
+
 - Version: 1.0.0
 - Variant: Default
 - Custom Props:
@@ -50,6 +55,7 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
   - actions
 
 #### Card Components
+
 - Version: 1.0.0
 - Variants Used:
   - Glass (hero section)
@@ -57,6 +63,7 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
   - Outlined (secondary)
 
 #### Button Components
+
 - Version: 2.0.0
 - Primary Actions
 - Secondary Actions
@@ -64,11 +71,13 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
 ## Responsive Design
 
 ### Breakpoints
+
 - Mobile: < 768px
 - Tablet: 768px - 1024px
 - Desktop: > 1024px
 
 ### Layout Adjustments
+
 - Stack navigation on mobile
 - Reduce card padding
 - Adjust typography scale
@@ -76,11 +85,13 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
 ## Performance Considerations
 
 ### Code Splitting
+
 - Route-based splitting
 - Component lazy loading
 - Dynamic imports
 
 ### Asset Optimization
+
 - Image compression
 - Font subsetting
 - CSS optimization
@@ -88,12 +99,14 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
 ## Accessibility
 
 ### WCAG Compliance
+
 - Color contrast ratios
 - Keyboard navigation
 - Screen reader support
 - Focus management
 
 ### Semantic Structure
+
 - Proper heading hierarchy
 - ARIA landmarks
 - Form labels
@@ -102,17 +115,20 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
 ## Testing Strategy
 
 ### Unit Tests
+
 - Component rendering
 - User interactions
 - State management
 - Error handling
 
 ### Integration Tests
+
 - Page layouts
 - Navigation flows
 - Data flow
 
 ### Visual Tests
+
 - Component styling
 - Responsive behavior
 - Theme consistency
@@ -120,6 +136,7 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
 ## Deployment
 
 ### Build Configuration
+
 ```json
 {
   "build": {
@@ -132,6 +149,7 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
 ```
 
 ### Performance Metrics
+
 - First Contentful Paint: < 1.5s
 - Time to Interactive: < 3.0s
 - Lighthouse Score: > 90
@@ -139,11 +157,13 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
 ## Version History
 
 ### v1.0.0
+
 - Initial release
 - Basic functionality
 - Core components
 
 ### v1.1.0
+
 - Enhanced features
 - Performance improvements
 - Bug fixes
@@ -151,12 +171,14 @@ export const appTheme = getTheme('finance'); // or 'logistics' or 'sales'
 ## Migration Guide
 
 ### Upgrading Dependencies
+
 1. Update package.json
 2. Run installation
 3. Test functionality
 4. Fix breaking changes
 
 ### Breaking Changes
+
 - Document any breaking changes
 - Provide upgrade steps
-- Include code examples 
+- Include code examples

@@ -5,11 +5,13 @@
 The AB InBev frontend architecture includes **two demo approaches** that demonstrate how the design system works:
 
 ### 1. **HTML Demo (`demo.html`)** - ✅ Currently Working
+
 - **Purpose**: Immediate demonstration without build setup
 - **Implementation**: Pure HTML/CSS/JS that mimics design system concepts
 - **Status**: 100% functional, open in any browser
 
 ### 2. **React Demo (`apps/demo/src/App.tsx`)** - 🔧 Needs Build Setup
+
 - **Purpose**: Production-ready React app using actual design system
 - **Implementation**: Imports and uses real design system components
 - **Status**: Requires npm install and build process
@@ -22,9 +24,15 @@ The AB InBev frontend architecture includes **two demo approaches** that demonst
 <!-- Theme System: CSS Variables -->
 <div id="root" class="theme-finance">
   <style>
-    .theme-finance { --primary-color: #1976d2; }
-    .theme-logistics { --primary-color: #2e7d32; }
-    .theme-sales { --primary-color: #d32f2f; }
+    .theme-finance {
+      --primary-color: #1976d2;
+    }
+    .theme-logistics {
+      --primary-color: #2e7d32;
+    }
+    .theme-sales {
+      --primary-color: #d32f2f;
+    }
   </style>
 </div>
 
@@ -33,8 +41,14 @@ The AB InBev frontend architecture includes **two demo approaches** that demonst
 <button class="demo-button primary v2">Version 2.0.0</button>
 
 <style>
-  .v1 { border-radius: 4px; text-transform: uppercase; }
-  .v2 { border-radius: 20px; text-transform: none; }
+  .v1 {
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .v2 {
+    border-radius: 20px;
+    text-transform: none;
+  }
 </style>
 ```
 
@@ -57,6 +71,7 @@ import { Button, getTheme, themes, AppTheme } from '@ab-inbev/design-system';
 ### **Core Components:**
 
 1. **Theme System** (`packages/design-system/src/theme/index.ts`)
+
    ```typescript
    export const getTheme = (appTheme: AppTheme) => {
      return createTheme({
@@ -67,6 +82,7 @@ import { Button, getTheme, themes, AppTheme } from '@ab-inbev/design-system';
    ```
 
 2. **Button Component** (`packages/design-system/src/components/Button/index.tsx`)
+
    ```typescript
    export const Button: React.FC<ButtonProps> = ({ version = '1.0.0', ...props }) => {
      return <StyledButton version={version} {...props} />;
@@ -83,26 +99,29 @@ import { Button, getTheme, themes, AppTheme } from '@ab-inbev/design-system';
 
 ## 📊 **Feature Comparison**
 
-| Feature | HTML Demo | React Demo | Design System |
-|---------|-----------|------------|---------------|
-| **Theme Switching** | ✅ CSS Variables | ✅ ThemeProvider | ✅ getTheme() |
-| **Component Versioning** | ✅ CSS Classes | ✅ Props | ✅ version prop |
-| **Type Safety** | ❌ No types | ✅ TypeScript | ✅ Full typing |
-| **Testing** | ❌ Manual | ✅ Automated | ✅ Jest tests |
-| **Build Process** | ❌ None needed | ✅ Required | ✅ Compiled |
-| **Production Ready** | ✅ Immediate | ✅ With build | ✅ Optimized |
+| Feature                  | HTML Demo        | React Demo       | Design System   |
+| ------------------------ | ---------------- | ---------------- | --------------- |
+| **Theme Switching**      | ✅ CSS Variables | ✅ ThemeProvider | ✅ getTheme()   |
+| **Component Versioning** | ✅ CSS Classes   | ✅ Props         | ✅ version prop |
+| **Type Safety**          | ❌ No types      | ✅ TypeScript    | ✅ Full typing  |
+| **Testing**              | ❌ Manual        | ✅ Automated     | ✅ Jest tests   |
+| **Build Process**        | ❌ None needed   | ✅ Required      | ✅ Compiled     |
+| **Production Ready**     | ✅ Immediate     | ✅ With build    | ✅ Optimized    |
 
 ## 🚀 **How to Get React Demo Working**
 
 ### **Current Issue:**
+
 The React demo has dependency issues because the monorepo setup needs proper linking.
 
 ### **Quick Fix:**
+
 1. **Use the HTML demo** for immediate demonstration
 2. **Build the design system** for React demo to work
 3. **Install dependencies** properly
 
 ### **Commands to Fix:**
+
 ```bash
 # Go to root directory
 cd /Users/douglasschimulfening/Documents/USTest2
@@ -120,18 +139,21 @@ cd apps/demo && npm run dev
 ## 🎯 **Demo Flow for Client**
 
 ### **Phase 1: HTML Demo (Immediate)**
+
 1. Open `demo.html` in browser
 2. Show theme switching: Finance → Logistics → Sales
 3. Show component versioning: v1.0.0 → v2.0.0
 4. Explain design system concepts
 
 ### **Phase 2: React Demo (If Built)**
+
 1. Show actual component imports
 2. Demonstrate TypeScript integration
 3. Show testing capabilities
 4. Explain production workflow
 
 ### **Phase 3: Architecture Explanation**
+
 1. Show monorepo structure
 2. Explain component versioning
 3. Demonstrate CI/CD pipeline
@@ -140,6 +162,7 @@ cd apps/demo && npm run dev
 ## 🔧 **Technical Implementation**
 
 ### **HTML Demo Implementation:**
+
 ```javascript
 // Theme switching
 function switchTheme(theme) {
@@ -149,11 +172,13 @@ function switchTheme(theme) {
 // Version switching
 function switchVersion(version) {
   const versionClass = version === '2.0.0' ? 'v2' : 'v1';
-  document.getElementById('demo-primary').className = `demo-button primary ${versionClass}`;
+  document.getElementById('demo-primary').className =
+    `demo-button primary ${versionClass}`;
 }
 ```
 
 ### **React Demo Implementation:**
+
 ```tsx
 // Theme switching
 const [currentTheme, setCurrentTheme] = useState<AppTheme>('finance');
@@ -167,11 +192,13 @@ const [buttonVersion, setButtonVersion] = useState<'1.0.0' | '2.0.0'>('1.0.0');
 ## 📈 **Value Proposition**
 
 ### **For Client Presentation:**
+
 1. **HTML Demo**: "Here's immediate proof of concept"
 2. **React Demo**: "Here's production-ready implementation"
 3. **Design System**: "Here's scalable architecture"
 
 ### **Key Benefits:**
+
 - ✅ **Immediate Value**: HTML demo works instantly
 - ✅ **Production Ready**: React demo shows real implementation
 - ✅ **Scalable**: Design system supports 300+ repositories
@@ -182,4 +209,4 @@ const [buttonVersion, setButtonVersion] = useState<'1.0.0' | '2.0.0'>('1.0.0');
 
 The **HTML demo** successfully demonstrates all 8 requirements and provides immediate value. The **React demo** shows the production implementation path. Together, they prove the design system architecture is both **functional** and **scalable**.
 
-**Current Status**: HTML demo is 100% functional. React demo needs build setup but architecture is complete. 
+**Current Status**: HTML demo is 100% functional. React demo needs build setup but architecture is complete.

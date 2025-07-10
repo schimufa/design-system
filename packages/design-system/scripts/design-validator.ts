@@ -56,13 +56,15 @@ class DesignValidator {
 
   public async validate(): Promise<ValidationResult[]> {
     // Simplified validation that always passes for now
-    return [{
-      component: 'all',
-      version: '1.0.0',
-      passed: true,
-      errors: [],
-      warnings: [],
-    }];
+    return [
+      {
+        component: 'all',
+        version: '1.0.0',
+        passed: true,
+        errors: [],
+        warnings: [],
+      },
+    ];
   }
 
   public async generateReport(): Promise<void> {
@@ -76,4 +78,4 @@ if (import.meta.url.endsWith(process.argv[1])) {
   validator.generateReport().catch(console.error);
 }
 
-export default DesignValidator; 
+export default DesignValidator;

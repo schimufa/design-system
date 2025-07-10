@@ -36,6 +36,7 @@ function App() {
 ## Themes
 
 The design system supports three themes:
+
 - Finance
 - Logistics
 - Sales
@@ -46,7 +47,7 @@ import { getTheme } from '@ab-inbev/design-system';
 // Use with ThemeProvider
 <ThemeProvider theme={getTheme('finance')}>
   {/* Your app content */}
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 ## Component Versioning
@@ -67,4 +68,4 @@ Please read our [Contributing Guide](../../CONTRIBUTING.md) for details on our c
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details. 
+This project is licensed under the MIT License - see the [LICENSE](../../LICENSE) file for details.

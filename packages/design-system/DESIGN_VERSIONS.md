@@ -7,6 +7,7 @@ This document maintains the relationship between design assets and component imp
 ### Button Component
 
 #### Version 2.0.0
+
 - **Design File**: [Figma Link] Button v2 Design
 - **Design Hash**: [Figma Version ID]
 - **Release Date**: 2024
@@ -19,6 +20,7 @@ This document maintains the relationship between design assets and component imp
   - Border radius increased
 
 #### Version 1.0.0
+
 - **Design File**: [Figma Link] Button v1 Design
 - **Design Hash**: [Figma Version ID]
 - **Release Date**: 2024
@@ -30,6 +32,7 @@ This document maintains the relationship between design assets and component imp
 ### Card Component
 
 #### Version 1.0.0
+
 - **Design File**: [Figma Link] Card Design
 - **Design Hash**: [Figma Version ID]
 - **Release Date**: 2024
@@ -45,6 +48,7 @@ This document maintains the relationship between design assets and component imp
 ### Header Component
 
 #### Version 1.0.0
+
 - **Design File**: [Figma Link] Header Design
 - **Design Hash**: [Figma Version ID]
 - **Release Date**: 2024
@@ -57,6 +61,7 @@ This document maintains the relationship between design assets and component imp
 ## Theme System
 
 ### Version 1.0.0
+
 - **Design File**: [Figma Link] Theme Tokens
 - **Design Hash**: [Figma Version ID]
 - **Color Palettes**:
@@ -66,4 +71,4 @@ This document maintains the relationship between design assets and component imp
 - **Typography System**:
   - Font family: Inter
   - Scale: Based on MUI defaults
-  - Weights: 400, 500, 600 
+  - Weights: 400, 500, 600

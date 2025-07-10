@@ -50,20 +50,26 @@ export const Outlined: Story = {
 
 export const AllVariants: Story = {
   args: {
-    children: 'Card content'
+    children: 'Card content',
   },
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-      <Card title="Default" variant="default">Default variant</Card>
-      <Card title="Glass" variant="glass">Glass variant</Card>
-      <Card title="Outlined" variant="outlined">Outlined variant</Card>
+      <Card title="Default" variant="default">
+        Default variant
+      </Card>
+      <Card title="Glass" variant="glass">
+        Glass variant
+      </Card>
+      <Card title="Outlined" variant="outlined">
+        Outlined variant
+      </Card>
     </div>
   ),
 };
 
 export const ComplexContent: Story = {
   args: {
-    children: 'Complex content example'
+    children: 'Complex content example',
   },
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
@@ -94,4 +100,4 @@ export const ComplexContent: Story = {
       </Card>
     </div>
   ),
-}; 
+};

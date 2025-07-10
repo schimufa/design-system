@@ -1,5 +1,12 @@
 import React from 'react';
-import { Card as MuiCard, CardContent, Typography, useTheme, SxProps, Theme } from '@mui/material';
+import {
+  Card as MuiCard,
+  CardContent,
+  Typography,
+  useTheme,
+  SxProps,
+  Theme,
+} from '@mui/material';
 
 export interface CardProps {
   /**
@@ -42,7 +49,7 @@ export const Card: React.FC<CardProps> = ({
   icon,
   className,
   variant = 'default',
-  sx
+  sx,
 }) => {
   const theme = useTheme();
 
@@ -53,7 +60,7 @@ export const Card: React.FC<CardProps> = ({
       overflow: 'hidden',
       border: 'none',
       boxShadow: 'none',
-      ...sx
+      ...sx,
     };
 
     switch (variant) {
@@ -75,40 +82,40 @@ export const Card: React.FC<CardProps> = ({
   };
 
   return (
-    <MuiCard 
-      className={className}
-      sx={getCardStyles()}
-      role="article"
-    >
+    <MuiCard className={className} sx={getCardStyles()} role="article">
       <CardContent sx={{ p: 3 }}>
         {(title || icon) && (
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '12px',
-            marginBottom: subtitle ? '4px' : '16px'
-          }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              marginBottom: subtitle ? '4px' : '16px',
+            }}
+          >
             {icon && (
-              <div style={{
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: '50%',
-                backgroundColor: theme.palette.primary.main,
-                color: theme.palette.primary.contrastText,
-              }}>
+              <div
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%',
+                  backgroundColor: theme.palette.primary.main,
+                  color: theme.palette.primary.contrastText,
+                }}
+              >
                 {icon}
               </div>
             )}
-            <Typography 
-              variant="h6" 
+            <Typography
+              variant="h6"
               component="h2"
-              sx={{ 
+              sx={{
                 fontWeight: 500,
                 fontSize: '1.25rem',
-                lineHeight: 1.2
+                lineHeight: 1.2,
               }}
             >
               {title}
@@ -116,13 +123,13 @@ export const Card: React.FC<CardProps> = ({
           </div>
         )}
         {subtitle && (
-          <Typography 
-            variant="subtitle1" 
+          <Typography
+            variant="subtitle1"
             color="text.secondary"
-            sx={{ 
+            sx={{
               mb: 2,
               fontSize: '1rem',
-              lineHeight: 1.5
+              lineHeight: 1.5,
             }}
           >
             {subtitle}
@@ -132,4 +139,4 @@ export const Card: React.FC<CardProps> = ({
       </CardContent>
     </MuiCard>
   );
-}; 
+};

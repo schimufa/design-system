@@ -14,4 +14,4 @@ export const ThemeDecorator = (Story: any) => {
       <Story />
     </ThemeProvider>
   );
-}; 
+};

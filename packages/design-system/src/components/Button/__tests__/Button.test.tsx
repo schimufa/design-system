@@ -6,9 +6,7 @@ import Button from '../index';
 
 const renderWithTheme = (ui: React.ReactElement) => {
   return render(
-    <ThemeProvider theme={getTheme('finance')}>
-      {ui}
-    </ThemeProvider>
+    <ThemeProvider theme={getTheme('finance')}>{ui}</ThemeProvider>
   );
 };
 
@@ -39,4 +37,4 @@ describe('Button Component', () => {
     const button = screen.getByText('Test');
     expect(button).toHaveStyle('text-transform: none');
   });
-}); 
+});

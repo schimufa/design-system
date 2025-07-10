@@ -93,12 +93,24 @@ export const Variants: Story = {
 export const Colors: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-      <Button color="primary" variant="contained">Primary</Button>
-      <Button color="secondary" variant="contained">Secondary</Button>
-      <Button color="error" variant="contained">Error</Button>
-      <Button color="warning" variant="contained">Warning</Button>
-      <Button color="info" variant="contained">Info</Button>
-      <Button color="success" variant="contained">Success</Button>
+      <Button color="primary" variant="contained">
+        Primary
+      </Button>
+      <Button color="secondary" variant="contained">
+        Secondary
+      </Button>
+      <Button color="error" variant="contained">
+        Error
+      </Button>
+      <Button color="warning" variant="contained">
+        Warning
+      </Button>
+      <Button color="info" variant="contained">
+        Info
+      </Button>
+      <Button color="success" variant="contained">
+        Success
+      </Button>
     </div>
   ),
 };
@@ -111,4 +123,4 @@ export const Sizes: Story = {
       <Button size="large">Large</Button>
     </div>
   ),
-}; 
+};

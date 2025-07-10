@@ -63,4 +63,4 @@ export const getTheme = (appTheme: AppTheme) => {
   });
 };
 
-export const themes = Object.keys(themeConfigs) as AppTheme[]; 
+export const themes = Object.keys(themeConfigs) as AppTheme[];

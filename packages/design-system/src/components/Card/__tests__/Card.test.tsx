@@ -7,9 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const renderWithTheme = (ui: React.ReactElement) => {
   return render(
-    <ThemeProvider theme={getTheme('finance')}>
-      {ui}
-    </ThemeProvider>
+    <ThemeProvider theme={getTheme('finance')}>{ui}</ThemeProvider>
   );
 };
 
@@ -25,10 +23,7 @@ describe('Card Component', () => {
 
   it('renders title and subtitle', () => {
     renderWithTheme(
-      <Card 
-        title="Test Title" 
-        subtitle="Test Subtitle"
-      >
+      <Card title="Test Title" subtitle="Test Subtitle">
         <div>Content</div>
       </Card>
     );
@@ -38,7 +33,7 @@ describe('Card Component', () => {
 
   it('renders with icon', () => {
     renderWithTheme(
-      <Card 
+      <Card
         title="With Icon"
         icon={<AccountCircleIcon data-testid="card-icon" />}
       >
@@ -89,4 +84,4 @@ describe('Card Component', () => {
     const card = screen.getByRole('article');
     expect(card).toHaveClass(customClass);
   });
-}); 
+});

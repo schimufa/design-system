@@ -11,15 +11,11 @@ function App() {
         <div className="max-w-4xl mx-auto mb-16">
           <Card variant="glass">
             <div className="text-center py-6">
-              <Typography 
-                component="h1" 
-                variant="h4"
-                gutterBottom
-              >
+              <Typography component="h1" variant="h4" gutterBottom>
                 Clean Design System
               </Typography>
-              <Typography 
-                component="h2" 
+              <Typography
+                component="h2"
                 variant="subtitle1"
                 color="text.secondary"
               >
@@ -45,9 +41,7 @@ function App() {
                 <div className="border border-blue-500 text-blue-500 px-6 py-2 rounded-full inline-block">
                   Secondary
                 </div>
-                <div className="text-gray-500 mt-2">
-                  Tertiary
-                </div>
+                <div className="text-gray-500 mt-2">Tertiary</div>
               </div>
             </Card>
 
@@ -108,4 +102,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

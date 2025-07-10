@@ -62,7 +62,10 @@ To migrate from v1 to v2:
   },
 };
 
-export function getDesignSpec(component: string, version: string): DesignSpec | undefined {
+export function getDesignSpec(
+  component: string,
+  version: string
+): DesignSpec | undefined {
   return designSpecs[component]?.[version];
 }
 
@@ -89,12 +92,19 @@ export function getPRUrl(component: string, version: string): string {
   return `https://github.com/your-org/design-system/pull/${spec.prNumber}`;
 }
 
-export function getMigrationGuide(component: string, fromVersion: string, toVersion: string): string {
+export function getMigrationGuide(
+  component: string,
+  fromVersion: string,
+  toVersion: string
+): string {
   const spec = getDesignSpec(component, toVersion);
   return spec?.migrationGuide || 'No migration guide available.';
 }
 
-export function getBreakingChanges(component: string, version: string): string[] {
+export function getBreakingChanges(
+  component: string,
+  version: string
+): string[] {
   const spec = getDesignSpec(component, version);
   return spec?.breakingChanges || [];
-} 
+}

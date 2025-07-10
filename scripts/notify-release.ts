@@ -12,7 +12,11 @@ interface NotificationConfig {
   };
 }
 
-async function sendSlackNotification(version: string, notes: string, config: NotificationConfig) {
+async function sendSlackNotification(
+  version: string,
+  notes: string,
+  config: NotificationConfig
+) {
   const message = {
     channel: config.slack.channel,
     text: `🎉 Design System v${version} Released!`,
@@ -42,10 +46,17 @@ async function sendSlackNotification(version: string, notes: string, config: Not
   };
 
   // In a real implementation, you would use the Slack Web API to send this message
-  console.log('Slack notification would be sent:', JSON.stringify(message, null, 2));
+  console.log(
+    'Slack notification would be sent:',
+    JSON.stringify(message, null, 2)
+  );
 }
 
-async function sendEmailNotification(version: string, notes: string, config: NotificationConfig) {
+async function sendEmailNotification(
+  version: string,
+  notes: string,
+  config: NotificationConfig
+) {
   const email = {
     from: config.email.from,
     to: config.email.recipients,
@@ -63,16 +74,24 @@ async function sendEmailNotification(version: string, notes: string, config: Not
   };
 
   // In a real implementation, you would use a mail service like nodemailer
-  console.log('Email notification would be sent:', JSON.stringify(email, null, 2));
+  console.log(
+    'Email notification would be sent:',
+    JSON.stringify(email, null, 2)
+  );
 }
 
 async function notifyStakeholders() {
   // Read release notes
-  const notes = fs.readFileSync(path.join(process.cwd(), 'RELEASE_NOTES.md'), 'utf-8');
-  
+  const notes = fs.readFileSync(
+    path.join(process.cwd(), 'RELEASE_NOTES.md'),
+    'utf-8'
+  );
+
   // Read package.json for version
-  const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-  
+  const pkg = JSON.parse(
+    fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8')
+  );
+
   // Read config (in real implementation, this would be in a separate config file)
   const config: NotificationConfig = {
     slack: {
@@ -99,4 +118,4 @@ if (require.main === module) {
   notifyStakeholders().catch(console.error);
 }
 
-export default notifyStakeholders; 
+export default notifyStakeholders;
