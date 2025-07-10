@@ -1,5 +1,21 @@
 # @ab-inbev/demo
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated build configuration and fixed package exports for proper type generation.
+- Updated dependencies
+  - @schimufa/design-system@2.0.3
+
+## 1.0.1
+
+### Patch Changes
+
+- Updated design system dependency version to match current version and fixed version mismatch issues.
+- Updated dependencies
+  - @schimufa/design-system@2.0.2
+
 ## 1.0.0
 
 ### Major Changes

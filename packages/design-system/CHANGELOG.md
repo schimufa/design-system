@@ -1,5 +1,27 @@
 # @ab-inbev/design-system
 
+## 2.0.3
+
+### Patch Changes
+
+- Updated build configuration and fixed package exports for proper type generation.
+
+## 2.0.2
+
+### Patch Changes
+
+- Updated design system dependency version to match current version and fixed version mismatch issues.
+
+## 2.0.1
+
+### Patch Changes
+
+- Improvements to build and deployment process:
+  - Fixed CI/CD workflows
+  - Updated dependency management
+  - Improved Storybook deployment
+  - Added proper caching
+
 ## 2.0.0
 
 ### Major Changes

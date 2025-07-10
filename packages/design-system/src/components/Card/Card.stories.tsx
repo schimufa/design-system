@@ -1,149 +1,97 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Card } from './index';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import InfoIcon from '@mui/icons-material/Info';
 import StarIcon from '@mui/icons-material/Star';
+import { Card } from './index';
 
-const meta = {
+const meta: Meta<typeof Card> = {
   title: 'Components/Card',
   component: Card,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: `
-A flexible card component that can be used to group related content.
-
-## Usage
-
-\`\`\`jsx
-import { Card } from '@schimufa/design-system';
-
-function MyComponent() {
-  return (
-    <Card title="My Card" subtitle="Some description">
-      Content goes here
-    </Card>
-  );
-}
-\`\`\`
-
-## Variants
-- default: Standard card with shadow
-- outlined: Card with border
-- glass: Semi-transparent card with blur effect
-        `,
-      },
-    },
-  },
-  argTypes: {
-    title: {
-      control: 'text',
-      description: 'The title of the card',
-      table: {
-        type: { summary: 'string' },
-      },
-    },
-    subtitle: {
-      control: 'text',
-      description: 'Optional subtitle or description',
-      table: {
-        type: { summary: 'string' },
-      },
-    },
-    variant: {
-      control: 'select',
-      options: ['default', 'outlined', 'glass'],
-      description: 'The variant of the card',
-      table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'default' },
-      },
-    },
-    icon: {
-      control: 'select',
-      options: ['none', 'account', 'info', 'star'],
-      mapping: {
-        none: null,
-        account: <AccountCircleIcon />,
-        info: <InfoIcon />,
-        star: <StarIcon />,
-      },
-      description: 'Optional icon to display',
-    },
-  },
   tags: ['autodocs'],
-} satisfies Meta<typeof Card>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
   args: {
     title: 'Default Card',
-    subtitle: 'This is a basic card example',
-    children: 'Card content goes here. You can add any React elements as children.',
+    subtitle: 'A simple card component',
+    children: 'This is the card content',
   },
 };
 
 export const WithIcon: Story = {
   args: {
     title: 'Card with Icon',
-    subtitle: 'This card includes an icon',
+    subtitle: 'Using Material Icons',
     icon: <AccountCircleIcon />,
-    children: 'Icons help provide visual context to your content.',
+    children: 'Card content with an icon',
+  },
+};
+
+export const Glass: Story = {
+  args: {
+    title: 'Glass Card',
+    subtitle: 'With glass effect',
+    variant: 'glass',
+    children: 'Content with glass effect background',
+  },
+};
+
+export const Outlined: Story = {
+  args: {
+    title: 'Outlined Card',
+    subtitle: 'With outline style',
+    variant: 'outlined',
+    children: 'Content in an outlined card',
   },
 };
 
 export const AllVariants: Story = {
+  args: {
+    children: 'Card content'
+  },
   render: () => (
-    <div style={{ display: 'flex', gap: '2rem', padding: '1rem' }}>
-      <Card
-        title="Default"
-        subtitle="Standard card"
-        variant="default"
-      >
-        Content
-      </Card>
-      <Card
-        title="Outlined"
-        subtitle="Border only"
-        variant="outlined"
-      >
-        Content
-      </Card>
-      <Card
-        title="Glass"
-        subtitle="Blur effect"
-        variant="glass"
-      >
-        Content
-      </Card>
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <Card title="Default" variant="default">Default variant</Card>
+      <Card title="Glass" variant="glass">Glass variant</Card>
+      <Card title="Outlined" variant="outlined">Outlined variant</Card>
     </div>
   ),
 };
 
 export const ComplexContent: Story = {
+  args: {
+    children: 'Complex content example'
+  },
   render: () => (
-    <Card
-      title="Complex Example"
-      subtitle="Cards can contain any content"
-      icon={<StarIcon />}
-    >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <p style={{ margin: 0 }}>This is a paragraph of text.</p>
-        <div style={{ 
-          padding: '1rem',
-          backgroundColor: '#f5f5f5',
-          borderRadius: '4px'
-        }}>
-          This is a nested content block
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <Card
+        title="Feature Card"
+        subtitle="Important features"
+        icon={<StarIcon />}
+        variant="glass"
+      >
+        <div style={{ padding: '1rem' }}>
+          <h3>Key Features</h3>
+          <ul>
+            <li>Feature 1</li>
+            <li>Feature 2</li>
+            <li>Feature 3</li>
+          </ul>
         </div>
-        <button style={{ alignSelf: 'flex-start' }}>
-          A button
-        </button>
-      </div>
-    </Card>
+      </Card>
+      <Card
+        title="Info Card"
+        subtitle="Additional information"
+        icon={<InfoIcon />}
+        variant="outlined"
+      >
+        <div style={{ padding: '1rem' }}>
+          <p>Detailed information about the component...</p>
+        </div>
+      </Card>
+    </div>
   ),
 }; 
