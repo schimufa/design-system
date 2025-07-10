@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [
@@ -22,6 +22,7 @@ export default defineConfig({
         'react',
         'react-dom',
         '@mui/material',
+        '@mui/icons-material',
         '@emotion/react',
         '@emotion/styled',
       ],
@@ -29,9 +30,10 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          '@mui/material': 'MuiMaterial',
-          '@emotion/react': 'EmotionReact',
-          '@emotion/styled': 'EmotionStyled',
+          '@mui/material': 'MaterialUI',
+          '@mui/icons-material': 'MaterialIcons',
+          '@emotion/react': 'emotionReact',
+          '@emotion/styled': 'emotionStyled',
         },
       },
     },

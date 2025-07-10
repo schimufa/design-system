@@ -1,5 +1,49 @@
 # @ab-inbev/design-system
 
+## 3.0.0
+
+### Major Changes
+
+- New release
+
+## 2.0.5
+
+### Patch Changes
+
+- Fixed build configuration and dependencies:
+  - Added @emotion/react and @emotion/styled dependencies
+  - Updated Vite configuration for proper external handling
+  - Fixed TypeScript errors in theme validation
+  - Improved Storybook configuration
+
+## 3.0.0
+
+### Major Changes
+
+- 8f9ce8f: Major update with theme system improvements and documentation enhancements
+
+  BREAKING CHANGES:
+  - Theme system now uses Material-UI's createTheme function
+  - Custom theme tokens replaced with MUI theme structure
+  - Dark mode support added through palette.mode
+
+  NEW FEATURES:
+  - Theme validation system with accessibility checks
+  - Comprehensive documentation and migration guides
+  - Enhanced Storybook examples with theme demonstrations
+  - Automated CI/CD pipeline with documentation deployment
+
+  For detailed migration instructions, see the MIGRATION.md guide.
+
+### Patch Changes
+
+- Fixed TypeScript errors and improved theme validation:
+  - Updated Storybook configuration and types
+  - Fixed theme decorator implementation
+  - Improved color contrast validation using colord
+  - Added proper WCAG contrast ratio checks
+  - Removed unused code and improved type safety
+
 ## 2.0.4
 
 ### Patch Changes

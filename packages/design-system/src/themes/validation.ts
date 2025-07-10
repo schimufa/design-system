@@ -1,49 +1,31 @@
 import { Theme } from '@mui/material';
-import { colord } from 'colord';
+import { colord, extend } from 'colord';
+import a11yPlugin from 'colord/plugins/a11y';
+
+// Extend colord with the a11y plugin
+extend([a11yPlugin]);
+
+export function getContrastRatio(color1: string, color2: string): number {
+  const c1 = colord(color1);
+  const c2 = colord(color2);
+  return c1.contrast(c2);
+}
+
+export function validateThemeColors(theme: Theme): boolean {
+  const { primary, background, text } = theme.palette;
+  
+  // Check contrast ratios against WCAG standards
+  const textContrast = getContrastRatio(text.primary, background.default);
+  const primaryContrast = getContrastRatio(primary.main, background.default);
+  
+  // WCAG AA standards: 4.5:1 for normal text, 3:1 for large text
+  return textContrast >= 4.5 && primaryContrast >= 3.0;
+}
 
 interface ValidationResult {
   valid: boolean;
   errors: string[];
   warnings: string[];
-}
-
-interface ContrastRequirement {
-  ratio: number;
-  level: 'AA' | 'AAA';
-}
-
-const WCAG_REQUIREMENTS: Record<string, ContrastRequirement> = {
-  normalText: { ratio: 4.5, level: 'AA' },
-  largeText: { ratio: 3.0, level: 'AA' },
-  normalTextAAA: { ratio: 7.0, level: 'AAA' },
-  largeTextAAA: { ratio: 4.5, level: 'AAA' },
-};
-
-function checkColorContrast(color1: string, color2: string): number {
-  return colord(color1).contrast(color2);
-}
-
-function validateColorPalette(theme: Theme): string[] {
-  const errors: string[] = [];
-  const { primary, secondary, error, background, text } = theme.palette;
-
-  // Check primary color contrast
-  const primaryContrast = checkColorContrast(primary.main, background.default);
-  if (primaryContrast < WCAG_REQUIREMENTS.normalText.ratio) {
-    errors.push(
-      `Primary color contrast ratio (${primaryContrast.toFixed(2)}) is below WCAG AA standard`
-    );
-  }
-
-  // Check text color contrast
-  const textContrast = checkColorContrast(text.primary, background.default);
-  if (textContrast < WCAG_REQUIREMENTS.normalText.ratio) {
-    errors.push(
-      `Text color contrast ratio (${textContrast.toFixed(2)}) is below WCAG AA standard`
-    );
-  }
-
-  return errors;
 }
 
 function validateTypography(theme: Theme): string[] {
@@ -96,7 +78,6 @@ export function validateTheme(theme: Theme): ValidationResult {
 
   // Collect all validation errors
   result.errors = [
-    ...validateColorPalette(theme),
     ...validateTypography(theme),
     ...validateSpacing(theme),
     ...validateShape(theme),

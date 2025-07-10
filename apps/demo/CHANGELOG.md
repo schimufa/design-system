@@ -1,5 +1,41 @@
 # @ab-inbev/demo
 
+## 3.0.0
+
+### Major Changes
+
+- New release
+
+### Patch Changes
+
+- Updated dependencies
+  - @schimufa/design-system@3.0.0
+
+## 2.0.0
+
+### Major Changes
+
+- 8f9ce8f: Major update with theme system improvements and documentation enhancements
+
+  BREAKING CHANGES:
+  - Theme system now uses Material-UI's createTheme function
+  - Custom theme tokens replaced with MUI theme structure
+  - Dark mode support added through palette.mode
+
+  NEW FEATURES:
+  - Theme validation system with accessibility checks
+  - Comprehensive documentation and migration guides
+  - Enhanced Storybook examples with theme demonstrations
+  - Automated CI/CD pipeline with documentation deployment
+
+  For detailed migration instructions, see the MIGRATION.md guide.
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies [8f9ce8f]
+  - @schimufa/design-system@3.0.0
+
 ## 1.0.3
 
 ### Patch Changes

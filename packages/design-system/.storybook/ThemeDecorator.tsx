@@ -1,17 +1,20 @@
-import React from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { ReactNode } from 'react';
+import { ThemeProvider } from '@mui/material';
 import { themes } from '../src/themes';
 import { useGlobals } from '@storybook/preview-api';
 
-export const ThemeDecorator = (Story: any) => {
+type ThemeDecoratorProps = {
+  children: ReactNode;
+};
+
+export const ThemeDecorator = ({ children }: ThemeDecoratorProps) => {
   const [{ theme }] = useGlobals();
-  const selectedTheme = themes[theme || 'finance'] || themes.finance;
+  const themeKey = (theme || 'finance') as keyof typeof themes;
+  const selectedTheme = themes[themeKey] || themes.finance;
 
   return (
     <ThemeProvider theme={selectedTheme}>
-      <CssBaseline />
-      <Story />
+      {children}
     </ThemeProvider>
   );
 };
