@@ -16,11 +16,13 @@
         "prepare": "husky install",
         "changeset": "changeset",
         "version-packages": "changeset version",
-        "release": "turbo run build && changeset publish",
+        "release": "turbo run build --filter=./packages/* && changeset publish",
         "validate-design": "node -r ts-node/register packages/design-system/scripts/design-validator.ts",
         "generate-release-notes": "node -r ts-node/register scripts/generate-release-notes.ts",
         "preversion-packages": "pnpm validate-design",
-        "postversion-packages": "pnpm generate-release-notes"
+        "postversion-packages": "pnpm generate-release-notes",
+        "clean": "turbo run clean && rm -rf node_modules",
+        "build:storybook": "turbo run build-storybook"
     },
     "devDependencies": {
         "@changesets/cli": "^2.29.5",
