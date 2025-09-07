@@ -16,13 +16,10 @@ export {
   componentVersions,
   getMigrationPath,
   isSupportEndingSoon,
-  getVersionWarning
+  getVersionWarning,
 } from './utils/version-manager';
 
-export type {
-  ComponentVersion,
-  ComponentName
-} from './utils/version-manager';
+export type { ComponentVersion, ComponentName } from './utils/version-manager';
 
 export {
   checkForUpdates,
@@ -33,7 +30,7 @@ export {
   getMigrationInfo,
   logVersionDiscoveryInfo,
   createVersionWidget,
-  initVersionDiscovery
+  initVersionDiscovery,
 } from './utils/version-discovery';
 
 // Export version info types with aliases to avoid conflicts

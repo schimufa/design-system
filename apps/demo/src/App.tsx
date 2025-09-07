@@ -9,11 +9,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box 
+      <Box
         sx={{
           minHeight: '100vh',
           background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-          p: 4
+          p: 4,
         }}
       >
         {/* Header Section */}
@@ -21,7 +21,8 @@ function App() {
           <Card variant="glass">
             <Box sx={{ textAlign: 'center', py: 3 }}>
               <Typography component="h1" variant="h4" gutterBottom>
-                AB InBev Design System - {themeKey.charAt(0).toUpperCase() + themeKey.slice(1)} Theme
+                AB InBev Design System -{' '}
+                {themeKey.charAt(0).toUpperCase() + themeKey.slice(1)} Theme
               </Typography>
               <Typography
                 component="h2"
@@ -36,11 +37,13 @@ function App() {
 
         {/* Features Grid */}
         <Box sx={{ maxWidth: '1200px', mx: 'auto' }}>
-          <Box sx={{ 
-            display: 'grid', 
-            gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
-            gap: 4
-          }}>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+              gap: 4,
+            }}
+          >
             {/* Theme Demo Card */}
             <Card
               variant="default"
@@ -48,16 +51,16 @@ function App() {
               subtitle="Dynamic color palettes Business unit alignment"
             >
               <Box sx={{ mt: 3, space: 2 }}>
-                <Button 
-                  variant="contained" 
-                  color="primary" 
+                <Button
+                  variant="contained"
+                  color="primary"
                   sx={{ mr: 2, mb: 2 }}
                 >
                   Primary Action
                 </Button>
-                <Button 
-                  variant="outlined" 
-                  color="secondary" 
+                <Button
+                  variant="outlined"
+                  color="secondary"
                   sx={{ mr: 2, mb: 2 }}
                 >
                   Secondary
@@ -83,34 +86,42 @@ function App() {
               subtitle="Consistent elements Reusable patterns"
             >
               <Box sx={{ mt: 3 }}>
-                <Box sx={{ 
-                  bgcolor: theme.palette.grey[100], 
-                  borderRadius: theme.shape.borderRadius / 4, 
-                  p: 2, 
-                  mb: 2 
-                }}>
-                  <Box sx={{ 
-                    bgcolor: 'background.paper', 
-                    borderRadius: theme.shape.borderRadius / 4, 
-                    p: 2, 
-                    border: 1, 
-                    borderColor: 'divider' 
-                  }}>
+                <Box
+                  sx={{
+                    bgcolor: theme.palette.grey[100],
+                    borderRadius: theme.shape.borderRadius / 4,
+                    p: 2,
+                    mb: 2,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      bgcolor: 'background.paper',
+                      borderRadius: theme.shape.borderRadius / 4,
+                      p: 2,
+                      border: 1,
+                      borderColor: 'divider',
+                    }}
+                  >
                     <Typography variant="body2">Input field</Typography>
                   </Box>
                 </Box>
-                <Box sx={{ 
-                  bgcolor: theme.palette.grey[100], 
-                  borderRadius: theme.shape.borderRadius / 4, 
-                  p: 2 
-                }}>
-                  <Box sx={{ 
-                    bgcolor: 'background.paper', 
-                    borderRadius: theme.shape.borderRadius / 4, 
-                    p: 2, 
-                    border: 1, 
-                    borderColor: 'divider' 
-                  }}>
+                <Box
+                  sx={{
+                    bgcolor: theme.palette.grey[100],
+                    borderRadius: theme.shape.borderRadius / 4,
+                    p: 2,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      bgcolor: 'background.paper',
+                      borderRadius: theme.shape.borderRadius / 4,
+                      p: 2,
+                      border: 1,
+                      borderColor: 'divider',
+                    }}
+                  >
                     <Typography variant="body2">Card component</Typography>
                     <Typography variant="caption" color="text.secondary">
                       Clean layout structure
@@ -127,82 +138,100 @@ function App() {
               subtitle="Theme-aware palette Accessible contrast"
             >
               <Box sx={{ mt: 3 }}>
-                <Box sx={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: 'repeat(4, 1fr)', 
-                  gap: 1, 
-                  mb: 2 
-                }}>
-                  <Box sx={{ 
-                    width: 32, 
-                    height: 32, 
-                    borderRadius: '50%', 
-                    bgcolor: theme.palette.primary.main 
-                  }} />
-                  <Box sx={{ 
-                    width: 32, 
-                    height: 32, 
-                    borderRadius: '50%', 
-                    bgcolor: theme.palette.secondary.main 
-                  }} />
-                  <Box sx={{ 
-                    width: 32, 
-                    height: 32, 
-                    borderRadius: '50%', 
-                    bgcolor: theme.palette.error.main 
-                  }} />
-                  <Box sx={{ 
-                    width: 32, 
-                    height: 32, 
-                    borderRadius: '50%', 
-                    bgcolor: theme.palette.warning.main 
-                  }} />
-                  <Box sx={{ 
-                    width: 32, 
-                    height: 32, 
-                    borderRadius: '50%', 
-                    bgcolor: theme.palette.info.main 
-                  }} />
-                  <Box sx={{ 
-                    width: 32, 
-                    height: 32, 
-                    borderRadius: '50%', 
-                    bgcolor: theme.palette.success.main 
-                  }} />
-                  <Box sx={{ 
-                    width: 32, 
-                    height: 32, 
-                    borderRadius: '50%', 
-                    bgcolor: theme.palette.grey[500] 
-                  }} />
-                  <Box sx={{ 
-                    width: 32, 
-                    height: 32, 
-                    borderRadius: '50%', 
-                    bgcolor: theme.palette.grey[200] 
-                  }} />
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(4, 1fr)',
+                    gap: 1,
+                    mb: 2,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      bgcolor: theme.palette.primary.main,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      bgcolor: theme.palette.secondary.main,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      bgcolor: theme.palette.error.main,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      bgcolor: theme.palette.warning.main,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      bgcolor: theme.palette.info.main,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      bgcolor: theme.palette.success.main,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      bgcolor: theme.palette.grey[500],
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      bgcolor: theme.palette.grey[200],
+                    }}
+                  />
                 </Box>
                 <Box sx={{ display: 'flex', gap: 1 }}>
-                  <Typography 
-                    variant="caption" 
-                    sx={{ 
-                      bgcolor: theme.palette.success.main, 
-                      color: theme.palette.success.contrastText, 
-                      px: 2, 
-                      py: 0.5, 
-                      borderRadius: theme.shape.borderRadius 
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      bgcolor: theme.palette.success.main,
+                      color: theme.palette.success.contrastText,
+                      px: 2,
+                      py: 0.5,
+                      borderRadius: theme.shape.borderRadius,
                     }}
                   >
                     Success
                   </Typography>
-                  <Typography 
-                    variant="caption" 
-                    sx={{ 
-                      bgcolor: theme.palette.warning.main, 
-                      color: theme.palette.warning.contrastText, 
-                      px: 2, 
-                      py: 0.5, 
-                      borderRadius: theme.shape.borderRadius 
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      bgcolor: theme.palette.warning.main,
+                      color: theme.palette.warning.contrastText,
+                      px: 2,
+                      py: 0.5,
+                      borderRadius: theme.shape.borderRadius,
                     }}
                   >
                     Warning
@@ -211,13 +240,22 @@ function App() {
               </Box>
             </Card>
           </Box>
-          
+
           {/* Theme Demo Section */}
           <Box sx={{ mt: 6, textAlign: 'center' }}>
             <Typography variant="h5" gutterBottom color="white">
-              Design System Button Demo - Current Theme: {themeKey.toUpperCase()}
+              Design System Button Demo - Current Theme:{' '}
+              {themeKey.toUpperCase()}
             </Typography>
-            <Box sx={{ mt: 3, display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Box
+              sx={{
+                mt: 3,
+                display: 'flex',
+                gap: 2,
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+              }}
+            >
               <Button variant="contained" color="primary" version="1.0.0">
                 Primary v1.0.0
               </Button>

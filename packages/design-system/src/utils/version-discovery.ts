@@ -43,10 +43,23 @@ export function getVersionInfo(): VersionInfo {
   return {
     current: '4.0.1',
     latest: '4.0.1',
-    available: ['1.0.0', '2.0.0', '2.0.1', '2.0.2', '2.0.3', '2.0.4', '2.0.5', '3.0.0', '4.0.0', '4.0.1'],
+    available: [
+      '1.0.0',
+      '2.0.0',
+      '2.0.1',
+      '2.0.2',
+      '2.0.3',
+      '2.0.4',
+      '2.0.5',
+      '3.0.0',
+      '4.0.0',
+      '4.0.1',
+    ],
     hasUpdate: false,
-    releaseNotes: 'https://github.com/schimufa/design-system/releases/tag/v4.0.1',
-    changelog: 'https://github.com/schimufa/design-system/blob/main/packages/design-system/CHANGELOG.md',
+    releaseNotes:
+      'https://github.com/schimufa/design-system/releases/tag/v4.0.1',
+    changelog:
+      'https://github.com/schimufa/design-system/blob/main/packages/design-system/CHANGELOG.md',
   };
 }
 
@@ -98,7 +111,7 @@ export async function checkForUpdates(): Promise<{
   // In a real implementation, this would make an HTTP request to NPM registry
   // For demonstration, we'll simulate the check
   const versionInfo = getVersionInfo();
-  
+
   return {
     hasUpdates: versionInfo.hasUpdate,
     currentVersion: versionInfo.current,
@@ -118,7 +131,7 @@ export function getComponentDocumentation(componentName: string): {
   examples: string[];
 } {
   const baseUrl = 'https://schimufa.github.io/design-system';
-  
+
   return {
     storybook: `${baseUrl}/storybook/?path=/docs/components-${componentName.toLowerCase()}--docs`,
     mdx: `src/docs/${componentName}.mdx`,
@@ -133,11 +146,15 @@ export function getComponentDocumentation(componentName: string): {
 /**
  * Generate update notification message
  */
-export function getUpdateNotification(hasUpdate: boolean, currentVersion: string, latestVersion: string): string {
+export function getUpdateNotification(
+  hasUpdate: boolean,
+  currentVersion: string,
+  latestVersion: string
+): string {
   if (!hasUpdate) {
     return `✅ You're using the latest version (${currentVersion}) of the design system.`;
   }
-  
+
   return `
 🎉 New design system version available!
 
@@ -173,18 +190,22 @@ export function getDevelopmentInfo(): {
 /**
  * Get migration information for version updates
  */
-export function getMigrationInfo(fromVersion: string, toVersion: string): {
+export function getMigrationInfo(
+  fromVersion: string,
+  toVersion: string
+): {
   hasBreakingChanges: boolean;
   migrationGuide: string;
   estimatedEffort: 'low' | 'medium' | 'high';
   affectedComponents: string[];
 } {
   // This would typically be fetched from a migration database or API
-  const majorVersionChange = fromVersion.split('.')[0] !== toVersion.split('.')[0];
-  
+  const majorVersionChange =
+    fromVersion.split('.')[0] !== toVersion.split('.')[0];
+
   return {
     hasBreakingChanges: majorVersionChange,
-    migrationGuide: majorVersionChange 
+    migrationGuide: majorVersionChange
       ? `See migration guide: https://github.com/schimufa/design-system/blob/main/MIGRATION_${toVersion}.md`
       : 'No breaking changes - safe to update',
     estimatedEffort: majorVersionChange ? 'high' : 'low',
@@ -197,16 +218,16 @@ export function getMigrationInfo(fromVersion: string, toVersion: string): {
  */
 export function logVersionDiscoveryInfo(): void {
   if (process.env.NODE_ENV !== 'development') return;
-  
+
   const versionInfo = getVersionInfo();
   const links = getDocumentationLinks();
-  
+
   console.group('🎨 Design System Version Info');
   console.log(`Current version: ${versionInfo.current}`);
   console.log(`Latest version: ${versionInfo.latest}`);
   console.log(`Has updates: ${versionInfo.hasUpdate ? '🎉 Yes' : '✅ No'}`);
   console.groupEnd();
-  
+
   console.group('📚 Documentation Links');
   console.log(`Storybook (local): ${links.storybook.local}`);
   console.log(`Storybook (prod): ${links.storybook.production}`);
@@ -222,7 +243,7 @@ export function createVersionWidget(): HTMLElement | null {
   if (typeof window === 'undefined' || process.env.NODE_ENV !== 'development') {
     return null;
   }
-  
+
   const widget = document.createElement('div');
   widget.id = 'design-system-version-widget';
   widget.style.cssText = `
@@ -240,17 +261,17 @@ export function createVersionWidget(): HTMLElement | null {
     z-index: 10000;
     transition: all 0.2s ease;
   `;
-  
+
   const versionInfo = getVersionInfo();
   const links = getDocumentationLinks();
-  
+
   widget.innerHTML = `
     <div>🎨 Design System v${versionInfo.current}</div>
     <div style="font-size: 12px; opacity: 0.9; margin-top: 4px;">
       Click for docs & updates
     </div>
   `;
-  
+
   widget.addEventListener('click', () => {
     const menu = document.createElement('div');
     menu.style.cssText = `
@@ -267,7 +288,7 @@ export function createVersionWidget(): HTMLElement | null {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       color: #333;
     `;
-    
+
     menu.innerHTML = `
       <div style="font-weight: 600; margin-bottom: 12px;">Design System Resources</div>
       <div style="margin-bottom: 8px;">
@@ -294,7 +315,7 @@ export function createVersionWidget(): HTMLElement | null {
         Version: ${versionInfo.current} | ${versionInfo.hasUpdate ? '🎉 Update available' : '✅ Up to date'}
       </div>
     `;
-    
+
     // Close menu when clicking outside
     const closeMenu = (e: Event) => {
       if (!menu.contains(e.target as Node)) {
@@ -302,11 +323,11 @@ export function createVersionWidget(): HTMLElement | null {
         document.removeEventListener('click', closeMenu);
       }
     };
-    
+
     setTimeout(() => document.addEventListener('click', closeMenu), 100);
     document.body.appendChild(menu);
   });
-  
+
   return widget;
 }
 
@@ -317,7 +338,7 @@ export function initVersionDiscovery(): void {
   if (process.env.NODE_ENV === 'development') {
     // Log version info
     logVersionDiscoveryInfo();
-    
+
     // Create version widget if in browser
     if (typeof window !== 'undefined') {
       const widget = createVersionWidget();

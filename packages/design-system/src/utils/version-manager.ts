@@ -79,18 +79,24 @@ export function getVersionInfo(
 /**
  * Get the latest version of a component
  */
-export function getLatestVersion(componentName: ComponentName): ComponentVersion | null {
+export function getLatestVersion(
+  componentName: ComponentName
+): ComponentVersion | null {
   const versions = componentVersions[componentName];
   if (!versions) return null;
 
-  const latestEntry = Object.entries(versions).find(([, config]) => config.isLatest);
+  const latestEntry = Object.entries(versions).find(
+    ([, config]) => config.isLatest
+  );
   return latestEntry ? (latestEntry[0] as ComponentVersion) : null;
 }
 
 /**
  * Get all available versions for a component
  */
-export function getAvailableVersions(componentName: ComponentName): ComponentVersion[] {
+export function getAvailableVersions(
+  componentName: ComponentName
+): ComponentVersion[] {
   const versions = componentVersions[componentName];
   if (!versions) return [];
 
@@ -147,12 +153,16 @@ export function getVersionWarning(
   if (!info) return null;
 
   if (info.isDeprecated) {
-    const migrationPath = info.migrationPath ? ` Please migrate to version ${info.migrationPath}.` : '';
+    const migrationPath = info.migrationPath
+      ? ` Please migrate to version ${info.migrationPath}.`
+      : '';
     return `⚠️ ${componentName} v${version} is deprecated.${migrationPath}`;
   }
 
   if (isSupportEndingSoon(componentName, version)) {
-    const migrationPath = info.migrationPath ? ` Consider migrating to version ${info.migrationPath}.` : '';
+    const migrationPath = info.migrationPath
+      ? ` Consider migrating to version ${info.migrationPath}.`
+      : '';
     return `⏰ Support for ${componentName} v${version} is ending soon.${migrationPath}`;
   }
 
@@ -177,7 +187,9 @@ export function validateVersion(
 
   const availableVersions = getAvailableVersions(componentName);
   if (!availableVersions.includes(version)) {
-    console.warn(`Invalid version "${version}" for ${componentName}. Using latest version.`);
+    console.warn(
+      `Invalid version "${version}" for ${componentName}. Using latest version.`
+    );
     return getLatestVersion(componentName) || '1.0.0';
   }
 

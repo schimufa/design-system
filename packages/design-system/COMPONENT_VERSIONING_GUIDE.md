@@ -5,6 +5,7 @@ This guide explains how to use and manage different versions of components in th
 ## Overview
 
 Our design system supports multiple versions of components to enable:
+
 - **Gradual migration** from old to new designs
 - **Backward compatibility** for existing applications
 - **A/B testing** of different component versions
@@ -37,6 +38,7 @@ import { Button, Card } from '@schimufa/design-system';
 ### Button Component
 
 #### Version 1.0.0 (Legacy)
+
 - **Features**: Sharp corners (4px), uppercase text
 - **Status**: Supported until 2025-12-31
 - **Migration Path**: v2.0.0
@@ -48,6 +50,7 @@ import { Button, Card } from '@schimufa/design-system';
 ```
 
 #### Version 2.0.0 (Current)
+
 - **Features**: Rounded corners (20px), normal text case
 - **Status**: Latest, recommended
 - **Breaking Changes**: Text transform, border radius
@@ -61,6 +64,7 @@ import { Button, Card } from '@schimufa/design-system';
 ### Card Component
 
 #### Version 1.0.0 (Legacy)
+
 - **Features**: 16px border radius, standard padding
 - **Status**: Supported until 2025-12-31
 - **Migration Path**: v2.0.0
@@ -72,6 +76,7 @@ import { Button, Card } from '@schimufa/design-system';
 ```
 
 #### Version 2.0.0 (Current)
+
 - **Features**: 12px border radius, optimized padding
 - **Status**: Latest, recommended
 - **Breaking Changes**: Border radius, padding structure
@@ -106,9 +111,7 @@ Use feature flags to control version rollout:
 ```tsx
 const useNewDesign = useFeatureFlag('new-button-design');
 
-<Button version={useNewDesign ? '2.0.0' : '1.0.0'}>
-  Action Button
-</Button>
+<Button version={useNewDesign ? '2.0.0' : '1.0.0'}>Action Button</Button>;
 ```
 
 ### 3. A/B Testing
@@ -118,9 +121,7 @@ Test different versions with user segments:
 ```tsx
 const buttonVersion = userSegment === 'beta' ? '2.0.0' : '1.0.0';
 
-<Button version={buttonVersion}>
-  Test Button
-</Button>
+<Button version={buttonVersion}>Test Button</Button>;
 ```
 
 ## Version Management Utilities
@@ -163,6 +164,7 @@ const latest = getLatestVersion('Button');
 ### Development Warnings
 
 In development mode, the system automatically logs warnings for:
+
 - Deprecated versions
 - Versions with ending support
 - Available newer versions
@@ -186,6 +188,7 @@ View all versions side-by-side in Storybook:
 ### Design Links
 
 Each version story includes:
+
 - Link to Figma design file
 - Migration guide
 - Breaking changes list
@@ -241,6 +244,7 @@ Each version story includes:
 ### Common Issues
 
 #### Version Not Found
+
 ```tsx
 // Error: Invalid version "3.0.0" for Button
 <Button version="3.0.0">Button</Button>
@@ -250,6 +254,7 @@ Each version story includes:
 ```
 
 #### Styling Conflicts
+
 ```tsx
 // Issue: Custom styles override version styles
 <Button version="2.0.0" sx={{ borderRadius: '4px' }}>
@@ -263,6 +268,7 @@ Each version story includes:
 ```
 
 #### Migration Timing
+
 ```tsx
 // Issue: Mixing versions inconsistently
 <Button version="1.0.0">Action 1</Button>
@@ -284,6 +290,7 @@ Each version story includes:
 ## Support
 
 For questions about component versioning:
+
 1. Check this guide and Storybook documentation
 2. Review design specs and migration guides
 3. Contact the design system team

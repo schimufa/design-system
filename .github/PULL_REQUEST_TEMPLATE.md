@@ -1,6 +1,6 @@
 # Pull Request
 
-<!-- 
+<!--
 🚨 EXTERNAL CONTRIBUTORS: Please read the External Contribution Guide before submitting:
 https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.md
 -->
@@ -10,12 +10,15 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 <!-- Provide a clear and concise description of your changes -->
 
 ### What was changed?
+
 <!-- Describe the specific changes made -->
 
 ### Why was this change needed?
+
 <!-- Explain the motivation or problem this solves -->
 
 ### How was it implemented?
+
 <!-- Brief technical overview of the implementation -->
 
 ## 🎨 Design Reference
@@ -44,17 +47,20 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 ## 📊 Impact Assessment
 
 ### Version Impact
+
 - [ ] **Patch** (bug fixes, small improvements)
 - [ ] **Minor** (new features, backward compatible)
 - [ ] **Major** (breaking changes)
 
 ### Theme Impact
+
 - [ ] No theme changes
 - [ ] Theme token updates (non-breaking)
 - [ ] New theme variants added
 - [ ] Breaking theme changes
 
 ### Bundle Size Impact
+
 - [ ] No significant size change (< 5KB)
 - [ ] Small increase (5-20KB)
 - [ ] Large increase (> 20KB) - **Requires justification**
@@ -62,6 +68,7 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 ## 🧪 Testing Checklist
 
 ### Automated Tests
+
 - [ ] **TypeScript compilation** passes (`pnpm typecheck`)
 - [ ] **Linting** passes (`pnpm lint`)
 - [ ] **Unit tests** pass (`pnpm test`)
@@ -70,6 +77,7 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 - [ ] **Storybook** builds (`pnpm build-storybook`)
 
 ### Manual Testing
+
 - [ ] **Cross-browser testing** (Chrome, Firefox, Safari, Edge)
 - [ ] **Responsive design** testing (mobile, tablet, desktop)
 - [ ] **Keyboard navigation** testing
@@ -77,6 +85,7 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 - [ ] **Theme switching** testing (all available themes)
 
 ### Quality Gates
+
 - [ ] **Test coverage** ≥ 80%
 - [ ] **Accessibility** audit passes (axe-core)
 - [ ] **Performance** impact assessed
@@ -97,6 +106,7 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 ## 🔧 Code Quality
 
 ### Standards Compliance
+
 - [ ] Follows **TypeScript** best practices
 - [ ] Uses **design tokens** (no hard-coded values)
 - [ ] Implements **proper error handling**
@@ -105,6 +115,7 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 - [ ] Uses **semantic HTML** elements
 
 ### Performance Considerations
+
 - [ ] **Lazy loading** implemented where appropriate
 - [ ] **Memoization** used for expensive calculations
 - [ ] **Bundle splitting** considered
@@ -115,23 +126,25 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 <!-- ⚠️ REQUIRED for breaking changes -->
 
 ### What breaks?
+
 <!-- List all breaking changes -->
 
 ### Migration Steps
+
 <!-- Provide step-by-step migration instructions -->
 
 ```typescript
 // Before (old API)
 
-
 // After (new API)
-
 ```
 
 ### Affected Components
+
 <!-- List all components that need updates -->
 
 ### Estimated Migration Effort
+
 - [ ] **Low** (< 1 hour)
 - [ ] **Medium** (1-4 hours)
 - [ ] **High** (> 4 hours)
@@ -139,13 +152,15 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 ## 📸 Visual Evidence
 
 ### Screenshots
+
 <!-- Add before/after screenshots for UI changes -->
 
-| Before | After |
-|--------|-------|
+| Before              | After               |
+| ------------------- | ------------------- |
 | <!-- Screenshot --> | <!-- Screenshot --> |
 
 ### Storybook Links
+
 <!-- Provide links to relevant Storybook stories -->
 
 - **Component Story**: <!-- Link to main story -->
@@ -155,6 +170,7 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 ## 🔍 Review Checklist
 
 ### For Reviewers
+
 - [ ] **Design alignment** verified against Figma
 - [ ] **Code quality** meets standards
 - [ ] **Test coverage** is adequate
@@ -164,6 +180,7 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 - [ ] **Accessibility** requirements are met
 
 ### For External Contributors
+
 - [ ] Read the **External Contribution Guide**
 - [ ] Followed **branch naming convention**
 - [ ] Used proper **commit message format**
@@ -189,12 +206,15 @@ https://github.com/schimufa/design-system/blob/main/EXTERNAL_CONTRIBUTION_GUIDE.
 ## 📝 Additional Notes
 
 ### For Reviewers
+
 <!-- Any specific areas you'd like reviewers to focus on -->
 
 ### Known Limitations
+
 <!-- Any known issues or limitations with this implementation -->
 
 ### Future Improvements
+
 <!-- Any planned follow-up work or improvements -->
 
 ---

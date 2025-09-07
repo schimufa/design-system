@@ -96,8 +96,8 @@ importers:
         specifier: ^5.15.3
         version: 5.18.0(@emotion/react@11.14.0)(@emotion/styled@11.14.1)(@types/react@18.3.23)(react-dom@18.3.1)(react@18.3.1)
       '@schimufa/design-system':
-        specifier: ^4.0.1
-        version: 4.1.0(@types/react@18.3.23)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^5.0.0
+        version: link:../../packages/design-system
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -1658,23 +1658,6 @@ packages:
     transitivePeerDependencies:
       - '@types/node'
     dev: true
-
-  /@schimufa/design-system@4.1.0(@types/react@18.3.23)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-V6gXa0kicLkmFlfdRh/RPaEkheydp/QPZZJmNRoRbauovcii5266wb+maMQFlfGBXcv1vZUmpFvkh1zzXf7QJA==}
-    peerDependencies:
-      react: ^18.2.0
-      react-dom: ^18.2.0
-    dependencies:
-      '@emotion/react': 11.14.0(@types/react@18.3.23)(react@18.3.1)
-      '@emotion/styled': 11.14.1(@emotion/react@11.14.0)(@types/react@18.3.23)(react@18.3.1)
-      '@mui/icons-material': 5.18.0(@mui/material@5.18.0)(@types/react@18.3.23)(react@18.3.1)
-      '@mui/material': 5.18.0(@emotion/react@11.14.0)(@emotion/styled@11.14.1)(@types/react@18.3.23)(react-dom@18.3.1)(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    transitivePeerDependencies:
-      - '@types/react'
-      - supports-color
-    dev: false
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}

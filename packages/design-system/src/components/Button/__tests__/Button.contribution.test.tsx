@@ -19,7 +19,6 @@ import {
 
 // Example of comprehensive component testing for external contributions
 describe('Button Component - Contribution Standards', () => {
-  
   // Basic functionality tests
   describe('Basic Functionality', () => {
     it('renders with text content', () => {
@@ -30,7 +29,7 @@ describe('Button Component - Contribution Standards', () => {
     it('handles click events', () => {
       const handleClick = jest.fn();
       renderWithTheme(<Button onClick={handleClick}>Click me</Button>);
-      
+
       fireEvent.click(screen.getByRole('button'));
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
@@ -38,7 +37,7 @@ describe('Button Component - Contribution Standards', () => {
     it('supports disabled state', () => {
       renderWithTheme(<Button disabled>Disabled</Button>);
       const button = screen.getByRole('button');
-      
+
       expect(button).toBeDisabled();
       expect(button).toHaveAttribute('aria-disabled', 'true');
     });
@@ -46,32 +45,30 @@ describe('Button Component - Contribution Standards', () => {
 
   // Version compatibility tests
   describe('Version Compatibility', () => {
-    testComponentVersions(
-      'Button',
-      Button,
-      { children: 'Test Button' },
-      ['1.0.0', '2.0.0']
-    );
+    testComponentVersions('Button', Button, { children: 'Test Button' }, [
+      '1.0.0',
+      '2.0.0',
+    ]);
 
     it('applies correct styles for version 1.0.0', () => {
       renderWithTheme(<Button version="1.0.0">V1 Button</Button>);
       const button = screen.getByRole('button');
-      
+
       // Check for version-specific styles
       expect(button).toHaveStyle({
         borderRadius: '4px',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
       });
     });
 
     it('applies correct styles for version 2.0.0', () => {
       renderWithTheme(<Button version="2.0.0">V2 Button</Button>);
       const button = screen.getByRole('button');
-      
+
       // Check for version-specific styles
       expect(button).toHaveStyle({
         borderRadius: '20px',
-        textTransform: 'none'
+        textTransform: 'none',
       });
     });
   });
@@ -85,7 +82,7 @@ describe('Button Component - Contribution Standards', () => {
     it('supports ARIA labels', () => {
       renderWithTheme(<Button aria-label="Submit form">Submit</Button>);
       const button = screen.getByRole('button');
-      
+
       expect(button).toHaveAttribute('aria-label', 'Submit form');
     });
 
@@ -96,7 +93,7 @@ describe('Button Component - Contribution Standards', () => {
           <div id="help-text">This button performs an action</div>
         </div>
       );
-      
+
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('aria-describedby', 'help-text');
     });
@@ -104,7 +101,7 @@ describe('Button Component - Contribution Standards', () => {
     it('handles loading state accessibility', () => {
       renderWithTheme(<Button aria-busy="true">Loading...</Button>);
       const button = screen.getByRole('button');
-      
+
       expect(button).toHaveAttribute('aria-busy', 'true');
     });
   });
@@ -113,34 +110,32 @@ describe('Button Component - Contribution Standards', () => {
   testKeyboardNavigation('Button', <Button>Keyboard Test</Button>);
 
   // Visual regression tests
-  testVisualRegression('Button', <Button variant="contained">Visual Test</Button>);
+  testVisualRegression(
+    'Button',
+    <Button variant="contained">Visual Test</Button>
+  );
 
   // Performance tests
   testPerformance('Button', <Button>Performance Test</Button>);
 
   // Props validation tests
-  testPropsValidation(
-    'Button',
-    Button,
-    { children: 'Valid Button' },
-    [
-      {
-        description: 'accepts valid variant prop',
-        props: { variant: 'outlined' },
-        shouldError: false,
-      },
-      {
-        description: 'accepts valid size prop',
-        props: { size: 'large' },
-        shouldError: false,
-      },
-      {
-        description: 'accepts valid color prop',
-        props: { color: 'primary' },
-        shouldError: false,
-      },
-    ]
-  );
+  testPropsValidation('Button', Button, { children: 'Valid Button' }, [
+    {
+      description: 'accepts valid variant prop',
+      props: { variant: 'outlined' },
+      shouldError: false,
+    },
+    {
+      description: 'accepts valid size prop',
+      props: { size: 'large' },
+      shouldError: false,
+    },
+    {
+      description: 'accepts valid color prop',
+      props: { color: 'primary' },
+      shouldError: false,
+    },
+  ]);
 
   // Component API consistency tests
   testComponentAPI('Button', Button, { children: 'API Test' });
@@ -148,14 +143,14 @@ describe('Button Component - Contribution Standards', () => {
   // Theme compatibility tests
   describe('Theme Compatibility', () => {
     const themes = ['finance', 'logistics', 'sales'] as const;
-    
-    themes.forEach(theme => {
+
+    themes.forEach((theme) => {
       it(`renders correctly with ${theme} theme`, () => {
         const { container } = renderWithTheme(
           <Button variant="contained">Themed Button</Button>,
           { theme }
         );
-        
+
         expect(container.firstChild).toBeInTheDocument();
         expect(container.firstChild).toMatchSnapshot(`button-${theme}-theme`);
       });
@@ -167,21 +162,21 @@ describe('Button Component - Contribution Standards', () => {
     it('supports Material-UI variant prop', () => {
       renderWithTheme(<Button variant="outlined">Outlined</Button>);
       const button = screen.getByRole('button');
-      
+
       expect(button).toHaveClass('MuiButton-outlined');
     });
 
     it('supports Material-UI size prop', () => {
       renderWithTheme(<Button size="large">Large Button</Button>);
       const button = screen.getByRole('button');
-      
+
       expect(button).toHaveClass('MuiButton-sizeLarge');
     });
 
     it('supports Material-UI color prop', () => {
       renderWithTheme(<Button color="secondary">Secondary</Button>);
       const button = screen.getByRole('button');
-      
+
       expect(button).toHaveClass('MuiButton-colorSecondary');
     });
 
@@ -190,7 +185,7 @@ describe('Button Component - Contribution Standards', () => {
         <Button sx={{ backgroundColor: 'red' }}>Custom Styled</Button>
       );
       const button = screen.getByRole('button');
-      
+
       expect(button).toBeInTheDocument();
     });
   });
@@ -219,7 +214,7 @@ describe('Button Component - Contribution Standards', () => {
           <Button type="submit">Submit Form</Button>
         </form>
       );
-      
+
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('type', 'submit');
     });
@@ -229,13 +224,13 @@ describe('Button Component - Contribution Standards', () => {
       const MockLink = ({ children, ...props }: any) => (
         <a {...props}>{children}</a>
       );
-      
+
       renderWithTheme(
         <Button component={MockLink} href="/test">
           Link Button
         </Button>
       );
-      
+
       const link = screen.getByRole('link');
       expect(link).toHaveAttribute('href', '/test');
     });
@@ -244,35 +239,36 @@ describe('Button Component - Contribution Standards', () => {
   // Edge cases
   describe('Edge Cases', () => {
     it('handles very long text content', () => {
-      const longText = 'This is a very long button text that might cause layout issues if not handled properly';
-      
+      const longText =
+        'This is a very long button text that might cause layout issues if not handled properly';
+
       renderWithTheme(<Button>{longText}</Button>);
       const button = screen.getByRole('button');
-      
+
       expect(button).toHaveTextContent(longText);
       expect(button).toBeInTheDocument();
     });
 
     it('handles special characters in text', () => {
       const specialText = '🚀 Submit & Continue → 100%';
-      
+
       renderWithTheme(<Button>{specialText}</Button>);
       const button = screen.getByRole('button');
-      
+
       expect(button).toHaveTextContent(specialText);
     });
 
     it('handles rapid click events', () => {
       const handleClick = jest.fn();
       renderWithTheme(<Button onClick={handleClick}>Rapid Click</Button>);
-      
+
       const button = screen.getByRole('button');
-      
+
       // Simulate rapid clicking
       for (let i = 0; i < 10; i++) {
         fireEvent.click(button);
       }
-      
+
       expect(handleClick).toHaveBeenCalledTimes(10);
     });
   });

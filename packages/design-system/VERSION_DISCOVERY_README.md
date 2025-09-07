@@ -17,11 +17,13 @@ pnpm update @schimufa/design-system
 ## 📱 Automated Notifications
 
 ### GitHub Watch
+
 1. Visit: https://github.com/schimufa/design-system
 2. Click **Watch** → **Custom** → **Releases**
 3. Get email notifications for new releases
 
 ### NPM Monitoring
+
 ```bash
 # Install monitoring tool
 npm install -g npm-check-updates
@@ -32,24 +34,25 @@ ncu @schimufa/design-system
 
 ## 📚 Documentation Access
 
-| Resource | Local | Production |
-|----------|-------|------------|
-| **Storybook** | `pnpm dev` → http://localhost:6006 | https://schimufa.github.io/design-system/storybook |
-| **API Docs** | `pnpm docs` → `docs/` | https://schimufa.github.io/design-system/docs |
-| **Repository** | - | https://github.com/schimufa/design-system |
-| **NPM Package** | - | https://www.npmjs.com/package/@schimufa/design-system |
+| Resource        | Local                              | Production                                            |
+| --------------- | ---------------------------------- | ----------------------------------------------------- |
+| **Storybook**   | `pnpm dev` → http://localhost:6006 | https://schimufa.github.io/design-system/storybook    |
+| **API Docs**    | `pnpm docs` → `docs/`              | https://schimufa.github.io/design-system/docs         |
+| **Repository**  | -                                  | https://github.com/schimufa/design-system             |
+| **NPM Package** | -                                  | https://www.npmjs.com/package/@schimufa/design-system |
 
 ## 🔄 Version Types & Impact
 
-| Type | Example | Impact | Action |
-|------|---------|---------|---------|
+| Type      | Example       | Impact           | Action                 |
+| --------- | ------------- | ---------------- | ---------------------- |
 | **Major** | 4.0.0 → 5.0.0 | Breaking changes | Review migration guide |
-| **Minor** | 4.0.0 → 4.1.0 | New features | Safe to update |
-| **Patch** | 4.0.0 → 4.0.1 | Bug fixes | Recommended update |
+| **Minor** | 4.0.0 → 4.1.0 | New features     | Safe to update         |
+| **Patch** | 4.0.0 → 4.0.1 | Bug fixes        | Recommended update     |
 
 ## 🛠 Development Tools
 
 ### Version Discovery Widget
+
 ```tsx
 import { initVersionDiscovery } from '@schimufa/design-system';
 
@@ -58,11 +61,12 @@ initVersionDiscovery(); // Shows version widget in bottom-right
 ```
 
 ### Programmatic Checks
+
 ```tsx
-import { 
-  checkForUpdates, 
+import {
+  checkForUpdates,
   getVersionInfo,
-  getDocumentationLinks 
+  getDocumentationLinks,
 } from '@schimufa/design-system';
 
 // Check for updates
@@ -81,12 +85,14 @@ console.log('Storybook:', links.storybook.local);
 ## 📋 Migration Planning
 
 ### Before Updating
+
 1. **Check changelog**: Review breaking changes
 2. **Test in staging**: Verify compatibility
 3. **Plan rollout**: Coordinate with team
 4. **Backup**: Commit current state
 
 ### Update Process
+
 ```bash
 # 1. Check current version
 npm list @schimufa/design-system

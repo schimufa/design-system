@@ -7,7 +7,11 @@ import {
   SxProps,
   Theme,
 } from '@mui/material';
-import { validateVersion, logVersionWarning, ComponentVersion } from '../../utils/version-manager';
+import {
+  validateVersion,
+  logVersionWarning,
+  ComponentVersion,
+} from '../../utils/version-manager';
 
 export interface CardProps {
   title?: string;
@@ -37,7 +41,7 @@ export function Card(props: CardProps) {
   } = props;
 
   const validatedVersion = validateVersion('Card', version);
-  
+
   // Log development warnings
   logVersionWarning('Card', validatedVersion);
 
@@ -45,13 +49,16 @@ export function Card(props: CardProps) {
 
   const getCardStyles = () => {
     // Version-specific base styles
-    const versionStyles = validatedVersion === '2.0.0' ? {
-      borderRadius: '12px',
-      padding: '1.5rem',
-    } : {
-      borderRadius: '16px',
-      padding: '1rem',
-    };
+    const versionStyles =
+      validatedVersion === '2.0.0'
+        ? {
+            borderRadius: '12px',
+            padding: '1.5rem',
+          }
+        : {
+            borderRadius: '16px',
+            padding: '1rem',
+          };
 
     const baseStyles: SxProps<Theme> = {
       backgroundColor: theme.palette.background.paper,

@@ -1,5 +1,21 @@
 # @ab-inbev/design-system
 
+## 5.0.0
+
+### Major Changes
+
+- 314c6de: xAdd comprehensive contribution management system for external development teams
+
+### Minor Changes
+
+- 314c6de: Add comprehensive contribution management system for external development teams
+  - Add component versioning system with Button v1.0.0/v2.0.0 and Card v1.0.0/v2.0.0
+  - Add version discovery utilities and CLI tools for automated update checking
+  - Add contribution validation scripts with 30+ quality checks and testing utilities
+  - Add external contribution guide, standards documentation, and enhanced PR templates
+  - Update CI/CD workflows with automated quality gates and accessibility audits
+  - Maintain full backward compatibility while enabling scalable external contributions
+
 ## 4.0.1
 
 ### Patch Changes

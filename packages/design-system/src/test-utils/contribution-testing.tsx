@@ -23,13 +23,9 @@ export function renderWithTheme(
   options: CustomRenderOptions = {}
 ): RenderResult {
   const { theme = 'finance', ...renderOptions } = options;
-  
+
   function Wrapper({ children }: { children: React.ReactNode }) {
-    return (
-      <ThemeProvider theme={getTheme(theme)}>
-        {children}
-      </ThemeProvider>
-    );
+    return <ThemeProvider theme={getTheme(theme)}>{children}</ThemeProvider>;
   }
 
   return render(ui, { wrapper: Wrapper, ...renderOptions });
@@ -42,9 +38,9 @@ export function testAcrossThemes(
   testFn: (result: RenderResult, theme: AppTheme) => void | Promise<void>
 ) {
   const themeNames = Object.keys(themes) as AppTheme[];
-  
+
   describe(`${componentName} across themes`, () => {
-    themeNames.forEach(theme => {
+    themeNames.forEach((theme) => {
       it(`works with ${theme} theme`, async () => {
         const component = renderComponent(theme);
         const result = renderWithTheme(component, { theme });
@@ -78,10 +74,12 @@ export function testVisualRegression(
 
     // Test across all themes
     const themeNames = Object.keys(themes) as AppTheme[];
-    themeNames.forEach(theme => {
+    themeNames.forEach((theme) => {
       it(`matches snapshot with ${theme} theme`, () => {
         const result = renderWithTheme(component, { ...options, theme });
-        expect(result.container.firstChild).toMatchSnapshot(`${componentName}-${theme}`);
+        expect(result.container.firstChild).toMatchSnapshot(
+          `${componentName}-${theme}`
+        );
       });
     });
   });
@@ -95,7 +93,7 @@ export function testComponentVersions<T extends { version?: string }>(
   versions: string[]
 ) {
   describe(`${componentName} version compatibility`, () => {
-    versions.forEach(version => {
+    versions.forEach((version) => {
       it(`renders correctly with version ${version}`, () => {
         const props = { ...baseProps, version } as T;
         const result = renderWithTheme(<Component {...props} />);
@@ -105,7 +103,9 @@ export function testComponentVersions<T extends { version?: string }>(
       it(`matches snapshot for version ${version}`, () => {
         const props = { ...baseProps, version } as T;
         const result = renderWithTheme(<Component {...props} />);
-        expect(result.container.firstChild).toMatchSnapshot(`${componentName}-v${version}`);
+        expect(result.container.firstChild).toMatchSnapshot(
+          `${componentName}-v${version}`
+        );
       });
     });
   });
@@ -123,7 +123,7 @@ export function testPerformance(
       renderWithTheme(component);
       const endTime = performance.now();
       const renderTime = endTime - startTime;
-      
+
       expect(renderTime).toBeLessThan(maxRenderTime);
     });
   });
@@ -136,19 +136,21 @@ export function testKeyboardNavigation(
   expectedKeys: string[] = ['Enter', ' ', 'Tab']
 ) {
   describe(`${componentName} keyboard navigation`, () => {
-    expectedKeys.forEach(key => {
+    expectedKeys.forEach((key) => {
       it(`responds to ${key} key`, () => {
         const { container } = renderWithTheme(component);
-        const element = container.querySelector('[tabindex], button, input, select, textarea, a');
-        
+        const element = container.querySelector(
+          '[tabindex], button, input, select, textarea, a'
+        );
+
         if (element) {
           (element as HTMLElement).focus();
           expect(document.activeElement).toBe(element);
-          
+
           // Test key press
           const event = new KeyboardEvent('keydown', { key });
           element.dispatchEvent(event);
-          
+
           // Component should handle the key event without errors
           expect(element).toBeInTheDocument();
         }
@@ -178,7 +180,7 @@ export function testPropsValidation<T extends Record<string, any>>(
     invalidPropsTests.forEach(({ description, props, shouldError = false }) => {
       it(description, () => {
         const testProps = { ...validProps, ...props } as T;
-        
+
         if (shouldError) {
           expect(() => {
             renderWithTheme(<Component {...testProps} />);
@@ -214,16 +216,20 @@ export function testComponentAPI<T>(
 
     it('accepts className prop', () => {
       const className = 'test-class';
-      const propsWithClassName = { ...baseProps, className } as T & { className: string };
-      const { container } = renderWithTheme(<Component {...propsWithClassName} />);
-      
+      const propsWithClassName = { ...baseProps, className } as T & {
+        className: string;
+      };
+      const { container } = renderWithTheme(
+        <Component {...propsWithClassName} />
+      );
+
       expect(container.querySelector(`.${className}`)).toBeInTheDocument();
     });
 
     it('accepts sx prop for Material-UI components', () => {
       const sx = { color: 'red' };
       const propsWithSx = { ...baseProps, sx } as T & { sx: any };
-      
+
       expect(() => {
         renderWithTheme(<Component {...propsWithSx} />);
       }).not.toThrow();
@@ -232,10 +238,7 @@ export function testComponentAPI<T>(
 }
 
 // Bundle size testing helper (for CI/CD)
-export function testBundleSize(
-  componentName: string,
-  maxSizeKB: number = 50
-) {
+export function testBundleSize(componentName: string, maxSizeKB: number = 50) {
   describe(`${componentName} bundle size`, () => {
     it(`should be under ${maxSizeKB}KB`, () => {
       // This would typically be implemented with webpack-bundle-analyzer
@@ -274,7 +277,7 @@ export function createComponentTestSuite<T extends Record<string, any>>(
     maxRenderTime = 100,
     maxBundleSize = 50,
     keyboardKeys = ['Enter', ' ', 'Tab'],
-    invalidPropsTests = []
+    invalidPropsTests = [],
   } = config;
 
   describe(`${componentName} comprehensive test suite`, () => {
@@ -302,11 +305,20 @@ export function createComponentTestSuite<T extends Record<string, any>>(
     testPerformance(componentName, <Component {...baseProps} />, maxRenderTime);
 
     // Keyboard navigation
-    testKeyboardNavigation(componentName, <Component {...baseProps} />, keyboardKeys);
+    testKeyboardNavigation(
+      componentName,
+      <Component {...baseProps} />,
+      keyboardKeys
+    );
 
     // Props validation
     if (invalidPropsTests.length > 0) {
-      testPropsValidation(componentName, Component, baseProps, invalidPropsTests);
+      testPropsValidation(
+        componentName,
+        Component,
+        baseProps,
+        invalidPropsTests
+      );
     }
 
     // API consistency
