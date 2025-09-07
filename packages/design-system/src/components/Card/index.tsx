@@ -7,6 +7,7 @@ import {
   SxProps,
   Theme,
 } from '@mui/material';
+import { validateVersion, logVersionWarning, ComponentVersion } from '../../utils/version-manager';
 
 export interface CardProps {
   title?: string;
@@ -15,9 +16,14 @@ export interface CardProps {
   icon?: React.ReactNode;
   className?: string;
   variant?: 'default' | 'outlined' | 'glass';
+  version?: ComponentVersion;
   sx?: SxProps<Theme>;
 }
 
+/**
+ * @version 1.0.0 - Initial card with rounded corners and modern styling
+ * @version 2.0.0 - Enhanced card with improved spacing and typography
+ */
 export function Card(props: CardProps) {
   const {
     title,
@@ -26,18 +32,33 @@ export function Card(props: CardProps) {
     icon,
     className,
     variant = 'default',
+    version,
     sx,
   } = props;
+
+  const validatedVersion = validateVersion('Card', version);
+  
+  // Log development warnings
+  logVersionWarning('Card', validatedVersion);
 
   const theme = useTheme();
 
   const getCardStyles = () => {
+    // Version-specific base styles
+    const versionStyles = validatedVersion === '2.0.0' ? {
+      borderRadius: '12px',
+      padding: '1.5rem',
+    } : {
+      borderRadius: '16px',
+      padding: '1rem',
+    };
+
     const baseStyles: SxProps<Theme> = {
       backgroundColor: theme.palette.background.paper,
-      borderRadius: '16px',
       overflow: 'hidden',
       border: 'none',
       boxShadow: 'none',
+      ...versionStyles,
       ...sx,
     };
 
@@ -59,9 +80,13 @@ export function Card(props: CardProps) {
     }
   };
 
+  const getContentPadding = () => {
+    return validatedVersion === '2.0.0' ? { p: 2 } : { p: 3 };
+  };
+
   return (
     <MuiCard className={className} sx={getCardStyles()} role="article">
-      <CardContent sx={{ p: 3 }}>
+      <CardContent sx={getContentPadding()}>
         {(title || icon) && (
           <div
             style={{

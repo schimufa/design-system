@@ -18,14 +18,20 @@
     },
     "scripts": {
         "dev": "storybook dev -p 6006",
-        "build": "tsc && vite build",
+        "build": "tsc --project tsconfig.build.json && vite build",
         "build-storybook": "storybook build",
         "test:visual": "playwright test",
         "lint": "eslint . --ext .ts,.tsx",
         "typecheck": "tsc --noEmit",
         "docs": "typedoc --out docs src",
         "release": "pnpm validate-all && pnpm build && changeset publish",
-        "prepare-release": "changeset version && pnpm install"
+        "prepare-release": "changeset version && pnpm install",
+        "check-version": "node scripts/version-checker.js",
+        "check-updates": "npm outdated @schimufa/design-system",
+        "version-info": "npm info @schimufa/design-system",
+        "validate-contribution": "node scripts/validate-contribution.js",
+        "validate-theme": "ts-node scripts/validate-theme.ts",
+        "validate-design": "echo 'Design validation placeholder'"
     },
     "peerDependencies": {
         "@emotion/react": "^11.11.3",
@@ -53,6 +59,7 @@
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.3.0",
         "@types/jest": "^30.0.0",
+        "@types/jest-axe": "^3.5.9",
         "@types/node": "^24.0.0",
         "@types/react": "^18.2.43",
         "@types/react-dom": "^18.2.17",
@@ -61,6 +68,7 @@
         "@vitejs/plugin-react": "^4.2.1",
         "colord": "^2.9.3",
         "eslint": "^8.0.0",
+        "jest-axe": "^10.0.0",
         "jsdom": "^24.0.0",
         "storybook": "^8.6.14",
         "ts-node": "^10.9.2",

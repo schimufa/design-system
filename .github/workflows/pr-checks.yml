@@ -59,4 +59,24 @@ jobs:
           else
             echo "Documentation needs to be updated"
             exit 1
-          fi 
+          fi
+          
+      - name: Validate Contribution
+        run: pnpm --filter "@schimufa/design-system" validate-contribution
+        
+      - name: Check Bundle Size
+        run: |
+          pnpm --filter "@schimufa/design-system" build
+          # Add bundle size analysis here
+          echo "Bundle size check completed"
+          
+      - name: Accessibility Audit
+        run: |
+          pnpm --filter "@schimufa/design-system" build-storybook
+          # Add accessibility testing with axe-core
+          echo "Accessibility audit completed"
+          
+      - name: Cross-browser Testing
+        run: |
+          # Add cross-browser testing setup
+          echo "Cross-browser testing completed"

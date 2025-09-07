@@ -59,6 +59,25 @@ To migrate from v1 to v2:
       commitSha: 'ghi789',
       prNumber: '47',
     },
+    '2.0.0': {
+      version: '2.0.0',
+      figmaFileId: 'Fxyz126',
+      figmaNodeId: '1:126',
+      component: 'Card',
+      designTicket: 'DESIGN-104',
+      commitSha: 'jkl012',
+      prNumber: '48',
+      breakingChanges: [
+        'Reduced default border radius from 16px to 12px',
+        'Changed default padding structure',
+      ],
+      migrationGuide: `
+To migrate from v1 to v2:
+1. Update version prop to "2.0.0"
+2. Review spacing and layout adjustments
+3. Test visual consistency with new border radius
+      `,
+    },
   },
 };
 
