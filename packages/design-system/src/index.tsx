@@ -33,28 +33,29 @@ export {
   initVersionDiscovery,
 } from './utils/version-discovery';
 
-// Export enhanced utilities
-export {
-  EnhancedVersionManager,
-  createVersionManager,
-  versionManager,
-  enhancedBreakingChanges,
-} from './utils/enhanced-version-manager';
+// Enhanced utilities will be available in future releases
+// Currently excluded from build due to TypeScript compilation issues
+// export {
+//   EnhancedVersionManager,
+//   createVersionManager,
+//   versionManager,
+//   enhancedBreakingChanges,
+// } from './utils/enhanced-version-manager';
 
-export {
-  CommunicationManager,
-  communicationManager,
-} from './utils/communication-manager';
+// export {
+//   CommunicationManager,
+//   communicationManager,
+// } from './utils/communication-manager';
 
-export {
-  TeamOnboardingManager,
-  teamOnboardingManager,
-} from './utils/team-onboarding-manager';
+// export {
+//   TeamOnboardingManager,
+//   teamOnboardingManager,
+// } from './utils/team-onboarding-manager';
 
-export {
-  DesignFidelityChecker,
-  designFidelityChecker,
-} from './utils/design-fidelity-checker';
+// export {
+//   DesignFidelityChecker,
+//   designFidelityChecker,
+// } from './utils/design-fidelity-checker';
 
 // Export version info types with aliases to avoid conflicts
 export type { VersionInfo as VersionManagerInfo } from './utils/version-manager';

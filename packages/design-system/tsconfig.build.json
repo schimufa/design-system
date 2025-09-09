@@ -5,7 +5,11 @@
     "**/*.test.ts",
     "**/__tests__/**",
     "src/test-utils/**",
-    "scripts/**"
+    "scripts/**",
+    "src/utils/communication-manager.ts",
+    "src/utils/design-fidelity-checker.ts",
+    "src/utils/enhanced-version-manager.ts",
+    "src/utils/team-onboarding-manager.ts"
   ],
   "include": [
     "src/**/*"

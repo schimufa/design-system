@@ -189,7 +189,7 @@ export class DesignFidelityChecker {
    */
   validateSpacing(component: RenderedComponent): {
     score: number;
-    issues: Array<{ element: string; issue: string; suggestion: string }>;
+    differences: Array<{ property: string; expected: string; actual: string; deviation: number }>;
   } {
     const issues: Array<{
       element: string;
@@ -221,7 +221,7 @@ export class DesignFidelityChecker {
    */
   validateTypography(component: RenderedComponent): {
     score: number;
-    issues: Array<{ element: string; issue: string; suggestion: string }>;
+    differences: Array<{ property: string; expected: string; actual: string; deviation: number }>;
   } {
     const issues: Array<{
       element: string;
@@ -232,7 +232,7 @@ export class DesignFidelityChecker {
 
     const fontSize = parseFloat(component.computedStyles.fontSize);
     const lineHeight = parseFloat(component.computedStyles.lineHeight);
-    const fontWeight = component.computedStyles.fontWeight;
+    // const fontWeight = component.computedStyles.fontWeight;
 
     // Validate font sizes are from design system scale
     const allowedFontSizes = [12, 14, 16, 18, 20, 24, 32, 40, 48];
@@ -668,15 +668,15 @@ export class DesignFidelityChecker {
     return recommendations;
   }
 
-  private calculateColorDifference(color1: string, color2: string): number {
+  private calculateColorDifference(_color1: string, _color2: string): number {
     // Simplified color difference calculation
     // In a real implementation, you'd use Delta E or similar
     return Math.random() * 10; // Placeholder
   }
 
   private calculateContrastRatio(
-    foreground: string,
-    background: string
+    _foreground: string,
+    _background: string
   ): number {
     // Simplified contrast ratio calculation
     // In a real implementation, you'd calculate luminance properly

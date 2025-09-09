@@ -91,7 +91,7 @@ export class EnhancedVersionManager {
    * Resolve the best version for a component based on strategy
    */
   resolveVersion(component: string, requestedVersion?: string): string {
-    const availableVersions = this.getAvailableVersions(component);
+    // const availableVersions = this.getAvailableVersions(component);
 
     if (!requestedVersion) {
       switch (this.strategy.mode) {
@@ -148,7 +148,7 @@ export class EnhancedVersionManager {
     component: string,
     currentVersion: string
   ): VersionCompatibility {
-    const availableVersions = this.getAvailableVersions(component);
+    // const availableVersions = this.getAvailableVersions(component);
     const compatibleVersions = this.getCompatibleVersions(
       component,
       currentVersion
@@ -350,7 +350,7 @@ export class EnhancedVersionManager {
     component: string,
     currentVersion: string
   ): string[] {
-    const availableVersions = this.getAvailableVersions(component);
+    // const availableVersions = this.getAvailableVersions(component);
     const currentIndex = availableVersions.indexOf(currentVersion);
 
     if (currentIndex === -1) return [];

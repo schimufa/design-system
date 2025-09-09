@@ -129,7 +129,7 @@ export class TeamOnboardingManager {
    * Track team contribution metrics
    */
   trackContribution(
-    teamId: string,
+    _teamId: string,
     contribution: {
       type: 'component' | 'documentation' | 'test' | 'fix';
       reviewTime: number;
@@ -223,7 +223,7 @@ export class TeamOnboardingManager {
    * Schedule team check-in
    */
   scheduleCheckIn(
-    teamId: string,
+    _teamId: string,
     type: 'weekly' | 'monthly' | 'milestone'
   ): ProgressCheckpoint {
     const team = this.teams.get(teamId);
@@ -628,7 +628,7 @@ export class TeamOnboardingManager {
     }
   }
 
-  private getCheckInCriteria(type: string, team: TeamProfile): string[] {
+  private getCheckInCriteria(type: string, _team: TeamProfile): string[] {
     const baseCriteria = [
       'Review progress',
       'Discuss challenges',

@@ -47,7 +47,7 @@ export class CommunicationManager {
    */
   async sendReleaseNotification(
     release: ReleaseInfo,
-    config: NotificationConfig
+    _config: NotificationConfig
   ): Promise<void> {
     const template = this.generateReleaseTemplate(release);
 
@@ -186,7 +186,7 @@ Migrate to ${component} v${replacementVersion} before the support end date.
    */
   async scheduleFollowUp(
     release: ReleaseInfo,
-    config: NotificationConfig
+    _config: NotificationConfig
   ): Promise<void> {
     const followUpDates = this.calculateFollowUpDates(release);
 
@@ -203,7 +203,7 @@ Migrate to ${component} v${replacementVersion} before the support end date.
    * Generate team-specific communication
    */
   generateTeamSpecificMessage(
-    teamId: string,
+    _teamId: string,
     release: ReleaseInfo
   ): CommunicationTemplate {
     const teamUsage = this.getTeamUsage(teamId, release.components);
@@ -351,7 +351,7 @@ ${release.supportEndDate ? `- **Support End**: ${release.supportEndDate.toLocale
   private async sendToChannel(
     channel: string,
     template: CommunicationTemplate,
-    config: NotificationConfig
+    _config: NotificationConfig
   ): Promise<void> {
     // Implementation would integrate with actual communication services
     console.log(`Sending to ${channel}:`, template.subject);
@@ -373,14 +373,14 @@ ${release.supportEndDate ? `- **Support End**: ${release.supportEndDate.toLocale
 
   private async scheduleNotification(
     date: Date,
-    notification: any
+    _notification: any
   ): Promise<void> {
     // Implementation would integrate with scheduling service
     console.log(`Scheduled notification for ${date.toLocaleDateString()}`);
   }
 
   private getTeamUsage(
-    teamId: string,
+    _teamId: string,
     components: string[]
   ): Array<{ component: string; count: number }> {
     // This would integrate with usage analytics
@@ -391,7 +391,7 @@ ${release.supportEndDate ? `- **Support End**: ${release.supportEndDate.toLocale
   }
 
   private generateTeamActionItems(
-    teamId: string,
+    _teamId: string,
     affectedComponents: Array<{ component: string; count: number }>
   ): string[] {
     if (affectedComponents.length === 0) {
@@ -406,15 +406,15 @@ ${release.supportEndDate ? `- **Support End**: ${release.supportEndDate.toLocale
     ];
   }
 
-  private getDeprecationRisk(component: string, version: string): string {
+  private getDeprecationRisk(_component: string, _version: string): string {
     // Implementation would assess risk based on usage and complexity
     return 'Medium';
   }
 
   private getMigrationEffort(
-    component: string,
-    fromVersion: string,
-    toVersion: string
+    _component: string,
+    _fromVersion: string,
+    _toVersion: string
   ): string {
     // Implementation would calculate effort based on breaking changes
     return 'Low to Medium';
