@@ -38,22 +38,22 @@ export {
   EnhancedVersionManager,
   createVersionManager,
   versionManager,
-  enhancedBreakingChanges
+  enhancedBreakingChanges,
 } from './utils/enhanced-version-manager';
 
 export {
   CommunicationManager,
-  communicationManager
+  communicationManager,
 } from './utils/communication-manager';
 
 export {
   TeamOnboardingManager,
-  teamOnboardingManager
+  teamOnboardingManager,
 } from './utils/team-onboarding-manager';
 
 export {
   DesignFidelityChecker,
-  designFidelityChecker
+  designFidelityChecker,
 } from './utils/design-fidelity-checker';
 
 // Export version info types with aliases to avoid conflicts

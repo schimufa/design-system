@@ -73,19 +73,39 @@ export interface FidelityReport {
   };
   dimensions: {
     score: number;
-    differences: Array<{ property: string; expected: string; actual: string; deviation: number }>;
+    differences: Array<{
+      property: string;
+      expected: string;
+      actual: string;
+      deviation: number;
+    }>;
   };
   colors: {
     score: number;
-    differences: Array<{ property: string; expected: string; actual: string; contrast: number }>;
+    differences: Array<{
+      property: string;
+      expected: string;
+      actual: string;
+      contrast: number;
+    }>;
   };
   typography: {
     score: number;
-    differences: Array<{ property: string; expected: string; actual: string; deviation: number }>;
+    differences: Array<{
+      property: string;
+      expected: string;
+      actual: string;
+      deviation: number;
+    }>;
   };
   spacing: {
     score: number;
-    differences: Array<{ property: string; expected: string; actual: string; deviation: number }>;
+    differences: Array<{
+      property: string;
+      expected: string;
+      actual: string;
+      deviation: number;
+    }>;
   };
   states: {
     score: number;
@@ -125,7 +145,10 @@ export class DesignFidelityChecker {
   /**
    * Compare implemented component with Figma design
    */
-  compareWithDesign(component: RenderedComponent, figmaSpec: FigmaSpec): FidelityReport {
+  compareWithDesign(
+    component: RenderedComponent,
+    figmaSpec: FigmaSpec
+  ): FidelityReport {
     const dimensionScore = this.validateDimensions(component, figmaSpec);
     const colorScore = this.validateColors(component, figmaSpec);
     const typographyScore = this.validateTypography(component, figmaSpec);
@@ -133,14 +156,18 @@ export class DesignFidelityChecker {
     const stateScore = this.validateStates(component, figmaSpec);
 
     const overallScore = Math.round(
-      (dimensionScore.score + colorScore.score + typographyScore.score + 
-       spacingScore.score + stateScore.score) / 5
+      (dimensionScore.score +
+        colorScore.score +
+        typographyScore.score +
+        spacingScore.score +
+        stateScore.score) /
+        5
     );
 
     return {
       overall: {
         score: overallScore,
-        status: this.getStatusFromScore(overallScore)
+        status: this.getStatusFromScore(overallScore),
       },
       dimensions: dimensionScore,
       colors: colorScore,
@@ -148,8 +175,12 @@ export class DesignFidelityChecker {
       spacing: spacingScore,
       states: stateScore,
       recommendations: this.generateRecommendations(overallScore, [
-        dimensionScore, colorScore, typographyScore, spacingScore, stateScore
-      ])
+        dimensionScore,
+        colorScore,
+        typographyScore,
+        spacingScore,
+        stateScore,
+      ]),
     };
   }
 
@@ -160,19 +191,23 @@ export class DesignFidelityChecker {
     score: number;
     issues: Array<{ element: string; issue: string; suggestion: string }>;
   } {
-    const issues: Array<{ element: string; issue: string; suggestion: string }> = [];
+    const issues: Array<{
+      element: string;
+      issue: string;
+      suggestion: string;
+    }> = [];
     let score = 100;
 
     // Check if spacing follows 8px grid system
     const padding = this.parsePadding(component.computedStyles.padding);
     const margin = this.parsePadding(component.computedStyles.margin);
 
-    [...padding, ...margin].forEach(value => {
+    [...padding, ...margin].forEach((value) => {
       if (value % 8 !== 0 && value !== 0) {
         issues.push({
           element: 'component',
           issue: `Spacing value ${value}px doesn't follow 8px grid system`,
-          suggestion: `Use ${Math.round(value / 8) * 8}px instead`
+          suggestion: `Use ${Math.round(value / 8) * 8}px instead`,
         });
         score -= 10;
       }
@@ -188,7 +223,11 @@ export class DesignFidelityChecker {
     score: number;
     issues: Array<{ element: string; issue: string; suggestion: string }>;
   } {
-    const issues: Array<{ element: string; issue: string; suggestion: string }> = [];
+    const issues: Array<{
+      element: string;
+      issue: string;
+      suggestion: string;
+    }> = [];
     let score = 100;
 
     const fontSize = parseFloat(component.computedStyles.fontSize);
@@ -201,7 +240,7 @@ export class DesignFidelityChecker {
       issues.push({
         element: 'text',
         issue: `Font size ${fontSize}px is not from design system scale`,
-        suggestion: `Use one of: ${allowedFontSizes.join(', ')}px`
+        suggestion: `Use one of: ${allowedFontSizes.join(', ')}px`,
       });
       score -= 15;
     }
@@ -212,7 +251,7 @@ export class DesignFidelityChecker {
       issues.push({
         element: 'text',
         issue: `Line height ratio ${lineHeightRatio.toFixed(2)} is outside recommended range`,
-        suggestion: 'Use line height ratio between 1.2 and 1.8'
+        suggestion: 'Use line height ratio between 1.2 and 1.8',
       });
       score -= 10;
     }
@@ -223,11 +262,24 @@ export class DesignFidelityChecker {
   /**
    * Validate color usage and accessibility
    */
-  validateColors(component: RenderedComponent, figmaSpec?: FigmaSpec): {
+  validateColors(
+    component: RenderedComponent,
+    figmaSpec?: FigmaSpec
+  ): {
     score: number;
-    differences: Array<{ property: string; expected: string; actual: string; contrast: number }>;
+    differences: Array<{
+      property: string;
+      expected: string;
+      actual: string;
+      contrast: number;
+    }>;
   } {
-    const differences: Array<{ property: string; expected: string; actual: string; contrast: number }> = [];
+    const differences: Array<{
+      property: string;
+      expected: string;
+      actual: string;
+      contrast: number;
+    }> = [];
     let score = 100;
 
     if (figmaSpec) {
@@ -236,13 +288,13 @@ export class DesignFidelityChecker {
         component.computedStyles.backgroundColor,
         figmaSpec.properties.backgroundColor
       );
-      
+
       if (bgColorDiff > this.tolerances.color) {
         differences.push({
           property: 'backgroundColor',
           expected: figmaSpec.properties.backgroundColor,
           actual: component.computedStyles.backgroundColor,
-          contrast: bgColorDiff
+          contrast: bgColorDiff,
         });
         score -= 15;
       }
@@ -251,13 +303,13 @@ export class DesignFidelityChecker {
         component.computedStyles.color,
         figmaSpec.properties.textColor
       );
-      
+
       if (textColorDiff > this.tolerances.color) {
         differences.push({
           property: 'color',
           expected: figmaSpec.properties.textColor,
           actual: component.computedStyles.color,
-          contrast: textColorDiff
+          contrast: textColorDiff,
         });
         score -= 15;
       }
@@ -274,7 +326,7 @@ export class DesignFidelityChecker {
         property: 'contrast',
         expected: '4.5:1 minimum',
         actual: `${contrastRatio.toFixed(2)}:1`,
-        contrast: contrastRatio
+        contrast: contrastRatio,
       });
       score -= 20;
     }
@@ -289,49 +341,74 @@ export class DesignFidelityChecker {
     overall: { score: number; status: string };
     principles: Array<{ principle: string; result: PrincipleValidationResult }>;
   } {
-    const results = this.designPrinciples.map(principle => ({
+    const results = this.designPrinciples.map((principle) => ({
       principle: principle.name,
-      result: principle.validator(component)
+      result: principle.validator(component),
     }));
 
     const overallScore = Math.round(
-      results.reduce((sum, result) => sum + result.result.score, 0) / results.length
+      results.reduce((sum, result) => sum + result.result.score, 0) /
+        results.length
     );
 
     return {
       overall: {
         score: overallScore,
-        status: this.getStatusFromScore(overallScore)
+        status: this.getStatusFromScore(overallScore),
       },
-      principles: results
+      principles: results,
     };
   }
 
   /**
    * Generate visual diff report
    */
-  generateVisualDiff(before: RenderedComponent, after: RenderedComponent): {
-    changes: Array<{ property: string; before: string; after: string; impact: 'low' | 'medium' | 'high' }>;
+  generateVisualDiff(
+    before: RenderedComponent,
+    after: RenderedComponent
+  ): {
+    changes: Array<{
+      property: string;
+      before: string;
+      after: string;
+      impact: 'low' | 'medium' | 'high';
+    }>;
     summary: string;
   } {
-    const changes: Array<{ property: string; before: string; after: string; impact: 'low' | 'medium' | 'high' }> = [];
+    const changes: Array<{
+      property: string;
+      before: string;
+      after: string;
+      impact: 'low' | 'medium' | 'high';
+    }> = [];
 
     // Compare key visual properties
     const properties = [
-      'backgroundColor', 'color', 'fontSize', 'fontWeight', 
-      'borderRadius', 'padding', 'margin', 'boxShadow', 'border'
+      'backgroundColor',
+      'color',
+      'fontSize',
+      'fontWeight',
+      'borderRadius',
+      'padding',
+      'margin',
+      'boxShadow',
+      'border',
     ];
 
-    properties.forEach(prop => {
-      const beforeValue = before.computedStyles[prop as keyof CSSStyleDeclaration] as string;
-      const afterValue = after.computedStyles[prop as keyof CSSStyleDeclaration] as string;
+    properties.forEach((prop) => {
+      const beforeValue = before.computedStyles[
+        prop as keyof CSSStyleDeclaration
+      ] as string;
+      const afterValue = after.computedStyles[
+        prop as keyof CSSStyleDeclaration
+      ] as string;
 
       if (beforeValue !== afterValue) {
         changes.push({
           property: prop,
           before: beforeValue,
           after: afterValue,
-          impact: this.assessChangeImpact(prop, beforeValue, afterValue)
+          impact: this.assessChangeImpact(prop, beforeValue, afterValue),
         });
       }
     });
@@ -348,38 +425,51 @@ export class DesignFidelityChecker {
         id: 'consistency',
         name: 'Visual Consistency',
         description: 'Component follows design system patterns',
-        validator: (component) => this.validateConsistency(component)
+        validator: (component) => this.validateConsistency(component),
       },
       {
         id: 'accessibility',
         name: 'Accessibility',
         description: 'Component meets accessibility standards',
-        validator: (component) => this.validateAccessibility(component)
+        validator: (component) => this.validateAccessibility(component),
       },
       {
         id: 'responsiveness',
         name: 'Responsiveness',
         description: 'Component adapts to different screen sizes',
-        validator: (component) => this.validateResponsiveness(component)
+        validator: (component) => this.validateResponsiveness(component),
       },
       {
         id: 'performance',
         name: 'Performance',
         description: 'Component is optimized for performance',
-        validator: (component) => this.validatePerformance(component)
-      }
+        validator: (component) => this.validatePerformance(component),
+      },
     ];
   }
 
-  private validateDimensions(component: RenderedComponent, figmaSpec: FigmaSpec): {
+  private validateDimensions(
+    component: RenderedComponent,
+    figmaSpec: FigmaSpec
+  ): {
     score: number;
-    differences: Array<{ property: string; expected: string; actual: string; deviation: number }>;
+    differences: Array<{
+      property: string;
+      expected: string;
+      actual: string;
+      deviation: number;
+    }>;
   } {
-    const differences: Array<{ property: string; expected: string; actual: string; deviation: number }> = [];
+    const differences: Array<{
+      property: string;
+      expected: string;
+      actual: string;
+      deviation: number;
+    }> = [];
     let score = 100;
 
     const rect = component.element.getBoundingClientRect();
-    
+
     // Compare width
     const widthDiff = Math.abs(rect.width - figmaSpec.properties.width);
     if (widthDiff > this.tolerances.dimension) {
@@ -387,7 +477,7 @@ export class DesignFidelityChecker {
         property: 'width',
         expected: `${figmaSpec.properties.width}px`,
         actual: `${rect.width}px`,
-        deviation: widthDiff
+        deviation: widthDiff,
       });
       score -= 10;
     }
@@ -399,7 +489,7 @@ export class DesignFidelityChecker {
         property: 'height',
         expected: `${figmaSpec.properties.height}px`,
         actual: `${rect.height}px`,
-        deviation: heightDiff
+        deviation: heightDiff,
       });
       score -= 10;
     }
@@ -407,7 +497,10 @@ export class DesignFidelityChecker {
     return { score: Math.max(0, score), differences };
   }
 
-  private validateStates(component: RenderedComponent, figmaSpec: FigmaSpec): {
+  private validateStates(
+    component: RenderedComponent,
+    figmaSpec: FigmaSpec
+  ): {
     score: number;
     missingStates: string[];
     incorrectStates: string[];
@@ -420,7 +513,7 @@ export class DesignFidelityChecker {
     const actualStates = Object.keys(component.states);
 
     // Check for missing states
-    expectedStates.forEach(state => {
+    expectedStates.forEach((state) => {
       if (!actualStates.includes(state)) {
         missingStates.push(state);
         score -= 15;
@@ -428,12 +521,20 @@ export class DesignFidelityChecker {
     });
 
     // Check state implementations
-    expectedStates.forEach(state => {
-      if (actualStates.includes(state) && figmaSpec.states[state as keyof typeof figmaSpec.states]) {
-        const expected = figmaSpec.states[state as keyof typeof figmaSpec.states];
+    expectedStates.forEach((state) => {
+      if (
+        actualStates.includes(state) &&
+        figmaSpec.states[state as keyof typeof figmaSpec.states]
+      ) {
+        const expected =
+          figmaSpec.states[state as keyof typeof figmaSpec.states];
         const actual = component.states[state as keyof typeof component.states];
-        
-        if (expected && actual && !this.compareStateProperties(expected, actual)) {
+
+        if (
+          expected &&
+          actual &&
+          !this.compareStateProperties(expected, actual)
+        ) {
           incorrectStates.push(state);
           score -= 10;
         }
@@ -443,7 +544,9 @@ export class DesignFidelityChecker {
     return { score: Math.max(0, score), missingStates, incorrectStates };
   }
 
-  private validateConsistency(component: RenderedComponent): PrincipleValidationResult {
+  private validateConsistency(
+    component: RenderedComponent
+  ): PrincipleValidationResult {
     let score = 100;
     const suggestions: string[] = [];
 
@@ -464,12 +567,17 @@ export class DesignFidelityChecker {
     return {
       passed: score >= 70,
       score,
-      message: score >= 70 ? 'Component follows design system consistency' : 'Component has consistency issues',
-      suggestions
+      message:
+        score >= 70
+          ? 'Component follows design system consistency'
+          : 'Component has consistency issues',
+      suggestions,
     };
   }
 
-  private validateAccessibility(component: RenderedComponent): PrincipleValidationResult {
+  private validateAccessibility(
+    component: RenderedComponent
+  ): PrincipleValidationResult {
     let score = 100;
     const suggestions: string[] = [];
 
@@ -481,7 +589,9 @@ export class DesignFidelityChecker {
 
     if (contrastRatio < 4.5) {
       score -= 30;
-      suggestions.push('Improve color contrast to meet WCAG AA standards (4.5:1 minimum)');
+      suggestions.push(
+        'Improve color contrast to meet WCAG AA standards (4.5:1 minimum)'
+      );
     }
 
     // Check font size
@@ -494,48 +604,64 @@ export class DesignFidelityChecker {
     return {
       passed: score >= 70,
       score,
-      message: score >= 70 ? 'Component meets accessibility standards' : 'Component has accessibility issues',
-      suggestions
+      message:
+        score >= 70
+          ? 'Component meets accessibility standards'
+          : 'Component has accessibility issues',
+      suggestions,
     };
   }
 
-  private validateResponsiveness(component: RenderedComponent): PrincipleValidationResult {
+  private validateResponsiveness(
+    component: RenderedComponent
+  ): PrincipleValidationResult {
     // This would test component at different viewport sizes
     return {
       passed: true,
       score: 100,
       message: 'Responsiveness validation not implemented',
-      suggestions: []
+      suggestions: [],
     };
   }
 
-  private validatePerformance(component: RenderedComponent): PrincipleValidationResult {
+  private validatePerformance(
+    component: RenderedComponent
+  ): PrincipleValidationResult {
     // This would analyze rendering performance
     return {
       passed: true,
       score: 100,
       message: 'Performance validation not implemented',
-      suggestions: []
+      suggestions: [],
     };
   }
 
-  private getStatusFromScore(score: number): 'excellent' | 'good' | 'needs-improvement' | 'poor' {
+  private getStatusFromScore(
+    score: number
+  ): 'excellent' | 'good' | 'needs-improvement' | 'poor' {
     if (score >= 90) return 'excellent';
     if (score >= 75) return 'good';
     if (score >= 60) return 'needs-improvement';
     return 'poor';
   }
 
-  private generateRecommendations(overallScore: number, scores: any[]): string[] {
+  private generateRecommendations(
+    overallScore: number,
+    scores: any[]
+  ): string[] {
     const recommendations: string[] = [];
 
     if (overallScore < 60) {
-      recommendations.push('Component requires significant improvements to meet design standards');
+      recommendations.push(
+        'Component requires significant improvements to meet design standards'
+      );
     }
 
-    scores.forEach(scoreObj => {
+    scores.forEach((scoreObj) => {
       if (scoreObj.score < 70) {
-        recommendations.push(`Focus on improving ${scoreObj.constructor.name.toLowerCase()} implementation`);
+        recommendations.push(
+          `Focus on improving ${scoreObj.constructor.name.toLowerCase()} implementation`
+        );
       }
     });
 
@@ -548,7 +674,10 @@ export class DesignFidelityChecker {
     return Math.random() * 10; // Placeholder
   }
 
-  private calculateContrastRatio(foreground: string, background: string): number {
+  private calculateContrastRatio(
+    foreground: string,
+    background: string
+  ): number {
     // Simplified contrast ratio calculation
     // In a real implementation, you'd calculate luminance properly
     return 4.5 + Math.random() * 10; // Placeholder
@@ -556,27 +685,43 @@ export class DesignFidelityChecker {
 
   private parsePadding(paddingStr: string): number[] {
     // Parse padding string like "8px 16px" into array of numbers
-    return paddingStr.split(' ').map(p => parseFloat(p) || 0);
+    return paddingStr.split(' ').map((p) => parseFloat(p) || 0);
   }
 
-  private compareStateProperties(expected: FigmaProperties, actual: ComputedStyleSnapshot): boolean {
+  private compareStateProperties(
+    expected: FigmaProperties,
+    actual: ComputedStyleSnapshot
+  ): boolean {
     // Compare state properties with tolerance
     return true; // Placeholder
   }
 
-  private assessChangeImpact(property: string, before: string, after: string): 'low' | 'medium' | 'high' {
+  private assessChangeImpact(
+    property: string,
+    before: string,
+    after: string
+  ): 'low' | 'medium' | 'high' {
     const highImpactProps = ['backgroundColor', 'color', 'fontSize'];
     const mediumImpactProps = ['padding', 'margin', 'borderRadius'];
-    
+
     if (highImpactProps.includes(property)) return 'high';
     if (mediumImpactProps.includes(property)) return 'medium';
     return 'low';
   }
 
-  private generateChangeSummary(changes: Array<{ property: string; before: string; after: string; impact: string }>): string {
-    const highImpactChanges = changes.filter(c => c.impact === 'high').length;
-    const mediumImpactChanges = changes.filter(c => c.impact === 'medium').length;
-    const lowImpactChanges = changes.filter(c => c.impact === 'low').length;
+  private generateChangeSummary(
+    changes: Array<{
+      property: string;
+      before: string;
+      after: string;
+      impact: string;
+    }>
+  ): string {
+    const highImpactChanges = changes.filter((c) => c.impact === 'high').length;
+    const mediumImpactChanges = changes.filter(
+      (c) => c.impact === 'medium'
+    ).length;
+    const lowImpactChanges = changes.filter((c) => c.impact === 'low').length;
 
     return `${changes.length} changes detected: ${highImpactChanges} high impact, ${mediumImpactChanges} medium impact, ${lowImpactChanges} low impact`;
   }

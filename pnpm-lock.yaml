@@ -96,7 +96,7 @@ importers:
         specifier: ^5.15.3
         version: 5.18.0(@emotion/react@11.14.0)(@emotion/styled@11.14.1)(@types/react@18.3.23)(react-dom@18.3.1)(react@18.3.1)
       '@schimufa/design-system':
-        specifier: ^5.0.0
+        specifier: ^5.1.0
         version: link:../../packages/design-system
       react:
         specifier: ^18.2.0

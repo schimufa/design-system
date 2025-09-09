@@ -52,11 +52,14 @@ export const enhancedBreakingChanges: BreakingChange[] = [
     migrationEffort: 'minutes',
     automatedMigration: 'npx @schimufa/codemods button-v2',
     testingRequired: ['visual-regression', 'accessibility', 'cross-browser'],
-    description: 'Button design updated with rounded corners and normal text case',
+    description:
+      'Button design updated with rounded corners and normal text case',
     examples: {
-      before: '<Button version="1.0.0" variant="contained">LEGACY BUTTON</Button>',
-      after: '<Button version="2.0.0" variant="contained">Modern Button</Button>'
-    }
+      before:
+        '<Button version="1.0.0" variant="contained">LEGACY BUTTON</Button>',
+      after:
+        '<Button version="2.0.0" variant="contained">Modern Button</Button>',
+    },
   },
   {
     component: 'Card',
@@ -68,14 +71,17 @@ export const enhancedBreakingChanges: BreakingChange[] = [
     description: 'Card border radius and padding optimizations',
     examples: {
       before: '<Card version="1.0.0" title="Legacy">Content</Card>',
-      after: '<Card version="2.0.0" title="Modern">Content</Card>'
-    }
-  }
+      after: '<Card version="2.0.0" title="Modern">Content</Card>',
+    },
+  },
 ];
 
 export class EnhancedVersionManager {
   private strategy: VersionStrategy;
-  private usageAnalytics: Map<string, { component: string; version: string; count: number }> = new Map();
+  private usageAnalytics: Map<
+    string,
+    { component: string; version: string; count: number }
+  > = new Map();
 
   constructor(strategy: VersionStrategy) {
     this.strategy = strategy;
@@ -86,7 +92,7 @@ export class EnhancedVersionManager {
    */
   resolveVersion(component: string, requestedVersion?: string): string {
     const availableVersions = this.getAvailableVersions(component);
-    
+
     if (!requestedVersion) {
       switch (this.strategy.mode) {
         case 'latest':
@@ -110,20 +116,26 @@ export class EnhancedVersionManager {
   /**
    * Get migration path between versions
    */
-  getMigrationPath(component: string, fromVersion: string, toVersion: string): MigrationStep[] {
+  getMigrationPath(
+    component: string,
+    fromVersion: string,
+    toVersion: string
+  ): MigrationStep[] {
     const breakingChange = enhancedBreakingChanges.find(
-      bc => bc.component === component && bc.version === toVersion
+      (bc) => bc.component === component && bc.version === toVersion
     );
 
     if (!breakingChange) {
-      return [{
-        step: 1,
-        title: 'Simple Version Update',
-        description: `Update version prop from ${fromVersion} to ${toVersion}`,
-        codeExample: `<${component} version="${toVersion}" />`,
-        automationAvailable: false,
-        estimatedTime: '1 minute'
-      }];
+      return [
+        {
+          step: 1,
+          title: 'Simple Version Update',
+          description: `Update version prop from ${fromVersion} to ${toVersion}`,
+          codeExample: `<${component} version="${toVersion}" />`,
+          automationAvailable: false,
+          estimatedTime: '1 minute',
+        },
+      ];
     }
 
     return this.generateMigrationSteps(breakingChange, fromVersion, toVersion);
@@ -132,25 +144,35 @@ export class EnhancedVersionManager {
   /**
    * Check version compatibility
    */
-  getVersionCompatibility(component: string, currentVersion: string): VersionCompatibility {
+  getVersionCompatibility(
+    component: string,
+    currentVersion: string
+  ): VersionCompatibility {
     const availableVersions = this.getAvailableVersions(component);
-    const compatibleVersions = this.getCompatibleVersions(component, currentVersion);
-    
+    const compatibleVersions = this.getCompatibleVersions(
+      component,
+      currentVersion
+    );
+
     return {
       component,
       currentVersion,
       compatibleVersions,
       recommendedVersion: this.getRecommendedVersion(component),
-      migrationPath: this.calculateMigrationPath(component, currentVersion)
+      migrationPath: this.calculateMigrationPath(component, currentVersion),
     };
   }
 
   /**
    * Generate automated migration script
    */
-  generateMigrationScript(component: string, fromVersion: string, toVersion: string): string {
+  generateMigrationScript(
+    component: string,
+    fromVersion: string,
+    toVersion: string
+  ): string {
     const breakingChange = enhancedBreakingChanges.find(
-      bc => bc.component === component && bc.version === toVersion
+      (bc) => bc.component === component && bc.version === toVersion
     );
 
     if (breakingChange?.automatedMigration) {
@@ -166,19 +188,31 @@ export class EnhancedVersionManager {
    */
   trackUsage(component: string, version: string): void {
     const key = `${component}:${version}`;
-    const current = this.usageAnalytics.get(key) || { component, version, count: 0 };
+    const current = this.usageAnalytics.get(key) || {
+      component,
+      version,
+      count: 0,
+    };
     this.usageAnalytics.set(key, { ...current, count: current.count + 1 });
   }
 
   /**
    * Get usage analytics
    */
-  getUsageAnalytics(): Array<{ component: string; version: string; count: number; percentage: number }> {
-    const total = Array.from(this.usageAnalytics.values()).reduce((sum, item) => sum + item.count, 0);
-    
-    return Array.from(this.usageAnalytics.values()).map(item => ({
+  getUsageAnalytics(): Array<{
+    component: string;
+    version: string;
+    count: number;
+    percentage: number;
+  }> {
+    const total = Array.from(this.usageAnalytics.values()).reduce(
+      (sum, item) => sum + item.count,
+      0
+    );
+
+    return Array.from(this.usageAnalytics.values()).map((item) => ({
       ...item,
-      percentage: Math.round((item.count / total) * 100)
+      percentage: Math.round((item.count / total) * 100),
     }));
   }
 
@@ -187,7 +221,9 @@ export class EnhancedVersionManager {
    */
   needsMigration(component: string, version: string): boolean {
     const recommended = this.getRecommendedVersion(component);
-    return version !== recommended && this.isVersionDeprecated(component, version);
+    return (
+      version !== recommended && this.isVersionDeprecated(component, version)
+    );
   }
 
   /**
@@ -197,13 +233,13 @@ export class EnhancedVersionManager {
     // Implementation would check against deprecation schedule
     const deprecationMonths = this.strategy.migrationWindow;
     const versionReleaseDate = this.getVersionReleaseDate(component, version);
-    
+
     if (versionReleaseDate) {
       const deprecationDate = new Date(versionReleaseDate);
       deprecationDate.setMonth(deprecationDate.getMonth() + deprecationMonths);
       return deprecationDate;
     }
-    
+
     return null;
   }
 
@@ -211,9 +247,9 @@ export class EnhancedVersionManager {
   private getAvailableVersions(component: string): string[] {
     // This would be populated from your component registry
     const versionMap: Record<string, string[]> = {
-      'Button': ['1.0.0', '2.0.0'],
-      'Card': ['1.0.0', '2.0.0'],
-      'Header': ['1.0.0']
+      Button: ['1.0.0', '2.0.0'],
+      Card: ['1.0.0', '2.0.0'],
+      Header: ['1.0.0'],
     };
     return versionMap[component] || [];
   }
@@ -232,9 +268,12 @@ export class EnhancedVersionManager {
     return this.getAvailableVersions(component).includes(version);
   }
 
-  private handleVersionNotFound(component: string, requestedVersion: string): string {
+  private handleVersionNotFound(
+    component: string,
+    requestedVersion: string
+  ): string {
     const message = `Version ${requestedVersion} not found for ${component}`;
-    
+
     switch (this.strategy.fallbackBehavior) {
       case 'error':
         throw new Error(message);
@@ -247,7 +286,11 @@ export class EnhancedVersionManager {
     }
   }
 
-  private generateMigrationSteps(breakingChange: BreakingChange, fromVersion: string, toVersion: string): MigrationStep[] {
+  private generateMigrationSteps(
+    breakingChange: BreakingChange,
+    fromVersion: string,
+    toVersion: string
+  ): MigrationStep[] {
     const steps: MigrationStep[] = [
       {
         step: 1,
@@ -255,8 +298,8 @@ export class EnhancedVersionManager {
         description: breakingChange.description,
         codeExample: `// Before:\n${breakingChange.examples.before}\n\n// After:\n${breakingChange.examples.after}`,
         automationAvailable: false,
-        estimatedTime: '5 minutes'
-      }
+        estimatedTime: '5 minutes',
+      },
     ];
 
     if (breakingChange.automatedMigration) {
@@ -266,7 +309,7 @@ export class EnhancedVersionManager {
         description: 'Execute the automated migration script',
         codeExample: breakingChange.automatedMigration,
         automationAvailable: true,
-        estimatedTime: '2 minutes'
+        estimatedTime: '2 minutes',
       });
     }
 
@@ -276,7 +319,7 @@ export class EnhancedVersionManager {
       description: `Update the version prop to ${toVersion}`,
       codeExample: `<${breakingChange.component} version="${toVersion}" />`,
       automationAvailable: false,
-      estimatedTime: '1 minute'
+      estimatedTime: '1 minute',
     });
 
     if (breakingChange.testingRequired.length > 0) {
@@ -285,24 +328,33 @@ export class EnhancedVersionManager {
         title: 'Run Required Tests',
         description: `Execute required tests: ${breakingChange.testingRequired.join(', ')}`,
         automationAvailable: true,
-        estimatedTime: breakingChange.migrationEffort === 'minutes' ? '5 minutes' : '30 minutes'
+        estimatedTime:
+          breakingChange.migrationEffort === 'minutes'
+            ? '5 minutes'
+            : '30 minutes',
       });
     }
 
     return steps;
   }
 
-  private getCompatibleVersions(component: string, currentVersion: string): string[] {
+  private getCompatibleVersions(
+    component: string,
+    currentVersion: string
+  ): string[] {
     // Implementation would check compatibility matrix
     return this.getAvailableVersions(component);
   }
 
-  private calculateMigrationPath(component: string, currentVersion: string): string[] {
+  private calculateMigrationPath(
+    component: string,
+    currentVersion: string
+  ): string[] {
     const availableVersions = this.getAvailableVersions(component);
     const currentIndex = availableVersions.indexOf(currentVersion);
-    
+
     if (currentIndex === -1) return [];
-    
+
     return availableVersions.slice(currentIndex + 1);
   }
 
@@ -312,19 +364,24 @@ export class EnhancedVersionManager {
     return version !== latestVersion;
   }
 
-  private getVersionReleaseDate(component: string, version: string): Date | null {
+  private getVersionReleaseDate(
+    component: string,
+    version: string
+  ): Date | null {
     // This would be populated from your release history
     return new Date(); // Placeholder
   }
 }
 
 // Factory function for creating version manager with different strategies
-export function createVersionManager(strategy: Partial<VersionStrategy> = {}): EnhancedVersionManager {
+export function createVersionManager(
+  strategy: Partial<VersionStrategy> = {}
+): EnhancedVersionManager {
   const defaultStrategy: VersionStrategy = {
     mode: 'gradual',
     fallbackBehavior: 'warn',
     migrationWindow: 12,
-    autoMigration: false
+    autoMigration: false,
   };
 
   return new EnhancedVersionManager({ ...defaultStrategy, ...strategy });
