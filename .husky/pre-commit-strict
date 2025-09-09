@@ -1,0 +1,92 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running STRICT pre-commit validation..."
+echo "This will run ALL quality checks and block commits on any failure."
+echo ""
+
+# Check if bypass flag is set
+if [ "$SKIP_VALIDATION" = "true" ]; then
+    echo "⚠️  VALIDATION BYPASSED - SKIP_VALIDATION=true"
+    echo "🚨 This should only be used for emergency fixes!"
+    exit 0
+fi
+
+# Format code first
+echo "📝 Formatting code..."
+npm run format
+
+# Run design system contribution validation
+echo "🎨 Validating design system contribution..."
+cd packages/design-system
+
+# Run the full validation suite
+if ! pnpm validate-contribution; then
+    echo ""
+    echo "❌ Design system contribution validation failed!"
+    echo ""
+    echo "📋 VALIDATION REPORT:"
+    echo "The contribution does not meet design system standards."
+    echo ""
+    echo "💡 QUICK FIXES:"
+    echo "  🔧 TypeScript errors: pnpm build"
+    echo "  🧹 Linting issues: pnpm lint --fix"
+    echo "  🧪 Test failures: pnpm test"
+    echo "  📁 Missing files: Add required component files"
+    echo "  📚 Documentation: Update README, stories, or docs"
+    echo ""
+    echo "🚨 BYPASS (use with caution):"
+    echo "  SKIP_VALIDATION=true git commit -m 'your message'"
+    echo ""
+    echo "📖 For detailed guidance, see:"
+    echo "  - EXTERNAL_CONTRIBUTION_GUIDE.md"
+    echo "  - CONTRIBUTION_STANDARDS_SUMMARY.md"
+    echo ""
+    exit 1
+fi
+
+# Go back to root
+cd ../..
+
+# Run comprehensive checks
+echo "🧹 Running linter..."
+if ! pnpm lint; then
+    echo ""
+    echo "❌ Linting failed!"
+    echo "Run: pnpm lint --fix"
+    echo ""
+    exit 1
+fi
+
+echo "🔷 Running type check..."
+if ! pnpm typecheck; then
+    echo ""
+    echo "❌ Type checking failed!"
+    echo "Fix TypeScript errors before committing."
+    echo ""
+    exit 1
+fi
+
+echo "🧪 Running tests..."
+if ! pnpm test; then
+    echo ""
+    echo "❌ Tests failed!"
+    echo "Fix failing tests before committing."
+    echo ""
+    exit 1
+fi
+
+echo "🏗️  Running build..."
+if ! pnpm build; then
+    echo ""
+    echo "❌ Build failed!"
+    echo "Fix build errors before committing."
+    echo ""
+    exit 1
+fi
+
+echo ""
+echo "✅ ALL CHECKS PASSED!"
+echo "🎉 Your contribution meets all design system standards!"
+echo "🚀 Ready to commit!"
+echo ""

@@ -189,7 +189,12 @@ export class DesignFidelityChecker {
    */
   validateSpacing(component: RenderedComponent): {
     score: number;
-    differences: Array<{ property: string; expected: string; actual: string; deviation: number }>;
+    differences: Array<{
+      property: string;
+      expected: string;
+      actual: string;
+      deviation: number;
+    }>;
   } {
     const issues: Array<{
       element: string;
@@ -221,7 +226,12 @@ export class DesignFidelityChecker {
    */
   validateTypography(component: RenderedComponent): {
     score: number;
-    differences: Array<{ property: string; expected: string; actual: string; deviation: number }>;
+    differences: Array<{
+      property: string;
+      expected: string;
+      actual: string;
+      deviation: number;
+    }>;
   } {
     const issues: Array<{
       element: string;

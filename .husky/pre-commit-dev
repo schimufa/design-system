@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running development pre-commit checks..."
+echo "This runs essential checks but allows work-in-progress commits."
+echo ""
+
+# Format code first
+echo "📝 Formatting code..."
+npm run format
+
+# Run basic linting (but don't fail on warnings)
+echo "🧹 Running basic linter..."
+pnpm lint || echo "⚠️  Linting issues found - please address when possible"
+
+# Run type checking for design system only
+echo "🔷 Running type check..."
+cd packages/design-system
+if ! pnpm typecheck; then
+    echo ""
+    echo "⚠️  TypeScript errors in design system"
+    echo "Please fix when possible, but allowing commit for WIP"
+    echo ""
+fi
+
+cd ../..
+
+# Run a quick validation check (but don't fail)
+echo "🎨 Quick design system check..."
+cd packages/design-system
+pnpm validate-contribution || echo "⚠️  Some validation checks failed - please address before final PR"
+cd ../..
+
+echo ""
+echo "✅ Development pre-commit checks completed!"
+echo "💡 Run 'pnpm pre-commit:strict' before creating PR"
+echo "🚀 Commit allowed!"
+echo ""

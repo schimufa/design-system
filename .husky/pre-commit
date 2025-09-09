@@ -1,6 +1,52 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Temporarily disabled for this commit
-# pnpm lint
-npm run format 
+echo "🔍 Running pre-commit validation..."
+
+# Format code first
+echo "📝 Formatting code..."
+npm run format
+
+# Run design system contribution validation
+echo "🎨 Validating design system contribution..."
+cd packages/design-system
+if ! pnpm validate-contribution; then
+    echo ""
+    echo "❌ Design system contribution validation failed!"
+    echo "Please fix the issues above before committing."
+    echo ""
+    echo "💡 Common fixes:"
+    echo "  - Run 'pnpm build' to fix TypeScript errors"
+    echo "  - Run 'pnpm lint --fix' to fix linting issues"
+    echo "  - Run 'pnpm test' to fix failing tests"
+    echo "  - Add missing component files (index.tsx, stories, tests)"
+    echo ""
+    exit 1
+fi
+
+# Go back to root
+cd ../..
+
+# Run linting
+echo "🧹 Running linter..."
+if ! pnpm lint; then
+    echo ""
+    echo "❌ Linting failed!"
+    echo "Please fix linting errors before committing."
+    echo "Run 'pnpm lint --fix' to auto-fix issues."
+    echo ""
+    exit 1
+fi
+
+# Run type checking
+echo "🔷 Running type check..."
+if ! pnpm typecheck; then
+    echo ""
+    echo "❌ Type checking failed!"
+    echo "Please fix TypeScript errors before committing."
+    echo ""
+    exit 1
+fi
+
+echo "✅ All pre-commit checks passed!"
+echo "🚀 Ready to commit!" 

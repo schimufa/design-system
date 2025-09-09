@@ -14,7 +14,11 @@
         "docs": "turbo run docs",
         "release": "pnpm build && changeset publish",
         "prepare-release": "changeset version && pnpm install",
-        "ci": "pnpm build && pnpm lint && pnpm typecheck && pnpm test"
+        "ci": "pnpm build && pnpm lint && pnpm typecheck && pnpm test",
+        "pre-commit:strict": ".husky/pre-commit-strict",
+        "pre-commit:dev": ".husky/pre-commit-dev",
+        "validate:all": "pnpm format && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+        "validate:design-system": "cd packages/design-system && pnpm validate-contribution"
     },
     "devDependencies": {
         "@changesets/cli": "^2.0.0",
