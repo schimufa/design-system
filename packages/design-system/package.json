@@ -31,7 +31,10 @@
         "version-info": "npm info @schimufa/design-system",
         "validate-contribution": "node scripts/validate-contribution.js",
         "validate-theme": "ts-node scripts/validate-theme.ts",
-        "validate-design": "echo 'Design validation placeholder'"
+        "validate-design": "echo 'Design validation placeholder'",
+        "post-release": "node scripts/post-release-automation.js",
+        "validate-fidelity": "echo 'Design fidelity validation placeholder'",
+        "team-onboard": "echo 'Team onboarding placeholder'"
     },
     "peerDependencies": {
         "@emotion/react": "^11.11.3",
